@@ -153,11 +153,23 @@ public class Mat2x2 extends Matrix {
         };
     }
 
-    public Mat2x2 mul(Mat2x2 b) {
-        float m00 = this.m00 * b.m00 + this.m01 * b.m10;
-        float m01 = this.m00 * b.m01 + this.m01 * b.m11;
-        float m10 = this.m10 * b.m00 + this.m11 * b.m10;
-        float m11 = this.m10 * b.m01 + this.m11 * b.m11;
+    public Mat2x2 mul(Mat2x2 mat) {
+        float m00 = this.m00 * mat.m00 + this.m01 * mat.m10;
+        float m01 = this.m00 * mat.m01 + this.m01 * mat.m11;
+        float m10 = this.m10 * mat.m00 + this.m11 * mat.m10;
+        float m11 = this.m10 * mat.m01 + this.m11 * mat.m11;
+        this.m00 = m00;
+        this.m01 = m01;
+        this.m10 = m10;
+        this.m11 = m11;
+        return this;
+    }
+
+    public Mat2x2 mulRvs(Mat2x2 mat) {
+        float m00 = mat.m00 * this.m00 + mat.m01 * this.m10;
+        float m01 = mat.m00 * this.m01 + mat.m01 * this.m11;
+        float m10 = mat.m10 * this.m00 + mat.m11 * this.m10;
+        float m11 = mat.m10 * this.m01 + mat.m11 * this.m11;
         this.m00 = m00;
         this.m01 = m01;
         this.m10 = m10;

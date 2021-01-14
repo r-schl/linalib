@@ -218,16 +218,16 @@ public class Mat3x3 extends Matrix {
         };
     }
 
-    public Mat3x3 mul(Mat3x3 b) {
-        float m00 = this.m00 * b.m00 + this.m01 * b.m10 + this.m02 * b.m20;
-        float m01 = this.m00 * b.m01 + this.m01 * b.m11 + this.m02 * b.m21;
-        float m02 = this.m00 * b.m02 + this.m01 * b.m12 + this.m02 * b.m22;
-        float m10 = this.m10 * b.m00 + this.m11 * b.m10 + this.m12 * b.m20;
-        float m11 = this.m10 * b.m01 + this.m11 * b.m11 + this.m12 * b.m21;
-        float m12 = this.m10 * b.m02 + this.m11 * b.m12 + this.m12 * b.m22;
-        float m20 = this.m20 * b.m00 + this.m21 * b.m10 + this.m22 * b.m20;
-        float m21 = this.m20 * b.m01 + this.m21 * b.m11 + this.m22 * b.m21;
-        float m22 = this.m20 * b.m02 + this.m21 * b.m12 + this.m22 * b.m22;
+    public Mat3x3 mul(Mat3x3 mat) {
+        float m00 = this.m00 * mat.m00 + this.m01 * mat.m10 + this.m02 * mat.m20;
+        float m01 = this.m00 * mat.m01 + this.m01 * mat.m11 + this.m02 * mat.m21;
+        float m02 = this.m00 * mat.m02 + this.m01 * mat.m12 + this.m02 * mat.m22;
+        float m10 = this.m10 * mat.m00 + this.m11 * mat.m10 + this.m12 * mat.m20;
+        float m11 = this.m10 * mat.m01 + this.m11 * mat.m11 + this.m12 * mat.m21;
+        float m12 = this.m10 * mat.m02 + this.m11 * mat.m12 + this.m12 * mat.m22;
+        float m20 = this.m20 * mat.m00 + this.m21 * mat.m10 + this.m22 * mat.m20;
+        float m21 = this.m20 * mat.m01 + this.m21 * mat.m11 + this.m22 * mat.m21;
+        float m22 = this.m20 * mat.m02 + this.m21 * mat.m12 + this.m22 * mat.m22;
         this.m00 = m00;
         this.m01 = m01;
         this.m02 = m02;
@@ -240,16 +240,16 @@ public class Mat3x3 extends Matrix {
         return this;
     }
 
-    public Mat3x3 revMul(Mat3x3 b) {
-        float m00 = b.m00 * this.m00 + b.m01 * this.m10 + b.m02 * this.m20;
-        float m01 = b.m00 * this.m01 + b.m01 * this.m11 + b.m02 * this.m21;
-        float m02 = b.m00 * this.m02 + b.m01 * this.m12 + b.m02 * this.m22;
-        float m10 = b.m10 * this.m00 + b.m11 * this.m10 + b.m12 * this.m20;
-        float m11 = b.m10 * this.m01 + b.m11 * this.m11 + b.m12 * this.m21;
-        float m12 = b.m10 * this.m02 + b.m11 * this.m12 + b.m12 * this.m22;
-        float m20 = b.m20 * this.m00 + b.m21 * this.m10 + b.m22 * this.m20;
-        float m21 = b.m20 * this.m01 + b.m21 * this.m11 + b.m22 * this.m21;
-        float m22 = b.m20 * this.m02 + b.m21 * this.m12 + b.m22 * this.m22;
+    public Mat3x3 mulRvs(Mat3x3 mat) {
+        float m00 = mat.m00 * this.m00 + mat.m01 * this.m10 + mat.m02 * this.m20;
+        float m01 = mat.m00 * this.m01 + mat.m01 * this.m11 + mat.m02 * this.m21;
+        float m02 = mat.m00 * this.m02 + mat.m01 * this.m12 + mat.m02 * this.m22;
+        float m10 = mat.m10 * this.m00 + mat.m11 * this.m10 + mat.m12 * this.m20;
+        float m11 = mat.m10 * this.m01 + mat.m11 * this.m11 + mat.m12 * this.m21;
+        float m12 = mat.m10 * this.m02 + mat.m11 * this.m12 + mat.m12 * this.m22;
+        float m20 = mat.m20 * this.m00 + mat.m21 * this.m10 + mat.m22 * this.m20;
+        float m21 = mat.m20 * this.m01 + mat.m21 * this.m11 + mat.m22 * this.m21;
+        float m22 = mat.m20 * this.m02 + mat.m21 * this.m12 + mat.m22 * this.m22;
         this.m00 = m00;
         this.m01 = m01;
         this.m02 = m02;

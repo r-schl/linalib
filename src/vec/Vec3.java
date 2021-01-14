@@ -2,7 +2,6 @@ package src.vec;
 
 import src.mat.Mat3x3;
 import src.mat.Matrix;
-import src.utils.MatUtils;
 
 public class Vec3 extends Matrix {
 
