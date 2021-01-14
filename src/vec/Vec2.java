@@ -246,5 +246,12 @@ public class Vec2 extends Matrix {
         return this.isHor() ? "(" + x + " " + y + ")" : x + "\n" + y;
     }
 
+    @Override
+    public Vec2 toInt() {
+        this.x = (int) this.x;
+        this.y = (int) this.y;
+        return this;
+    }
+
 }
 

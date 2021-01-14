@@ -52,6 +52,8 @@ public abstract class Matrix {
 
     public abstract Matrix transpose();
 
+    public abstract Matrix toInt();
+
     public abstract float[][] toArr();
 
     public String toString() {

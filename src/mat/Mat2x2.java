@@ -2,6 +2,11 @@ package src.mat;
 
 public class Mat2x2 extends Matrix {
 
+    public static final Mat2x2 IDENTITY = new Mat2x2(
+            1, 0,
+            0, 1
+    );
+
     public static final Mat2x2 FLIP = new Mat2x2(
             0, 1,
             1, 0
@@ -14,10 +19,7 @@ public class Mat2x2 extends Matrix {
     private final int columns = 2;
 
     public Mat2x2() {
-        this(
-                1, 0,
-                0, 1
-        );
+        this.set(IDENTITY);
     }
 
     public Mat2x2(float m00, float m01,
@@ -28,11 +30,11 @@ public class Mat2x2 extends Matrix {
         this.m11 = m11;
     }
 
-    public Mat2x2(Mat2x2 other) {
-        this.m00 = other.m00;
-        this.m01 = other.m01;
-        this.m10 = other.m10;
-        this.m11 = other.m11;
+    public Mat2x2(Mat2x2 mat) {
+        this.m00 = mat.m00;
+        this.m01 = mat.m01;
+        this.m10 = mat.m10;
+        this.m11 = mat.m11;
     }
 
 
@@ -44,11 +46,11 @@ public class Mat2x2 extends Matrix {
         this.m11 = m11;
     }
 
-    public void set(Mat2x2 other) {
-        this.m00 = other.m00;
-        this.m01 = other.m01;
-        this.m10 = other.m10;
-        this.m11 = other.m11;
+    public void set(Mat2x2 mat) {
+        this.m00 = mat.m00;
+        this.m01 = mat.m01;
+        this.m10 = mat.m10;
+        this.m11 = mat.m11;
     }
 
 
@@ -160,6 +162,15 @@ public class Mat2x2 extends Matrix {
         this.m01 = m01;
         this.m10 = m10;
         this.m11 = m11;
+        return this;
+    }
+
+    @Override
+    public Matrix toInt() {
+        this.m00 = (int) m00;
+        this.m01 = (int) m01;
+        this.m10 = (int) m10;
+        this.m11 = (int) m11;
         return this;
     }
 

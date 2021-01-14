@@ -2,6 +2,12 @@ package src.mat;
 
 public class Mat3x3 extends Matrix {
 
+    public static final Mat3x3 IDENTITY = new Mat3x3(
+            1,0,0,
+            0,1,0,
+            0,0,1
+    );
+
     public static final Mat3x3 FLIP = new Mat3x3(
             0, 0, 1,
             0, 1, 0,
@@ -16,11 +22,7 @@ public class Mat3x3 extends Matrix {
     private final int columns = 3;
 
     public Mat3x3() {
-        this(
-                1, 0, 0,
-                0, 1, 0,
-                0, 0, 1
-        );
+        this.set(IDENTITY);
     }
 
     public Mat3x3(float m00, float m01, float m02,
@@ -37,16 +39,16 @@ public class Mat3x3 extends Matrix {
         this.m22 = m22;
     }
 
-    public Mat3x3(Mat3x3 other) {
-        this.m00 = other.m00;
-        this.m01 = other.m01;
-        this.m02 = other.m02;
-        this.m10 = other.m10;
-        this.m11 = other.m11;
-        this.m12 = other.m12;
-        this.m20 = other.m20;
-        this.m21 = other.m21;
-        this.m22 = other.m22;
+    public Mat3x3(Mat3x3 mat) {
+        this.m00 = mat.m00;
+        this.m01 = mat.m01;
+        this.m02 = mat.m02;
+        this.m10 = mat.m10;
+        this.m11 = mat.m11;
+        this.m12 = mat.m12;
+        this.m20 = mat.m20;
+        this.m21 = mat.m21;
+        this.m22 = mat.m22;
     }
 
     public void set(float m00, float m01, float m02,
@@ -63,16 +65,16 @@ public class Mat3x3 extends Matrix {
         this.m22 = m22;
     }
 
-    public void set(Mat3x3 other) {
-        this.m00 = other.m00;
-        this.m01 = other.m01;
-        this.m02 = other.m02;
-        this.m10 = other.m10;
-        this.m11 = other.m11;
-        this.m12 = other.m12;
-        this.m20 = other.m20;
-        this.m21 = other.m21;
-        this.m22 = other.m22;
+    public void set(Mat3x3 mat) {
+        this.m00 = mat.m00;
+        this.m01 = mat.m01;
+        this.m02 = mat.m02;
+        this.m10 = mat.m10;
+        this.m11 = mat.m11;
+        this.m12 = mat.m12;
+        this.m20 = mat.m20;
+        this.m21 = mat.m21;
+        this.m22 = mat.m22;
     }
 
     @Override
@@ -240,6 +242,20 @@ public class Mat3x3 extends Matrix {
         this.m20 = m20;
         this.m21 = m21;
         this.m22 = m22;
+        return this;
+    }
+
+    @Override
+    public Matrix toInt() {
+        this.m00 = (int) m00;
+        this.m01 = (int) m01;
+        this.m02 = (int) m02;
+        this.m10 = (int) m10;
+        this.m11 = (int) m11;
+        this.m12 = (int) m12;
+        this.m20 = (int) m20;
+        this.m21 = (int) m21;
+        this.m22 = (int) m22;
         return this;
     }
 }

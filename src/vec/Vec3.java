@@ -284,4 +284,12 @@ public class Vec3 extends Matrix {
     public String toString() {
         return this.isHor() ? "(" + x + " " + y + " " + z + ")" : x + "\n" + y + "\n" + z;
     }
+
+    @Override
+    public Vec3 toInt() {
+        this.x = (int) this.x;
+        this.y = (int) this.y;
+        this.z = (int) this.z;
+        return this;
+    }
 }

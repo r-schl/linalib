@@ -16,21 +16,16 @@ public class Main {
         vec1.print();
         res.print();
 
-
         Mat2x2 mat = new Mat2x2(
             3,4,
             5,6
         );
 
-        Mat2x2 mat2 = new Mat2x2(
-            0,0,
-            0,0
-        );
+        Mat2x2 mat2 = new Mat2x2();
+        mat2.m00 = 2;
 
-        mat.mul(mat2);
-
-
-        mat.print();
+        mat2.print();
+        Mat2x2.IDENTITY.print();
 
         
 
