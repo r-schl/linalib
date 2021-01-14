@@ -1,5 +1,7 @@
 package src.vec;
 
+import java.nio.FloatBuffer;
+
 import src.mat.Mat3x3;
 import src.mat.Matrix;
 
@@ -17,7 +19,6 @@ public class Vec3 extends Matrix {
 
     private static final int HOR_ROWS = 1;
     private static final int HOR_COLUMNS = 3;
-
 
     public Vec3(float x, float y, float z) {
         this.x = x;
@@ -49,7 +50,8 @@ public class Vec3 extends Matrix {
 
     public Vec3 normalize() {
         float len2 = this.len2();
-        if (len2 == 0) return this;
+        if (len2 == 0)
+            return this;
         float length = (float) Math.sqrt(len2);
         this.x = this.x / length;
         this.y = this.y / length;
@@ -151,8 +153,10 @@ public class Vec3 extends Matrix {
 
     public float max() {
         float max = this.x;
-        if (this.y > max) max = this.y;
-        if (this.z > max) max = this.z;
+        if (this.y > max)
+            max = this.y;
+        if (this.z > max)
+            max = this.z;
         return max;
     }
 
@@ -174,7 +178,7 @@ public class Vec3 extends Matrix {
 
     @Override
     public float[][] toArr() {
-        return this.isHor() ? new float[][]{{x, y, z}} : new float[][]{{x}, {y}, {z}};
+        return this.isHor() ? new float[][] { { x, y, z } } : new float[][] { { x }, { y }, { z } };
     }
 
     @Override
@@ -192,13 +196,19 @@ public class Vec3 extends Matrix {
         if (row >= rows || col >= columns)
             throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
         if (this.isHor()) {
-            if (col == 0) return x;
-            else if (col == 1) return y;
-            else if (col == 2) return z;
+            if (col == 0)
+                return x;
+            else if (col == 1)
+                return y;
+            else if (col == 2)
+                return z;
         } else {
-            if (row == 0) return x;
-            else if (row == 1) return y;
-            else if (row == 2) return z;
+            if (row == 0)
+                return x;
+            else if (row == 1)
+                return y;
+            else if (row == 2)
+                return z;
         }
         return -1;
     }
@@ -208,13 +218,19 @@ public class Vec3 extends Matrix {
         if (row >= rows || col >= columns)
             throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
         if (this.isHor()) {
-            if (col == 0) x = val;
-            else if (col == 1) y = val;
-            else if (col == 2) z = val;
+            if (col == 0)
+                x = val;
+            else if (col == 1)
+                y = val;
+            else if (col == 2)
+                z = val;
         } else {
-            if (row == 0) x = val;
-            else if (row == 1) y = val;
-            else if (row == 2) z = val;
+            if (row == 0)
+                x = val;
+            else if (row == 1)
+                y = val;
+            else if (row == 2)
+                z = val;
         }
     }
 
@@ -224,14 +240,18 @@ public class Vec3 extends Matrix {
 
     @Override
     public Vec3 flipHor() {
-        if (!isVer()) return this.mul(Mat3x3.FLIP);
-        else return this;
+        if (!isVer())
+            return this.mul(Mat3x3.FLIP);
+        else
+            return this;
     }
 
     @Override
     public Vec3 flipVer() {
-        if (!isHor()) return this.mulRvs(Mat3x3.FLIP);
-        else return this;
+        if (!isHor())
+            return this.mulRvs(Mat3x3.FLIP);
+        else
+            return this;
     }
 
     public Vec3 mul(Mat3x3 m) {
@@ -248,7 +268,7 @@ public class Vec3 extends Matrix {
         return this;
     }
 
-    public Vec3 mulRvs(Mat3x3 m){
+    public Vec3 mulRvs(Mat3x3 m) {
         if (m.isHor()) {
             new Exception("Cannot multiply 3x3 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);
@@ -290,6 +310,18 @@ public class Vec3 extends Matrix {
         this.x = (int) this.x;
         this.y = (int) this.y;
         this.z = (int) this.z;
+        return this;
+    }
+
+    public Vec2 xy() {
+        return new Vec2(this.x, this.y);
+    }
+
+    @Override
+    public Matrix storeInside(FloatBuffer buf) {
+        buf.put(x);
+        buf.put(y);
+        buf.put(z);
         return this;
     }
 }

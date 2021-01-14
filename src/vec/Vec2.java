@@ -1,5 +1,7 @@
 package src.vec;
 
+import java.nio.FloatBuffer;
+
 import src.mat.Mat2x2;
 import src.mat.Matrix;
 
@@ -45,7 +47,8 @@ public class Vec2 extends Matrix {
 
     public Vec2 normalize() {
         float len2 = this.len2();
-        if (len2 == 0) return this;
+        if (len2 == 0)
+            return this;
         float length = (float) Math.sqrt(len2);
         this.x = this.x / length;
         this.y = this.y / length;
@@ -122,7 +125,8 @@ public class Vec2 extends Matrix {
 
     public float max() {
         float max = this.x;
-        if (this.y > max) max = this.y;
+        if (this.y > max)
+            max = this.y;
         return max;
     }
 
@@ -141,7 +145,7 @@ public class Vec2 extends Matrix {
     }
 
     public float[][] toArr() {
-        return this.isHor() ? new float[][]{{x, y}} : new float[][]{{x}, {y}};
+        return this.isHor() ? new float[][] { { x, y } } : new float[][] { { x }, { y } };
     }
 
     public Vec2 mul(Mat2x2 m) {
@@ -184,11 +188,15 @@ public class Vec2 extends Matrix {
         if (row >= rows || col >= columns)
             throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
         if (this.isHor()) {
-            if (col == 0) return x;
-            else if (col == 1) return y;
+            if (col == 0)
+                return x;
+            else if (col == 1)
+                return y;
         } else {
-            if (row == 0) return x;
-            else if (row == 1) return y;
+            if (row == 0)
+                return x;
+            else if (row == 1)
+                return y;
         }
         return -1;
     }
@@ -198,11 +206,15 @@ public class Vec2 extends Matrix {
         if (row >= rows || col >= columns)
             throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
         if (this.isHor()) {
-            if (col == 0) x = val;
-            else if (col == 1) y = val;
+            if (col == 0)
+                x = val;
+            else if (col == 1)
+                y = val;
         } else {
-            if (row == 0) x = val;
-            else if (row == 1) y = val;
+            if (row == 0)
+                x = val;
+            else if (row == 1)
+                y = val;
         }
     }
 
@@ -212,16 +224,19 @@ public class Vec2 extends Matrix {
 
     @Override
     public Vec2 flipHor() {
-        if (!isVer()) return this.mul(Mat2x2.FLIP);
-        else return this;
+        if (!isVer())
+            return this.mul(Mat2x2.FLIP);
+        else
+            return this;
     }
 
     @Override
     public Vec2 flipVer() {
-        if (!isHor()) return this.mulRvs(Mat2x2.FLIP);
-        else return this;
+        if (!isHor())
+            return this.mulRvs(Mat2x2.FLIP);
+        else
+            return this;
     }
-
 
     @Override
     public Vec2 transpose() {
@@ -250,6 +265,13 @@ public class Vec2 extends Matrix {
     public Vec2 toInt() {
         this.x = (int) this.x;
         this.y = (int) this.y;
+        return this;
+    }
+
+    @Override
+    public Matrix storeInside(FloatBuffer buf) {
+        buf.put(x);
+        buf.put(y);
         return this;
     }
 

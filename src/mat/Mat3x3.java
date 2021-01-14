@@ -1,18 +1,12 @@
 package src.mat;
 
+import java.nio.FloatBuffer;
+
 public class Mat3x3 extends Matrix {
 
-    public static final Mat3x3 IDENTITY = new Mat3x3(
-            1,0,0,
-            0,1,0,
-            0,0,1
-    );
+    public static final Mat3x3 IDENTITY = new Mat3x3(1, 0, 0, 0, 1, 0, 0, 0, 1);
 
-    public static final Mat3x3 FLIP = new Mat3x3(
-            0, 0, 1,
-            0, 1, 0,
-            1, 0, 0
-    );
+    public static final Mat3x3 FLIP = new Mat3x3(0, 0, 1, 0, 1, 0, 1, 0, 0);
 
     public float m00, m01, m02;
     public float m10, m11, m12;
@@ -25,9 +19,7 @@ public class Mat3x3 extends Matrix {
         this.set(IDENTITY);
     }
 
-    public Mat3x3(float m00, float m01, float m02,
-                  float m10, float m11, float m12,
-                  float m20, float m21, float m22) {
+    public Mat3x3(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22) {
         this.m00 = m00;
         this.m01 = m01;
         this.m02 = m02;
@@ -51,9 +43,7 @@ public class Mat3x3 extends Matrix {
         this.m22 = mat.m22;
     }
 
-    public void set(float m00, float m01, float m02,
-                    float m10, float m11, float m12,
-                    float m20, float m21, float m22) {
+    public void set(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22) {
         this.m00 = m00;
         this.m01 = m01;
         this.m02 = m02;
@@ -162,7 +152,6 @@ public class Mat3x3 extends Matrix {
         throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
     }
 
-
     @Override
     public Mat3x3 copy() {
         return new Mat3x3(this);
@@ -194,11 +183,7 @@ public class Mat3x3 extends Matrix {
 
     @Override
     public float[][] toArr() {
-        return new float[][]{
-                {m00, m01, m02},
-                {m10, m11, m12},
-                {m20, m21, m22}
-        };
+        return new float[][] { { m00, m01, m02 }, { m10, m11, m12 }, { m20, m21, m22 } };
     }
 
     public Mat3x3 mul(Mat3x3 mat) {
@@ -256,6 +241,20 @@ public class Mat3x3 extends Matrix {
         this.m20 = (int) m20;
         this.m21 = (int) m21;
         this.m22 = (int) m22;
+        return this;
+    }
+
+    @Override
+    public Matrix storeInside(FloatBuffer buf) {
+        buf.put(m00);
+        buf.put(m01);
+        buf.put(m20);
+        buf.put(m10);
+        buf.put(m11);
+        buf.put(m12);
+        buf.put(m20);
+        buf.put(m21);
+        buf.put(m22);
         return this;
     }
 }

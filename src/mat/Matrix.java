@@ -1,5 +1,7 @@
 package src.mat;
 
+import java.nio.FloatBuffer;
+
 public abstract class Matrix {
 
     public abstract int rowCount();
@@ -53,6 +55,8 @@ public abstract class Matrix {
     public abstract Matrix transpose();
 
     public abstract Matrix toInt();
+
+    public abstract Matrix storeInside(FloatBuffer buf);
 
     public abstract float[][] toArr();
 

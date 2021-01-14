@@ -1,16 +1,12 @@
 package src.mat;
 
+import java.nio.FloatBuffer;
+
 public class Mat2x2 extends Matrix {
 
-    public static final Mat2x2 IDENTITY = new Mat2x2(
-            1, 0,
-            0, 1
-    );
+    public static final Mat2x2 IDENTITY = new Mat2x2(1, 0, 0, 1);
 
-    public static final Mat2x2 FLIP = new Mat2x2(
-            0, 1,
-            1, 0
-    );
+    public static final Mat2x2 FLIP = new Mat2x2(0, 1, 1, 0);
 
     public float m00, m01;
     public float m10, m11;
@@ -22,8 +18,7 @@ public class Mat2x2 extends Matrix {
         this.set(IDENTITY);
     }
 
-    public Mat2x2(float m00, float m01,
-                  float m10, float m11) {
+    public Mat2x2(float m00, float m01, float m10, float m11) {
         this.m00 = m00;
         this.m01 = m01;
         this.m10 = m10;
@@ -37,9 +32,7 @@ public class Mat2x2 extends Matrix {
         this.m11 = mat.m11;
     }
 
-
-    public void set(float m00, float m01,
-                    float m10, float m11) {
+    public void set(float m00, float m01, float m10, float m11) {
         this.m00 = m00;
         this.m01 = m01;
         this.m10 = m10;
@@ -52,7 +45,6 @@ public class Mat2x2 extends Matrix {
         this.m10 = mat.m10;
         this.m11 = mat.m11;
     }
-
 
     @Override
     public int rowCount() {
@@ -117,12 +109,12 @@ public class Mat2x2 extends Matrix {
 
     @Override
     public Mat2x2 flipHor() {
-       return this.mul(Mat2x2.FLIP);
+        return this.mul(Mat2x2.FLIP);
     }
 
     @Override
     public Mat2x2 flipVer() {
-       return this.mulRvs(Mat2x2.FLIP);
+        return this.mulRvs(Mat2x2.FLIP);
     }
 
     @Override
@@ -135,10 +127,7 @@ public class Mat2x2 extends Matrix {
 
     @Override
     public float[][] toArr() {
-        return new float[][]{
-                {m00, m01},
-                {m10, m11}
-        };
+        return new float[][] { { m00, m01 }, { m10, m11 } };
     }
 
     public Mat2x2 mul(Mat2x2 mat) {
@@ -171,6 +160,15 @@ public class Mat2x2 extends Matrix {
         this.m01 = (int) m01;
         this.m10 = (int) m10;
         this.m11 = (int) m11;
+        return this;
+    }
+
+    @Override
+    public Matrix storeInside(FloatBuffer buf) {
+        buf.put(m00);
+        buf.put(m01);
+        buf.put(m10);
+        buf.put(m11);
         return this;
     }
 
