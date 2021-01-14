@@ -168,31 +168,12 @@ public class Mat3x3 extends Matrix {
 
     @Override
     public Mat3x3 flipHor() {
-   /*     Mat3x3Utils.mul(
-                m00, m01, m02,
-                m10, m11, m12,
-                m20, m21, m22,
-                0, 0, 1,
-                0, 1, 0,
-                1, 0, 0,
-                this
-        );*/
-        return this;
+        return this.mul(Mat3x3.FLIP);
     }
 
     @Override
     public Mat3x3 flipVer() {
-
-      /*  Mat3x3Utils.mul(
-                0, 0, 1,
-                0, 1, 0,
-                1, 0, 0,
-                m00, m01, m02,
-                m10, m11, m12,
-                m20, m21, m22,
-                this
-        );*/
-        return this;
+        return this.mulRvs(Mat3x3.FLIP);
     }
 
     @Override
