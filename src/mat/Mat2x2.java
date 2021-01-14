@@ -115,26 +115,12 @@ public class Mat2x2 extends Matrix {
 
     @Override
     public Mat2x2 flipHor() {
-       /* Mat2x2Utils.mulMatWithMat(
-                0, 1,
-                1, 0,
-                m00, m01,
-                m10, m11,
-                this
-        );*/
-        return this;
+       return this.mul(Mat2x2.FLIP);
     }
 
     @Override
     public Mat2x2 flipVer() {
-      /*  Mat2x2Utils.mulMatWithMat(
-                0, 1,
-                1, 0,
-                m00, m01,
-                m10, m11,
-                this
-        );*/
-        return this;
+       return this.mulRvs(Mat2x2.FLIP);
     }
 
     @Override
