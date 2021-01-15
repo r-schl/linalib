@@ -50,8 +50,7 @@ public class Vec3 extends Matrix {
 
     public Vec3 normalize() {
         float len2 = this.len2();
-        if (len2 == 0)
-            return this;
+        if (len2 == 0) return this;
         float length = (float) Math.sqrt(len2);
         this.x = this.x / length;
         this.y = this.y / length;

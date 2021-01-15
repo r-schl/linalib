@@ -2,6 +2,8 @@ package src.mat;
 
 import java.nio.FloatBuffer;
 
+import src.vec.Vec3;
+
 public class Mat4x4 extends Matrix {
 
     public static final Mat4x4 IDENTITY = new Mat4x4(
@@ -443,6 +445,10 @@ public class Mat4x4 extends Matrix {
         return this;
     }
 
+    public Mat4x4 rotation3d(Vec3 angle) {
+        return rotation3d(angle.x, angle.y, angle.z);
+    }
+
     public Mat4x4 rotation3d(float rotX, float rotY, float rotZ) {
         float cosX = (float) Math.cos(Math.toRadians(rotX));
         float sinX = (float) Math.sin(Math.toRadians(rotX));
@@ -474,6 +480,44 @@ public class Mat4x4 extends Matrix {
         return this;
     }
 
+    public Mat4x4 translation3d(Vec3 translation) {
+        return translation3d(translation.x, translation.y, translation.z);
+    }
+
+    public Mat4x4 translation3d(float dX, float dY, float dZ) {
+        return this.mul(
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            dX, dY, dZ, 1
+        );
+    }
+
+    public Mat4x4 scale3d(Vec3 scale) {
+        return scale3d(scale.x, scale.y, scale.z);
+    }
+
+    public Mat4x4 scale3d(float scaleX, float scaleY, float scaleZ) {
+        return this.mul(
+            scaleX, 0, 0, 0,
+            0, scaleY, 0, 0,
+            0, 0, scaleZ, 0,
+            0, 0, 0, 1
+        );
+    }
+
+    public Mat4x4 projection3d(float aspectRatio, float zNear, float zFar, float fov) {
+        float tanHalfFOV = (float) Math.tan(Math.toRadians(fov / 2.0));
+        float yScale = (float) (1.0 / tanHalfFOV * aspectRatio);
+        float xScale = yScale / aspectRatio;
+        float frustumLength = zFar - zNear;
+        return this.mul(
+            xScale, 0, 0, 0,
+            0, yScale, 0, 0,
+            0, 0, -((zFar + zNear) / frustumLength), -1,
+            0, 0, -((2 * zNear * zFar) / frustumLength), 0
+        );
+    }
 
     @Override
     public Mat4x4 toInt() {
