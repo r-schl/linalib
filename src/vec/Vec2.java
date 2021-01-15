@@ -66,10 +66,20 @@ public class Vec2 extends Matrix {
         return this.x * v.x + this.y * v.y;
     }
 
+    public float dot(float vX, float vY) {
+        return this.x * vX + this.y * vY;
+    }
+
     public Vec2 add(Vec2 v) {
         this.x = this.x + v.x;
         this.y = this.y + v.y;
         return this;
+    }
+
+    public Vec2 add(float vX, float vY) {
+        this.x = this.x + vX;
+        this.y = this.y + vY;
+        return this;   
     }
 
     public Vec2 add(float r) {
@@ -81,6 +91,12 @@ public class Vec2 extends Matrix {
     public Vec2 sub(Vec2 v) {
         this.x = this.x - v.x;
         this.y = this.y - v.y;
+        return this;
+    }
+
+    public Vec2 sub(float vX, float vY) {
+        this.x = this.x - vX;
+        this.y = this.y - vY;
         return this;
     }
 
@@ -160,6 +176,19 @@ public class Vec2 extends Matrix {
         return this;
     }
 
+    public Vec2 mul(float mat00, float mat01,
+                    float mat10, float mat11) {
+        if (isVer()) {
+            new Exception("Cannot multiply a vertical vector with a 2x2 matrix.").printStackTrace();
+            System.exit(-1);
+        }
+        float x = this.x * mat00 + this.y * mat10;
+        float y = this.x * mat01 + this.y * mat11;
+        this.x = x;
+        this.y = y;
+        return this;
+    }
+
     public Vec2 mulRvs(Mat2x2 m) {
         if (isHor()) {
             new Exception("Cannot multiply 2x2 matrix with an horizontal vector.").printStackTrace();
@@ -167,6 +196,19 @@ public class Vec2 extends Matrix {
         }
         float x = m.m00 * this.x + m.m01 * this.y;
         float y = m.m10 * this.x + m.m11 * this.y;
+        this.x = x;
+        this.y = y;
+        return this;
+    }
+
+    public Vec2 mulRvs(float mat00, float mat01,
+                       float mat10, float mat11) {
+        if (isHor()) {
+            new Exception("Cannot multiply 2x2 matrix with an horizontal vector.").printStackTrace();
+            System.exit(-1);
+        }
+        float x = mat00 * this.x + mat01 * this.y;
+        float y = mat10 * this.x + mat11 * this.y;
         this.x = x;
         this.y = y;
         return this;
