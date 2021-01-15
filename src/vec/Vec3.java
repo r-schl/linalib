@@ -69,6 +69,16 @@ public class Vec3 extends Matrix {
         return this;
     }
 
+    public Vec3 cross(float vX, float vY, float vZ) {
+        float x = this.y * vZ - this.z * vY;
+        float y = this.z * vX - this.x * vZ;
+        float z = this.x * vY - this.y * vX;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
+    }
+
     public Vec3 crossRvs(Vec3 v) {
         float x = v.y * this.z - v.z * this.y;
         float y = v.z * this.x - v.x * this.z;
@@ -79,14 +89,35 @@ public class Vec3 extends Matrix {
         return this;
     }
 
+    public Vec3 crossRvs(float vX, float vY, float vZ) {
+        float x = vY * this.z - vZ * this.y;
+        float y = vZ * this.x - vX * this.z;
+        float z = vX * this.y - vY * this.x;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
+    }
+
     public float dot(Vec3 v) {
         return this.x * v.x + this.y * v.y + this.z * v.z;
+    }
+
+    public float dot(float vX, float vY, float vZ) {
+        return this.x * vX + this.y * vY + this.z * vZ;
     }
 
     public Vec3 add(Vec3 v) {
         this.x = this.x + v.x;
         this.y = this.y + v.y;
         this.z = this.z + v.z;
+        return this;
+    }
+
+    public Vec3 add(float vX, float vY, float vZ) {
+        this.x = this.x + vX;
+        this.y = this.y + vY;
+        this.z = this.z + vZ;
         return this;
     }
 
@@ -101,6 +132,13 @@ public class Vec3 extends Matrix {
         this.x = this.x - v.x;
         this.y = this.y - v.y;
         this.z = this.z - v.z;
+        return this;
+    }
+
+    public Vec3 sub(float vX, float vY, float vZ) {
+        this.x = this.x - vX;
+        this.y = this.y - vY;
+        this.z = this.z - vZ;
         return this;
     }
 

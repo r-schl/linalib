@@ -2,6 +2,8 @@ package src.mat;
 
 import java.nio.FloatBuffer;
 
+import src.vec.Vec2;
+
 public class Mat3x3 extends Matrix {
 
     public static final Mat3x3 IDENTITY = new Mat3x3(1, 0, 0, 0, 1, 0, 0, 0, 1);
@@ -208,6 +210,54 @@ public class Mat3x3 extends Matrix {
         return this;
     }
 
+    public Mat3x3 mul(float mat00, float mat01, float mat02,
+                      float mat10, float mat11, float mat12,
+                      float mat20, float mat21, float mat22) {
+        float m00 = this.m00 * mat00 + this.m01 * mat10 + this.m02 * mat20;
+        float m01 = this.m00 * mat01 + this.m01 * mat11 + this.m02 * mat21;
+        float m02 = this.m00 * mat02 + this.m01 * mat12 + this.m02 * mat22;
+        float m10 = this.m10 * mat00 + this.m11 * mat10 + this.m12 * mat20;
+        float m11 = this.m10 * mat01 + this.m11 * mat11 + this.m12 * mat21;
+        float m12 = this.m10 * mat02 + this.m11 * mat12 + this.m12 * mat22;
+        float m20 = this.m20 * mat00 + this.m21 * mat10 + this.m22 * mat20;
+        float m21 = this.m20 * mat01 + this.m21 * mat11 + this.m22 * mat21;
+        float m22 = this.m20 * mat02 + this.m21 * mat12 + this.m22 * mat22;
+        this.m00 = m00;
+        this.m01 = m01;
+        this.m02 = m02;
+        this.m10 = m10;
+        this.m11 = m11;
+        this.m12 = m12;
+        this.m20 = m20;
+        this.m21 = m21;
+        this.m22 = m22;
+        return this;
+    }
+
+    public Mat3x3 mulRvs(float mat00, float mat01, float mat02,
+                         float mat10, float mat11, float mat12,
+                         float mat20, float mat21, float mat22) {
+        float m00 = mat00 * this.m00 + mat01 * this.m10 + mat02 * this.m20;
+        float m01 = mat00 * this.m01 + mat01 * this.m11 + mat02 * this.m21;
+        float m02 = mat00 * this.m02 + mat01 * this.m12 + mat02 * this.m22;
+        float m10 = mat10 * this.m00 + mat11 * this.m10 + mat12 * this.m20;
+        float m11 = mat10 * this.m01 + mat11 * this.m11 + mat12 * this.m21;
+        float m12 = mat10 * this.m02 + mat11 * this.m12 + mat12 * this.m22;
+        float m20 = mat20 * this.m00 + mat21 * this.m10 + mat22 * this.m20;
+        float m21 = mat20 * this.m01 + mat21 * this.m11 + mat22 * this.m21;
+        float m22 = mat20 * this.m02 + mat21 * this.m12 + mat22 * this.m22;
+        this.m00 = m00;
+        this.m01 = m01;
+        this.m02 = m02;
+        this.m10 = m10;
+        this.m11 = m11;
+        this.m12 = m12;
+        this.m20 = m20;
+        this.m21 = m21;
+        this.m22 = m22;
+        return this;
+    }
+
     public Mat3x3 mulRvs(Mat3x3 mat) {
         float m00 = mat.m00 * this.m00 + mat.m01 * this.m10 + mat.m02 * this.m20;
         float m01 = mat.m00 * this.m01 + mat.m01 * this.m11 + mat.m02 * this.m21;
@@ -229,6 +279,34 @@ public class Mat3x3 extends Matrix {
         this.m22 = m22;
         return this;
     }
+
+
+    public Mat3x3 rotation2d(float angle) {
+        float cosA = (float) Math.cos(Math.toRadians(angle));
+        float sinA = (float) Math.sin(Math.toRadians(angle));
+        return this.mul(
+            cosA, sinA, 0,
+            sinA, cosA, 0,
+            0,0,1
+        );
+    }
+
+    public Mat3x3 translation2d(Vec2 translation){
+        return this.mul(
+            1,0,0,
+            0,1,0,
+            translation.x, translation.y, 1
+        );
+    }
+
+    public Mat3x3 scale2d(Vec2 scale) {
+        return this.mul(
+            scale.x, 0, 0,
+            0, scale.y, 0,
+            0,0,1
+        );
+    }
+
 
     @Override
     public Matrix toInt() {
