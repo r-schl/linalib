@@ -318,4 +318,3 @@ public class Vec2 extends Matrix {
     }
 
 }
-

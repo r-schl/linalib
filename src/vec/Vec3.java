@@ -306,14 +306,46 @@ public class Vec3 extends Matrix {
         return this;
     }
 
+    public Vec3 mul(float mat00, float mat01, float mat02,
+                    float mat10, float mat11, float mat12,
+                    float mat20, float mat21, float mat22) {
+        if (isVer()) {
+            new Exception("Cannot multiply a vertical vector with a 3x3 matrix.").printStackTrace();
+            System.exit(-1);
+        }
+        float x = this.x * mat00 + this.y * mat10 + this.z * mat20;
+        float y = this.x * mat01 + this.y * mat11 + this.z * mat21;
+        float z = this.x * mat02 + this.y * mat12 + this.z * mat22;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
+    }
+
     public Vec3 mulRvs(Mat3x3 m) {
-        if (m.isHor()) {
+        if (isHor()) {
             new Exception("Cannot multiply 3x3 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);
         }
         float x = m.m00 * this.x + m.m01 * this.y + m.m02 * this.z;
         float y = m.m10 * this.x + m.m11 * this.y + m.m12 * this.z;
         float z = m.m20 * this.x + m.m21 * this.y + m.m22 * this.z;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
+    }
+
+    public Vec3 mulRvs(float mat00, float mat01, float mat02,
+                       float mat10, float mat11, float mat12,
+                       float mat20, float mat21, float mat22){
+        if (isHor()) {
+            new Exception("Cannot multiply 3x3 matrix with an horizontal vector.").printStackTrace();
+            System.exit(-1);
+        }
+        float x = mat00 * this.x + mat01 * this.y + mat02 * this.z;
+        float y = mat10 * this.x + mat11 * this.y + mat12 * this.z;
+        float z = mat20 * this.x + mat21 * this.y + mat22 * this.z;
         this.x = x;
         this.y = y;
         this.z = z;
