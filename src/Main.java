@@ -12,8 +12,8 @@ public class Main {
 
        
 
-        Mat3x3 mat = new Mat3x3().scale2d(new Vec2(2,2));
-        
+        Mat3x3 mat = new Mat3x3()
+                        .rotation3d(1,2,2);
 
         Vec3 lol = new Vec3(1, 2, 1);
 

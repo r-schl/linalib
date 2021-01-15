@@ -3,6 +3,7 @@ package src.mat;
 import java.nio.FloatBuffer;
 
 import src.vec.Vec2;
+import src.vec.Vec3;
 
 public class Mat3x3 extends Matrix {
 
@@ -291,22 +292,61 @@ public class Mat3x3 extends Matrix {
         );
     }
 
+    public Mat3x3 rotation3d(float rotX, float rotY, float rotZ) {
+        float cosX = (float) Math.cos(Math.toRadians(rotX));
+        float sinX = (float) Math.sin(Math.toRadians(rotX));
+        float cosY = (float) Math.cos(Math.toRadians(rotY));
+        float sinY = (float) Math.sin(Math.toRadians(rotY));
+        float cosZ = (float) Math.cos(Math.toRadians(rotZ));
+        float sinZ = (float) Math.sin(Math.toRadians(rotZ));
+        // rotation around x axis
+        this.mul(
+            1, 0, 0,
+            0, cosX, sinX,
+            0, -sinX, cosX
+        );
+        // rotation around y axis
+        this.mul(
+            cosY, 0, sinY,
+            0, 1, 0,
+            -sinY, 0, cosY
+        );
+        // rotation around z axis
+        this.mul(
+            cosZ, -sinZ, 0,
+            sinZ, cosZ, 0, 
+            0, 0, 1
+        );
+        return this;
+    }
+
+    public Mat3x3 rotation3d(Vec3 angle) {
+        return rotation3d(angle.x, angle.y, angle.z);
+    }
+
     public Mat3x3 translation2d(Vec2 translation){
+        return translation2d(translation.x, translation.y);
+    }
+
+    public Mat3x3 translation2d(float translationX, float translationY) {
         return this.mul(
             1,0,0,
             0,1,0,
-            translation.x, translation.y, 1
+            translationX, translationY, 1
         );
     }
 
     public Mat3x3 scale2d(Vec2 scale) {
+        return scale2d(scale.x, scale.y);
+    }
+
+    public Mat3x3 scale2d(float scaleX, float scaleY) {
         return this.mul(
-            scale.x, 0, 0,
-            0, scale.y, 0,
+            scaleX, 0, 0,
+            0, scaleY, 0,
             0,0,1
         );
     }
-
 
     @Override
     public Matrix toInt() {

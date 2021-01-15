@@ -149,6 +149,13 @@ public class Vec3 extends Matrix {
         return this;
     }
 
+    public Vec3 subRvs(float vX, float vY, float vZ){
+        this.x = vX - this.x;
+        this.y = vY - this.y;
+        this.z = vZ - this.z;
+        return this;
+    }
+
     public Vec3 sub(float r) {
         this.x = this.x - r;
         this.y = this.y - r;
