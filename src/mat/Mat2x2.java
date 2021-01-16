@@ -2,6 +2,8 @@ package src.mat;
 
 import java.nio.FloatBuffer;
 
+import src.vec.Vec2;
+
 public class Mat2x2 extends Matrix {
 
     public static final Mat2x2 IDENTITY = new Mat2x2(1, 0, 0, 1);
@@ -142,6 +144,19 @@ public class Mat2x2 extends Matrix {
         return this;
     }
 
+    public Mat2x2 mul(float mat00, float mat01,
+                      float mat10, float mat11) {
+        float m00 = this.m00 * mat00 + this.m01 * mat10;
+        float m01 = this.m00 * mat01 + this.m01 * mat11;
+        float m10 = this.m10 * mat00 + this.m11 * mat10;
+        float m11 = this.m10 * mat01 + this.m11 * mat11;
+        this.m00 = m00;
+        this.m01 = m01;
+        this.m10 = m10;
+        this.m11 = m11;
+        return this;
+    }
+
     public Mat2x2 mulRvs(Mat2x2 mat) {
         float m00 = mat.m00 * this.m00 + mat.m01 * this.m10;
         float m01 = mat.m00 * this.m01 + mat.m01 * this.m11;
@@ -152,6 +167,39 @@ public class Mat2x2 extends Matrix {
         this.m10 = m10;
         this.m11 = m11;
         return this;
+    }
+
+    public Mat2x2 mulRvs(float mat00, float mat01,
+                         float mat10, float mat11) {
+        float m00 = mat00 * this.m00 + mat01 * this.m10;
+        float m01 = mat00 * this.m01 + mat01 * this.m11;
+        float m10 = mat10 * this.m00 + mat11 * this.m10;
+        float m11 = mat10 * this.m01 + mat11 * this.m11;
+        this.m00 = m00;
+        this.m01 = m01;
+        this.m10 = m10;
+        this.m11 = m11;
+        return this;
+    }
+
+    public Mat2x2 rotation2d(float angle) {
+        float cosA = (float) Math.cos(Math.toRadians(angle));
+        float sinA = (float) Math.sin(Math.toRadians(angle));
+        return this.mul(
+            cosA, sinA,
+            sinA, cosA
+        );
+    }
+
+    public Mat2x2 scale2d(Vec2 scale) {
+        return scale2d(scale.x, scale.y);
+    }
+
+    public Mat2x2 scale2d(float scaleX, float scaleY) {
+        return this.mul(
+            scaleX, 0,
+            0, scaleY
+        );
     }
 
     @Override

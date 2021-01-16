@@ -2,6 +2,7 @@ package src.mat;
 
 import java.nio.FloatBuffer;
 
+import src.vec.Vec2;
 import src.vec.Vec3;
 
 public class Mat4x4 extends Matrix {
@@ -445,6 +446,17 @@ public class Mat4x4 extends Matrix {
         return this;
     }
 
+    public Mat4x4 rotation2d(float angle) {
+        float cosA = (float) Math.cos(Math.toRadians(angle));
+        float sinA = (float) Math.sin(Math.toRadians(angle));
+        return this.mul(
+            cosA, sinA, 0, 0,
+            sinA, cosA, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        );
+    }
+
     public Mat4x4 rotation3dAxis(Vec3 axis, float angle) {
         return rotation3dAxis(axis.x, axis.y, axis.z, angle);
     }
@@ -506,6 +518,19 @@ public class Mat4x4 extends Matrix {
             0, 1, 0, 0,
             0, 0, 1, 0,
             dX, dY, dZ, 1
+        );
+    }
+    
+    public Mat4x4 scale2d(Vec2 scale) {
+        return scale2d(scale.x, scale.y);
+    }
+
+    public Mat4x4 scale2d(float scaleX, float scaleY) {
+        return this.mul(
+            scaleX, 0, 0, 0,
+            0, scaleY, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
         );
     }
 
