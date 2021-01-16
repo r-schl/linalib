@@ -43,10 +43,6 @@ public class Vec4 extends Matrix {
         this(xyzw, xyzw, xyzw, xyzw);
     }
 
-    public Vec4(float xyz, float w) {
-        this(xyz, xyz, xyz, w);
-    }
-
     public Vec4(Vec2 vec, float z, float w) {
         this(vec.x, vec.y, z, w);
     }

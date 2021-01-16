@@ -34,18 +34,20 @@ public class Mat2x2 extends Matrix {
         this.m11 = mat.m11;
     }
 
-    public void set(float m00, float m01, float m10, float m11) {
+    public Mat2x2 set(float m00, float m01, float m10, float m11) {
         this.m00 = m00;
         this.m01 = m01;
         this.m10 = m10;
         this.m11 = m11;
+        return this;
     }
 
-    public void set(Mat2x2 mat) {
+    public Mat2x2 set(Mat2x2 mat) {
         this.m00 = mat.m00;
         this.m01 = mat.m01;
         this.m10 = mat.m10;
         this.m11 = mat.m11;
+        return this;
     }
 
     @Override

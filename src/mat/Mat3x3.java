@@ -46,7 +46,7 @@ public class Mat3x3 extends Matrix {
         this.m22 = mat.m22;
     }
 
-    public void set(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22) {
+    public Mat3x3 set(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22) {
         this.m00 = m00;
         this.m01 = m01;
         this.m02 = m02;
@@ -56,9 +56,10 @@ public class Mat3x3 extends Matrix {
         this.m20 = m20;
         this.m21 = m21;
         this.m22 = m22;
+        return this;
     }
 
-    public void set(Mat3x3 mat) {
+    public Mat3x3 set(Mat3x3 mat) {
         this.m00 = mat.m00;
         this.m01 = mat.m01;
         this.m02 = mat.m02;
@@ -68,6 +69,7 @@ public class Mat3x3 extends Matrix {
         this.m20 = mat.m20;
         this.m21 = mat.m21;
         this.m22 = mat.m22;
+        return this;
     }
 
     @Override

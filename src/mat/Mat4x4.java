@@ -76,7 +76,7 @@ public class Mat4x4 extends Matrix {
     }
 
 
-    public void set(float m00, float m01, float m02, float m03,
+    public Mat4x4 set(float m00, float m01, float m02, float m03,
                     float m10, float m11, float m12, float m13,
                     float m20, float m21, float m22, float m23,
                     float m30, float m31, float m32, float m33) {
@@ -96,25 +96,27 @@ public class Mat4x4 extends Matrix {
         this.m31 = m31;
         this.m32 = m32;
         this.m33 = m33;
+        return this;
     }
 
-    public void set(Mat4x4 other) {
-        this.m00 = other.m00;
-        this.m01 = other.m01;
-        this.m02 = other.m02;
-        this.m03 = other.m03;
-        this.m10 = other.m10;
-        this.m11 = other.m11;
-        this.m12 = other.m12;
-        this.m13 = other.m13;
-        this.m20 = other.m20;
-        this.m21 = other.m21;
-        this.m22 = other.m22;
-        this.m23 = other.m23;
-        this.m30 = other.m30;
-        this.m31 = other.m31;
-        this.m32 = other.m32;
-        this.m33 = other.m33;
+    public Mat4x4 set(Mat4x4 mat) {
+        this.m00 = mat.m00;
+        this.m01 = mat.m01;
+        this.m02 = mat.m02;
+        this.m03 = mat.m03;
+        this.m10 = mat.m10;
+        this.m11 = mat.m11;
+        this.m12 = mat.m12;
+        this.m13 = mat.m13;
+        this.m20 = mat.m20;
+        this.m21 = mat.m21;
+        this.m22 = mat.m22;
+        this.m23 = mat.m23;
+        this.m30 = mat.m30;
+        this.m31 = mat.m31;
+        this.m32 = mat.m32;
+        this.m33 = mat.m33;
+        return this;
     }
 
     @Override
