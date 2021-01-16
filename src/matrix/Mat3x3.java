@@ -117,6 +117,39 @@ public class Mat3x3 extends Matrix {
     }
 
     @Override
+    public int getInt(int row, int col) {
+        if (row >= this.rows || col >= this.columns) {
+            throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
+        }
+        if (row == 0) {
+            if (col == 0) {
+                return (int) m00;
+            } else if (col == 1) {
+                return (int) m01;
+            } else if (col == 2) {
+                return (int) m02;
+            }
+        } else if (row == 1) {
+            if (col == 0) {
+                return (int) m10;
+            } else if (col == 1) {
+                return (int) m11;
+            } else if (col == 2) {
+                return (int) m12;
+            }
+        } else if (row == 2) {
+            if (col == 0) {
+                return (int) m20;
+            } else if (col == 1) {
+                return (int) m21;
+            } else if (col == 2) {
+                return (int) m22;
+            }
+        }
+        throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
+    }
+
+    @Override
     public void set(int row, int col, float val) {
         if (row >= this.rows || col >= this.columns) {
             throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);

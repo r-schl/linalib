@@ -14,6 +14,8 @@ public abstract class Matrix {
 
     public abstract float get(int row, int col);
 
+    public abstract int getInt(int row, int col);
+
     public abstract void set(int row, int col, float val);
 
     public abstract Matrix copy();

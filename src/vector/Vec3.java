@@ -271,6 +271,29 @@ public class Vec3 extends Matrix {
     }
 
     @Override
+    public int getInt(int row, int col) {
+        if (row >= rows || col >= columns)
+            throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
+        if (this.isHor()) {
+            if (col == 0)
+                return (int) x;
+            else if (col == 1)
+                return (int) y;
+            else if (col == 2)
+                return (int) z;
+        } else {
+            if (row == 0)
+                return (int) x;
+            else if (row == 1)
+                return (int) y;
+            else if (row == 2)
+                return (int) z;
+        }
+        return -1;
+    }
+
+
+    @Override
     public void set(int row, int col, float val) {
         if (row >= rows || col >= columns)
             throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
@@ -438,4 +461,17 @@ public class Vec3 extends Matrix {
         this.z = Math.abs(this.z);
         return this;
     }
+
+    public int getIntX() {
+        return (int) this.x;
+    }
+
+    public int getIntY() {
+        return (int) this.y;
+    }
+
+    public int getIntZ() {
+        return (int) this.z;
+    }
+
 }

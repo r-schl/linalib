@@ -246,6 +246,24 @@ public class Vec4 extends Matrix {
     }
 
     @Override
+    public int getInt(int row, int col) {
+        if (row >= rows || col >= columns)
+            throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
+        if (this.isHor()) {
+            if (col == 0) return (int) x;
+            else if (col == 1) return (int) y;
+            else if (col == 2) return (int) z;
+            else if (col == 3) return (int) w;
+        } else {
+            if (row == 0) return (int) x;
+            else if (row == 1) return (int) y;
+            else if (row == 2) return (int) z;
+            else if (row == 3) return (int) w;
+        }
+        return -1;
+    }
+
+    @Override
     public void set(int row, int col, float val) {
         if (row >= rows || col >= columns)
             throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
@@ -304,7 +322,7 @@ public class Vec4 extends Matrix {
                     float mat20, float mat21, float mat22, float mat23,
                     float mat30, float mat31, float mat32, float mat33) {
         if (isVer()) {
-            new Exception("Cannot multiply a vertical vector with a 3x3 matrix.").printStackTrace();
+            new Exception("Cannot multiply a vertical vector with a 4x4 matrix.").printStackTrace();
             System.exit(-1);
         }
         float x = this.x * mat00 + this.y * mat10 + this.z * mat20 + this.w * mat30;
@@ -320,7 +338,7 @@ public class Vec4 extends Matrix {
 
     public Vec4 mulRvs(Mat4x4 mat) {
         if (isHor()) {
-            new Exception("Cannot multiply 3x3 matrix with an horizontal vector.").printStackTrace();
+            new Exception("Cannot multiply a 4x4 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);
         }
         float x = mat.m00 * this.x + mat.m01 * this.y + mat.m02 * this.z + mat.m03 * this.w;
@@ -339,7 +357,7 @@ public class Vec4 extends Matrix {
                        float mat20, float mat21, float mat22, float mat23,
                        float mat30, float mat31, float mat32, float mat33) {
         if (isHor()) {
-            new Exception("Cannot multiply 3x3 matrix with an horizontal vector.").printStackTrace();
+            new Exception("Cannot multiply a 4x4 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);
         }
         float x = mat00 * this.x + mat01 * this.y + mat02 * this.z + mat03 * this.w;
@@ -434,6 +452,22 @@ public class Vec4 extends Matrix {
         this.z = Math.abs(this.z);
         this.w = Math.abs(this.w);
         return this;
+    }
+
+    public int getIntX() {
+        return (int) this.x;
+    }
+
+    public int getIntY() {
+        return (int) this.y;
+    }
+
+    public int getIntZ() {
+        return (int) this.z;
+    }
+
+    public int getIntW() {
+        return (int) this.w;
     }
 
 
