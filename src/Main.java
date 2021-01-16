@@ -11,10 +11,9 @@ public class Main {
 
     public static void main(String... args) {
 
-        Mat4x4 mat2 = new Mat4x4()
-                        .rotation3d(0, 0, 90)
-                        .translation3d(50, 50, 50)
-                        .projection3d(10, 13, 45, 78);
+        Mat4x4 mat2 = new Mat4x4().rotation3d(0, 0, 90).translation3d(50, 50, 50);
+
+        mat2.print();
 
         Vec4 lol = new Vec4(0, 5, 0, 1);
 

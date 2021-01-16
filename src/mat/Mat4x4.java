@@ -445,6 +445,22 @@ public class Mat4x4 extends Matrix {
         return this;
     }
 
+    public Mat4x4 rotation3dAxis(Vec3 axis, float angle) {
+        return rotation3dAxis(axis.x, axis.y, axis.z, angle);
+    }
+
+    public Mat4x4 rotation3dAxis(float axisX, float axisY, float axisZ, float angle) {
+        float a = (float) Math.toRadians(angle);
+        float sinA = (float) Math.sin(a);
+        float cosA = (float) Math.cos(a);
+        return this.mul(
+            axisX * axisX * (1 - cosA) + cosA, axisX * axisY * (1 - cosA) - axisZ * sinA, axisX * axisZ * (1 - cosA) + axisY * sinA, 0,
+            axisY * axisX * (1 - cosA) + axisZ * sinA, axisY * axisY * (1 - cosA) + cosA, axisY * axisZ * (1 - cosA) - axisX * sinA, 0,
+            axisZ * axisX * (1 - cosA) - axisY * sinA, axisZ * axisY * (1 - cosA) + axisX * sinA, axisZ * axisZ * (1 - cosA) + cosA, 0,
+            0, 0, 0, 1
+        );
+    }
+
     public Mat4x4 rotation3d(Vec3 angle) {
         return rotation3d(angle.x, angle.y, angle.z);
     }

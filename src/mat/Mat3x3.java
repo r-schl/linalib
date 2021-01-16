@@ -292,6 +292,21 @@ public class Mat3x3 extends Matrix {
         );
     }
 
+    public Mat3x3 rotation3dAxis(Vec3 axis, float angle) {
+        return rotation3dAxis(axis.x, axis.y, axis.z, angle);
+    }
+
+    public Mat3x3 rotation3dAxis(float axisX, float axisY, float axisZ, float angle) {
+        float a = (float) Math.toRadians(angle);
+        float sinA = (float) Math.sin(a);
+        float cosA = (float) Math.cos(a);
+        return this.mul(
+            axisX * axisX * (1 - cosA) + cosA, axisX * axisY * (1 - cosA) - axisZ * sinA, axisX * axisZ * (1 - cosA) + axisY * sinA,
+            axisY * axisX * (1 - cosA) + axisZ * sinA, axisY * axisY * (1 - cosA) + cosA, axisY * axisZ * (1 - cosA) - axisX * sinA,
+            axisZ * axisX * (1 - cosA) - axisY * sinA, axisZ * axisY * (1 - cosA) + axisX * sinA, axisZ * axisZ * (1 - cosA) + cosA
+        );
+    }
+
     public Mat3x3 rotation3d(float rotX, float rotY, float rotZ) {
         float cosX = (float) Math.cos(Math.toRadians(rotX));
         float sinX = (float) Math.sin(Math.toRadians(rotX));
