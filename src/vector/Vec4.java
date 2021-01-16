@@ -427,5 +427,14 @@ public class Vec4 extends Matrix {
         v.y = this.y;
     }
 
+    @Override
+    public Vec4 absElWise() {
+        this.x = Math.abs(this.x);
+        this.y = Math.abs(this.y);
+        this.z = Math.abs(this.z);
+        this.w = Math.abs(this.w);
+        return this;
+    }
+
 
 }

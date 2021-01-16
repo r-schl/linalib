@@ -602,7 +602,7 @@ public class Mat4x4 extends Matrix {
         buf.put(m31);
         buf.put(m32);
         buf.put(m33);
-        return null;
+        return this;
     }
 
     @Override
@@ -613,6 +613,27 @@ public class Mat4x4 extends Matrix {
             {m20, m21, m22, m23},
             {m30, m31, m32, m33}
         };
+    }
+
+    @Override
+    public Mat4x4 absElWise() {
+        this.m00 = Math.abs(m00);
+        this.m01 = Math.abs(m01);
+        this.m02 = Math.abs(m02);
+        this.m03 = Math.abs(m03);
+        this.m10 = Math.abs(m10);
+        this.m11 = Math.abs(m11);
+        this.m12 = Math.abs(m12);
+        this.m13 = Math.abs(m13);
+        this.m20 = Math.abs(m20);
+        this.m21 = Math.abs(m21);
+        this.m22 = Math.abs(m22);
+        this.m23 = Math.abs(m23);
+        this.m30 = Math.abs(m30);
+        this.m31 = Math.abs(m31);
+        this.m32 = Math.abs(m32);
+        this.m33 = Math.abs(m33);
+        return this;
     }
     
 }

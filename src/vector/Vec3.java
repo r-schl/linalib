@@ -407,7 +407,7 @@ public class Vec3 extends Matrix {
     }
 
     @Override
-    public Matrix storeInside(FloatBuffer buf) {
+    public Vec3 storeInside(FloatBuffer buf) {
         buf.put(x);
         buf.put(y);
         buf.put(z);
@@ -429,5 +429,13 @@ public class Vec3 extends Matrix {
         v.x = this.x;
         v.y = this.y;
         v.z = this.z;
+    }
+
+    @Override
+    public Vec3 absElWise() {
+        this.x = Math.abs(this.x);
+        this.y = Math.abs(this.y);
+        this.z = Math.abs(this.z);
+        return this;
     }
 }

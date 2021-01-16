@@ -205,7 +205,7 @@ public class Mat2x2 extends Matrix {
     }
 
     @Override
-    public Matrix toInt() {
+    public Mat2x2 toInt() {
         this.m00 = (int) m00;
         this.m01 = (int) m01;
         this.m10 = (int) m10;
@@ -214,11 +214,20 @@ public class Mat2x2 extends Matrix {
     }
 
     @Override
-    public Matrix storeInside(FloatBuffer buf) {
+    public Mat2x2 storeInside(FloatBuffer buf) {
         buf.put(m00);
         buf.put(m01);
         buf.put(m10);
         buf.put(m11);
+        return this;
+    }
+
+    @Override
+    public Mat2x2 absElWise() {
+        this.m00 = Math.abs(m00);
+        this.m01 = Math.abs(m01);
+        this.m10 = Math.abs(m10);
+        this.m11 = Math.abs(m11);
         return this;
     }
 

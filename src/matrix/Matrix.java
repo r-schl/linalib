@@ -58,6 +58,8 @@ public abstract class Matrix {
 
     public abstract Matrix storeInside(FloatBuffer buf);
 
+    public abstract Matrix absElWise();
+
     public abstract float[][] toArr();
 
     public String toString() {

@@ -367,7 +367,7 @@ public class Mat3x3 extends Matrix {
     }
 
     @Override
-    public Matrix toInt() {
+    public Mat3x3 toInt() {
         this.m00 = (int) m00;
         this.m01 = (int) m01;
         this.m02 = (int) m02;
@@ -381,7 +381,7 @@ public class Mat3x3 extends Matrix {
     }
 
     @Override
-    public Matrix storeInside(FloatBuffer buf) {
+    public Mat3x3 storeInside(FloatBuffer buf) {
         buf.put(m00);
         buf.put(m01);
         buf.put(m20);
@@ -391,6 +391,20 @@ public class Mat3x3 extends Matrix {
         buf.put(m20);
         buf.put(m21);
         buf.put(m22);
+        return this;
+    }
+
+    @Override
+    public Mat3x3 absElWise() {
+        this.m00 = Math.abs(m00);
+        this.m01 = Math.abs(m01);
+        this.m02 = Math.abs(m02);
+        this.m10 = Math.abs(m10);
+        this.m11 = Math.abs(m11);
+        this.m12 = Math.abs(m12);
+        this.m20 = Math.abs(m20);
+        this.m21 = Math.abs(m21);
+        this.m22 = Math.abs(m22);
         return this;
     }
 }

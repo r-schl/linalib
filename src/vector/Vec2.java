@@ -344,4 +344,11 @@ public class Vec2 extends Matrix {
         v.y = this.y;
     }
 
+    @Override
+    public Vec2 absElWise() {
+        this.x = Math.abs(this.x);
+        this.y = Math.abs(this.y);
+        return this;
+    }
+
 }
