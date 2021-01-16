@@ -1,4 +1,4 @@
-package src.mat;
+package matrix;
 
 import java.nio.FloatBuffer;
 

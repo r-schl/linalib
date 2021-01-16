@@ -1,9 +1,10 @@
-package src.mat;
+package matrix;
+
+import vector.Vec2;
+import vector.Vec3;
 
 import java.nio.FloatBuffer;
 
-import src.vec.Vec2;
-import src.vec.Vec3;
 
 public class Mat3x3 extends Matrix {
 

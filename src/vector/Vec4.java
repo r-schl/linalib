@@ -1,9 +1,10 @@
-package src.vec;
+package vector;
+
+import matrix.Mat4x4;
+import matrix.Matrix;
 
 import java.nio.FloatBuffer;
 
-import src.mat.Mat4x4;
-import src.mat.Matrix;
 
 public class Vec4 extends Matrix {
 

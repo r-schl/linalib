@@ -1,9 +1,9 @@
-package src.vec;
+package vector;
+
+import matrix.Mat2x2;
+import matrix.Matrix;
 
 import java.nio.FloatBuffer;
-
-import src.mat.Mat2x2;
-import src.mat.Matrix;
 
 public class Vec2 extends Matrix {
 
