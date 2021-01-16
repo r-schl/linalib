@@ -40,6 +40,26 @@ public class Vec3 extends Matrix {
         this(xyz, xyz, xyz);
     }
 
+    public Vec3(float xy, float z) {
+        this(xy, xy, z);
+    }
+
+    public Vec3(Vec2 vec, float z) {
+        this(vec.x, vec.y, z);
+    }
+
+    public Vec3(Vec3 vec) {
+        this(vec.x, vec.y, vec.z);
+    }
+
+    public Vec3(Vec4 vec) {
+        this(vec.x, vec.y, vec.z);
+    }
+
+    
+
+   
+
     public float len() {
         return (float) Math.sqrt(x * x + y * y + z * z);
     }

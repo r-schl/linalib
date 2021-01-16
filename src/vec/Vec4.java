@@ -39,10 +39,6 @@ public class Vec4 extends Matrix {
         this.columns = HOR_COLUMNS;
     }
 
-    public Vec4(Vec3 vec, float w) {
-        this(vec.x, vec.y, vec.z, w);
-    }
-
     public Vec4(float xyzw) {
         this(xyzw, xyzw, xyzw, xyzw);
     }
@@ -50,6 +46,19 @@ public class Vec4 extends Matrix {
     public Vec4(float xyz, float w) {
         this(xyz, xyz, xyz, w);
     }
+
+    public Vec4(Vec2 vec, float z, float w) {
+        this(vec.x, vec.y, z, w);
+    }
+
+    public Vec4(Vec3 vec, float w) {
+        this(vec.x, vec.y, vec.z, w);
+    }
+
+    public Vec4(Vec4 v) {
+        this(v.x, v.y, v.z, v.w);
+    }
+    
 
     public float len() {
         return (float) Math.sqrt(x * x + y * y + z * z + w * w);

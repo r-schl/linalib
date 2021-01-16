@@ -37,6 +37,18 @@ public class Vec2 extends Matrix {
         this(xy, xy);
     }
 
+    public Vec2(Vec2 vec) {
+        this(vec.x, vec.y);
+    }
+
+    public Vec2(Vec3 vec) {
+        this(vec.x, vec.y);
+    }
+
+    public Vec2(Vec4 vec) {
+        this(vec.x, vec.y);
+    }
+
     public float len() {
         return (float) Math.sqrt(x * x + y * y);
     }
