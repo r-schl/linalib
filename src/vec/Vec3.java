@@ -400,4 +400,21 @@ public class Vec3 extends Matrix {
         buf.put(z);
         return this;
     }
+
+    public void copyTo(Vec2 v) {
+        v.x = this.x;
+        v.y = this.y;
+    }
+
+    public void copyTo(Vec3 v) {
+        v.x = this.x;
+        v.y = this.y;
+        v.z = this.z;
+    }
+
+    public void copyTo(Vec4 v) {
+        v.x = this.x;
+        v.y = this.y;
+        v.z = this.z;
+    }
 }

@@ -39,6 +39,10 @@ public class Vec4 extends Matrix {
         this.columns = HOR_COLUMNS;
     }
 
+    public Vec4(Vec3 vec, float w) {
+        this(vec.x, vec.y, vec.z, w);
+    }
+
     public Vec4(float xyzw) {
         this(xyzw, xyzw, xyzw, xyzw);
     }
@@ -391,6 +395,31 @@ public class Vec4 extends Matrix {
         return this.isHor() ? "(" + x + " " + y + " " + z + " " + w + ")" : x + "\n" + y + "\n" + z + "\n" + w;
     }
 
+    public Vec3 xyz() {
+        return new Vec3(x, y, z);
+    }
+
+    public Vec2 xy() {
+        return new Vec2(x, y);
+    }
+
+    public void copyTo(Vec4 v) {
+        v.x = this.x;
+        v.y = this.y;
+        v.z = this.z;
+        v.w = this.w;
+    }
+
+    public void copyTo(Vec3 v) {
+        v.x = this.x;
+        v.y = this.y;
+        v.z = this.z;
+    }
+
+    public void copyTo(Vec2 v) {
+        v.x = this.x;
+        v.y = this.y;
+    }
 
 
 }
