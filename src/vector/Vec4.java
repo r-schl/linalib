@@ -149,6 +149,14 @@ public class Vec4 extends Matrix {
         return this;
     }
 
+    public Vec4 subRvs(float r) {
+        this.x = r - this.x;
+        this.y = r - this.y;
+        this.z = r - this.z;
+        this.w = r - this.w;
+        return this;
+    }
+
     public Vec4 mul(float r) {
         this.x = this.x * r;
         this.y = this.y * r;
@@ -162,6 +170,14 @@ public class Vec4 extends Matrix {
         this.y = this.y / r;
         this.z = this.z / r;
         this.w = this.w / r;
+        return this;
+    }
+
+    public Vec4 divRvs(float r) {
+        this.x = r / this.x;
+        this.y = r / this.y;
+        this.z = r / this.z;
+        this.w = r / this.w;
         return this;
     }
 
@@ -468,6 +484,30 @@ public class Vec4 extends Matrix {
 
     public int getIntW() {
         return (int) this.w;
+    }
+
+    @Override
+    public Matrix addElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Matrix subElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Matrix mulElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Matrix divElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 

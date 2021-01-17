@@ -118,9 +118,21 @@ public class Vec2 extends Matrix {
         return this;
     }
 
+    public Vec2 subRvs(float vX, float vY) {
+        this.x = vX - this.x;
+        this.y = vY - this.y;
+        return this;
+    }
+
     public Vec2 sub(float r) {
         this.x = this.x - r;
         this.y = this.y - r;
+        return this;
+    }
+
+    public Vec2 subRvs(float r) {
+        this.x = r - this.x;
+        this.y = r - this.y;
         return this;
     }
 
@@ -133,6 +145,12 @@ public class Vec2 extends Matrix {
     public Vec2 div(float r) {
         this.x = this.x / r;
         this.y = this.y / r;
+        return this;
+    }
+
+    public Vec2 divRvs(float r) {
+        this.x = r / this.x;
+        this.y = r / this.y;
         return this;
     }
 
@@ -227,7 +245,6 @@ public class Vec2 extends Matrix {
     }
 
     @Override
-
     public int rowCount() {
         return rows;
     }
@@ -375,6 +392,30 @@ public class Vec2 extends Matrix {
 
     public int getIntY() {
         return (int) this.y;
+    }
+
+    @Override
+    public Matrix addElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Matrix subElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Matrix mulElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Matrix divElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

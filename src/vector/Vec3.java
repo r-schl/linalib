@@ -175,6 +175,13 @@ public class Vec3 extends Matrix {
         return this;
     }
 
+    public Vec3 subRvs(float r) {
+        this.x = r - this.x;
+        this.y = r - this.y;
+        this.z = r - this.z;
+        return this;
+    }
+
     public Vec3 mul(float r) {
         this.x = this.x * r;
         this.y = this.y * r;
@@ -186,6 +193,13 @@ public class Vec3 extends Matrix {
         this.x = this.x / r;
         this.y = this.y / r;
         this.z = this.z / r;
+        return this;
+    }
+    
+    public Vec3 divRvs(float r) {
+        this.x = r / this.x;
+        this.y = r / this.y;
+        this.z = r / this.z;
         return this;
     }
 
@@ -472,6 +486,30 @@ public class Vec3 extends Matrix {
 
     public int getIntZ() {
         return (int) this.z;
+    }
+
+    @Override
+    public Matrix addElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Matrix subElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Matrix mulElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Matrix divElWise(float r) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

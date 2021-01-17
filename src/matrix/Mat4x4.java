@@ -684,5 +684,169 @@ public class Mat4x4 extends Matrix {
         this.m33 = Math.abs(m33);
         return this;
     }
+
+    public Mat4x4 addElWise(Mat4x4 mat) {
+        this.m00 = this.m00 + mat.m00;
+        this.m01 = this.m01 + mat.m01;
+        this.m02 = this.m02 + mat.m02;
+        this.m03 = this.m03 + mat.m03;
+        this.m10 = this.m10 + mat.m10;
+        this.m11 = this.m11 + mat.m11;
+        this.m12 = this.m12 + mat.m12;
+        this.m13 = this.m13 + mat.m13;
+        this.m20 = this.m20 + mat.m20;
+        this.m21 = this.m21 + mat.m21;
+        this.m22 = this.m22 + mat.m22;
+        this.m23 = this.m23 + mat.m23;
+        this.m30 = this.m30 + mat.m30;
+        this.m31 = this.m31 + mat.m31;
+        this.m32 = this.m32 + mat.m32;
+        this.m33 = this.m33 + mat.m33;
+        return this;
+    }
+
+    public Mat4x4 subElWise(Mat4x4 mat) {
+        this.m00 = this.m00 - mat.m00;
+        this.m01 = this.m01 - mat.m01;
+        this.m02 = this.m02 - mat.m02;
+        this.m03 = this.m03 - mat.m03;
+        this.m10 = this.m10 - mat.m10;
+        this.m11 = this.m11 - mat.m11;
+        this.m12 = this.m12 - mat.m12;
+        this.m13 = this.m13 - mat.m13;
+        this.m20 = this.m20 - mat.m20;
+        this.m21 = this.m21 - mat.m21;
+        this.m22 = this.m22 - mat.m22;
+        this.m23 = this.m23 - mat.m23;
+        this.m30 = this.m30 - mat.m30;
+        this.m31 = this.m31 - mat.m31;
+        this.m32 = this.m32 - mat.m32;
+        this.m33 = this.m33 - mat.m33;
+        return this;
+    }
+
+    public Mat4x4 mulElWise(Mat4x4 mat) {
+        this.m00 = this.m00 * mat.m00;
+        this.m01 = this.m01 * mat.m01;
+        this.m02 = this.m02 * mat.m02;
+        this.m03 = this.m03 * mat.m03;
+        this.m10 = this.m10 * mat.m10;
+        this.m11 = this.m11 * mat.m11;
+        this.m12 = this.m12 * mat.m12;
+        this.m13 = this.m13 * mat.m13;
+        this.m20 = this.m20 * mat.m20;
+        this.m21 = this.m21 * mat.m21;
+        this.m22 = this.m22 * mat.m22;
+        this.m23 = this.m23 * mat.m23;
+        this.m30 = this.m30 * mat.m30;
+        this.m31 = this.m31 * mat.m31;
+        this.m32 = this.m32 * mat.m32;
+        this.m33 = this.m33 * mat.m33;
+        return this;
+    }
+
+    public Mat4x4 divElWise(Mat4x4 mat) {
+        this.m00 = this.m00 / mat.m00;
+        this.m01 = this.m01 / mat.m01;
+        this.m02 = this.m02 / mat.m02;
+        this.m03 = this.m03 / mat.m03;
+        this.m10 = this.m10 / mat.m10;
+        this.m11 = this.m11 / mat.m11;
+        this.m12 = this.m12 / mat.m12;
+        this.m13 = this.m13 / mat.m13;
+        this.m20 = this.m20 / mat.m20;
+        this.m21 = this.m21 / mat.m21;
+        this.m22 = this.m22 / mat.m22;
+        this.m23 = this.m23 / mat.m23;
+        this.m30 = this.m30 / mat.m30;
+        this.m31 = this.m31 / mat.m31;
+        this.m32 = this.m32 / mat.m32;
+        this.m33 = this.m33 / mat.m33;
+        return this;
+    }
+
+    @Override
+    public Mat4x4 addElWise(float r) {
+        this.m00 = this.m00 + r;
+        this.m01 = this.m01 + r;
+        this.m02 = this.m02 + r;
+        this.m03 = this.m03 + r;
+        this.m10 = this.m10 + r;
+        this.m11 = this.m11 + r;
+        this.m12 = this.m12 + r;
+        this.m13 = this.m13 + r;
+        this.m20 = this.m20 + r;
+        this.m21 = this.m21 + r;
+        this.m22 = this.m22 + r;
+        this.m23 = this.m23 + r;
+        this.m30 = this.m30 + r;
+        this.m31 = this.m31 + r;
+        this.m32 = this.m32 + r;
+        this.m33 = this.m33 + r;
+        return this;
+    }
+
+    @Override
+    public Matrix subElWise(float r) {
+        this.m00 = this.m00 - r;
+        this.m01 = this.m01 - r;
+        this.m02 = this.m02 - r;
+        this.m03 = this.m03 - r;
+        this.m10 = this.m10 - r;
+        this.m11 = this.m11 - r;
+        this.m12 = this.m12 - r;
+        this.m13 = this.m13 - r;
+        this.m20 = this.m20 - r;
+        this.m21 = this.m21 - r;
+        this.m22 = this.m22 - r;
+        this.m23 = this.m23 - r;
+        this.m30 = this.m30 - r;
+        this.m31 = this.m31 - r;
+        this.m32 = this.m32 - r;
+        this.m33 = this.m33 - r;
+        return this;
+    }
+
+    @Override
+    public Matrix mulElWise(float r) {
+        this.m00 = this.m00 * r;
+        this.m01 = this.m01 * r;
+        this.m02 = this.m02 * r;
+        this.m03 = this.m03 * r;
+        this.m10 = this.m10 * r;
+        this.m11 = this.m11 * r;
+        this.m12 = this.m12 * r;
+        this.m13 = this.m13 * r;
+        this.m20 = this.m20 * r;
+        this.m21 = this.m21 * r;
+        this.m22 = this.m22 * r;
+        this.m23 = this.m23 * r;
+        this.m30 = this.m30 * r;
+        this.m31 = this.m31 * r;
+        this.m32 = this.m32 * r;
+        this.m33 = this.m33 * r;
+        return this;
+    }
+
+    @Override
+    public Matrix divElWise(float r) {
+        this.m00 = this.m00 / r;
+        this.m01 = this.m01 / r;
+        this.m02 = this.m02 / r;
+        this.m03 = this.m03 / r;
+        this.m10 = this.m10 / r;
+        this.m11 = this.m11 / r;
+        this.m12 = this.m12 / r;
+        this.m13 = this.m13 / r;
+        this.m20 = this.m20 / r;
+        this.m21 = this.m21 / r;
+        this.m22 = this.m22 / r;
+        this.m23 = this.m23 / r;
+        this.m30 = this.m30 / r;
+        this.m31 = this.m31 / r;
+        this.m32 = this.m32 / r;
+        this.m33 = this.m33 / r;
+        return this;
+    }
     
 }

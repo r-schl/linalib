@@ -252,4 +252,72 @@ public class Mat2x2 extends Matrix {
         return this;
     }
 
+    public Mat2x2 addElWise(Mat2x2 mat) {
+        this.m00 = m00 + mat.m00;
+        this.m01 = m01 + mat.m01;
+        this.m10 = m10 + mat.m10;
+        this.m11 = m11 + mat.m11;
+        return this;
+    }
+
+    public Mat2x2 subElWise(Mat2x2 mat) {
+        this.m00 = m00 - mat.m00;
+        this.m01 = m01 - mat.m01;
+        this.m10 = m10 - mat.m10;
+        this.m11 = m11 - mat.m11;
+        return this;
+    }
+
+    public Mat2x2 mulElWise(Mat2x2 mat) {
+        this.m00 = m00 * mat.m00;
+        this.m01 = m01 * mat.m01;
+        this.m10 = m10 * mat.m10;
+        this.m11 = m11 * mat.m11;
+        return this;
+    }
+
+    public Mat2x2 divElWise(Mat2x2 mat){
+        this.m00 = m00 / mat.m00;
+        this.m01 = m01 / mat.m01;
+        this.m10 = m10 / mat.m10;
+        this.m11 = m11 / mat.m11;
+        return this;
+    }
+
+    @Override
+    public Mat2x2 addElWise(float r) {
+        this.m00 = m00 + r;
+        this.m01 = m01 + r;
+        this.m10 = m10 + r;
+        this.m11 = m11 + r;
+        return this;
+    }
+
+    @Override
+    public Mat2x2 subElWise(float r) {
+        this.m00 = m00 - r;
+        this.m01 = m01 - r;
+        this.m10 = m10 - r;
+        this.m11 = m11 - r;
+        return this;
+    }
+
+    @Override
+    public Mat2x2 mulElWise(float r) {
+        this.m00 = m00 * r;
+        this.m01 = m01 * r;
+        this.m10 = m10 * r;
+        this.m11 = m11 * r;
+        return this;
+    }
+
+    @Override
+    public Mat2x2 divElWise(float r) {
+        this.m00 = m00 / r;
+        this.m01 = m01 / r;
+        this.m10 = m10 / r;
+        this.m11 = m11 / r;
+        return this;
+    }
+
 }
