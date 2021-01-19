@@ -467,6 +467,19 @@ public class Mat3x3 extends Matrix {
         return this;
     }
 
+    public Mat3x3 subElWiseRvs(Mat3x3 mat) {
+        this.m00 = mat.m00 - this.m00;
+        this.m01 = mat.m01 - this.m01;
+        this.m02 = mat.m02 - this.m02;
+        this.m10 = mat.m10 - this.m10;
+        this.m11 = mat.m11 - this.m11;
+        this.m12 = mat.m12 - this.m12;
+        this.m20 = mat.m20 - this.m20;
+        this.m21 = mat.m21 - this.m21;
+        this.m22 = mat.m22 - this.m22;
+        return this;
+    }
+
     public Mat3x3 mulElWise(Mat3x3 mat) {
         this.m00 = this.m00 * mat.m00;
         this.m01 = this.m01 * mat.m01;
@@ -493,7 +506,19 @@ public class Mat3x3 extends Matrix {
         return this;
     }
 
-    @Override
+    public Mat3x3 divElWiseRvs(Mat3x3 mat) {
+        this.m00 = mat.m00 / this.m00;
+        this.m01 = mat.m01 / this.m01;
+        this.m02 = mat.m02 / this.m02;
+        this.m10 = mat.m10 / this.m10;
+        this.m11 = mat.m11 / this.m11;
+        this.m12 = mat.m12 / this.m12;
+        this.m20 = mat.m20 / this.m20;
+        this.m21 = mat.m21 / this.m21;
+        this.m22 = mat.m22 / this.m22;
+        return this;
+    }
+
     public Mat3x3 addElWise(float r) {
         this.m00 = this.m00 + r;
         this.m01 = this.m01 + r;
@@ -507,7 +532,6 @@ public class Mat3x3 extends Matrix {
         return this;
     }
 
-    @Override
     public Mat3x3 subElWise(float r) {
         this.m00 = this.m00 - r;
         this.m01 = this.m01 - r;
@@ -521,7 +545,6 @@ public class Mat3x3 extends Matrix {
         return this;
     }
 
-    @Override
     public Mat3x3 mulElWise(float r) {
         this.m00 = this.m00 * r;
         this.m01 = this.m01 * r;
@@ -535,7 +558,6 @@ public class Mat3x3 extends Matrix {
         return this;
     }
 
-    @Override
     public Mat3x3 divElWise(float r) {
         this.m00 = this.m00 / r;
         this.m01 = this.m01 / r;
@@ -546,6 +568,32 @@ public class Mat3x3 extends Matrix {
         this.m20 = this.m20 / r;
         this.m21 = this.m21 / r;
         this.m22 = this.m22 / r;
+        return this;
+    }
+
+    public Matrix subElWiseRvs(float r) {
+        this.m00 = r - this.m00;
+        this.m01 = r - this.m01;
+        this.m02 = r - this.m02;
+        this.m10 = r - this.m10;
+        this.m11 = r - this.m11;
+        this.m12 = r - this.m12;
+        this.m20 = r - this.m20;
+        this.m21 = r - this.m21;
+        this.m22 = r - this.m22;
+        return this;
+    }
+
+    public Matrix divElWiseRvs(float r) {
+        this.m00 = r / this.m00;
+        this.m01 = r / this.m01;
+        this.m02 = r / this.m02;
+        this.m10 = r / this.m10;
+        this.m11 = r / this.m11;
+        this.m12 = r / this.m12;
+        this.m20 = r / this.m20;
+        this.m21 = r / this.m21;
+        this.m22 = r / this.m22;
         return this;
     }
 

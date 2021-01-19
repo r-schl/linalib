@@ -65,14 +65,6 @@ public abstract class Matrix {
 
     public abstract Matrix absElWise();
 
-    public abstract Matrix addElWise(float r);
-
-    public abstract Matrix subElWise(float r);
-
-    public abstract Matrix mulElWise(float r);
-
-    public abstract Matrix divElWise(float r);
-
     public boolean hasSameDim(Matrix mat) {
         return mat.rowCount() == this.rowCount() && mat.colCount() == this.colCount();
     }

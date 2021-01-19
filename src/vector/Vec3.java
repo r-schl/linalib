@@ -488,28 +488,4 @@ public class Vec3 extends Matrix {
         return (int) this.z;
     }
 
-    @Override
-    public Matrix addElWise(float r) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Matrix subElWise(float r) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Matrix mulElWise(float r) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Matrix divElWise(float r) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 }
