@@ -502,7 +502,7 @@ public class Mat4x4 extends Matrix {
         float cosA = (float) Math.cos(Math.toRadians(angle));
         float sinA = (float) Math.sin(Math.toRadians(angle));
         return this.mul(
-            cosA, sinA, 0, 0,
+            cosA, -sinA, 0, 0,
             sinA, cosA, 0, 0,
             0, 0, 1, 0,
             0, 0, 0, 1
@@ -705,6 +705,30 @@ public class Mat4x4 extends Matrix {
         return this;
     }
 
+
+    public Mat4x4 addElWise(float mat00, float mat01, float mat02, float mat03,
+                            float mat10, float mat11, float mat12, float mat13,
+                            float mat20, float mat21, float mat22, float mat23,
+                            float mat30, float mat31, float mat32, float mat33) {
+        this.m00 = this.m00 + mat00;
+        this.m01 = this.m01 + mat01;
+        this.m02 = this.m02 + mat02;
+        this.m03 = this.m03 + mat03;
+        this.m10 = this.m10 + mat10;
+        this.m11 = this.m11 + mat11;
+        this.m12 = this.m12 + mat12;
+        this.m13 = this.m13 + mat13;
+        this.m20 = this.m20 + mat20;
+        this.m21 = this.m21 + mat21;
+        this.m22 = this.m22 + mat22;
+        this.m23 = this.m23 + mat23;
+        this.m30 = this.m30 + mat30;
+        this.m31 = this.m31 + mat31;
+        this.m32 = this.m32 + mat32;
+        this.m33 = this.m33 + mat33;
+        return this;
+    }
+
     public Mat4x4 subElWise(Mat4x4 mat) {
         this.m00 = this.m00 - mat.m00;
         this.m01 = this.m01 - mat.m01;
@@ -722,6 +746,29 @@ public class Mat4x4 extends Matrix {
         this.m31 = this.m31 - mat.m31;
         this.m32 = this.m32 - mat.m32;
         this.m33 = this.m33 - mat.m33;
+        return this;
+    }
+
+    public Mat4x4 subElWise(float mat00, float mat01, float mat02, float mat03,
+                            float mat10, float mat11, float mat12, float mat13,
+                            float mat20, float mat21, float mat22, float mat23,
+                            float mat30, float mat31, float mat32, float mat33) {
+        this.m00 = this.m00 - mat00;
+        this.m01 = this.m01 - mat01;
+        this.m02 = this.m02 - mat02;
+        this.m03 = this.m03 - mat03;
+        this.m10 = this.m10 - mat10;
+        this.m11 = this.m11 - mat11;
+        this.m12 = this.m12 - mat12;
+        this.m13 = this.m13 - mat13;
+        this.m20 = this.m20 - mat20;
+        this.m21 = this.m21 - mat21;
+        this.m22 = this.m22 - mat22;
+        this.m23 = this.m23 - mat23;
+        this.m30 = this.m30 - mat30;
+        this.m31 = this.m31 - mat31;
+        this.m32 = this.m32 - mat32;
+        this.m33 = this.m33 - mat33;
         return this;
     }
 
@@ -745,6 +792,29 @@ public class Mat4x4 extends Matrix {
         return this;
     }
 
+    public Mat4x4 subElWiseRvs(float mat00, float mat01, float mat02, float mat03,
+                               float mat10, float mat11, float mat12, float mat13,
+                               float mat20, float mat21, float mat22, float mat23,
+                               float mat30, float mat31, float mat32, float mat33) {
+        this.m00 = mat00 - this.m00;
+        this.m01 = mat01 - this.m01;
+        this.m02 = mat02 - this.m02;
+        this.m03 = mat03 - this.m03;
+        this.m10 = mat10 - this.m10;
+        this.m11 = mat11 - this.m11;
+        this.m12 = mat12 - this.m12;
+        this.m13 = mat13 - this.m13;
+        this.m20 = mat20 - this.m20;
+        this.m21 = mat21 - this.m21;
+        this.m22 = mat22 - this.m22;
+        this.m23 = mat23 - this.m23;
+        this.m30 = mat30 - this.m30;
+        this.m31 = mat31 - this.m31;
+        this.m32 = mat32 - this.m32;
+        this.m33 = mat33 - this.m33;
+        return this;
+    }
+
     public Mat4x4 mulElWise(Mat4x4 mat) {
         this.m00 = this.m00 * mat.m00;
         this.m01 = this.m01 * mat.m01;
@@ -762,6 +832,29 @@ public class Mat4x4 extends Matrix {
         this.m31 = this.m31 * mat.m31;
         this.m32 = this.m32 * mat.m32;
         this.m33 = this.m33 * mat.m33;
+        return this;
+    }
+
+    public Mat4x4 mulElWise(float mat00, float mat01, float mat02, float mat03,
+                            float mat10, float mat11, float mat12, float mat13,
+                            float mat20, float mat21, float mat22, float mat23,
+                            float mat30, float mat31, float mat32, float mat33) {
+        this.m00 = this.m00 * mat00;
+        this.m01 = this.m01 * mat01;
+        this.m02 = this.m02 * mat02;
+        this.m03 = this.m03 * mat03;
+        this.m10 = this.m10 * mat10;
+        this.m11 = this.m11 * mat11;
+        this.m12 = this.m12 * mat12;
+        this.m13 = this.m13 * mat13;
+        this.m20 = this.m20 * mat20;
+        this.m21 = this.m21 * mat21;
+        this.m22 = this.m22 * mat22;
+        this.m23 = this.m23 * mat23;
+        this.m30 = this.m30 * mat30;
+        this.m31 = this.m31 * mat31;
+        this.m32 = this.m32 * mat32;
+        this.m33 = this.m33 * mat33;
         return this;
     }
 
@@ -785,6 +878,29 @@ public class Mat4x4 extends Matrix {
         return this;
     }
 
+    public Mat4x4 divElWise(float mat00, float mat01, float mat02, float mat03,
+                            float mat10, float mat11, float mat12, float mat13,
+                            float mat20, float mat21, float mat22, float mat23,
+                            float mat30, float mat31, float mat32, float mat33) {
+        this.m00 = this.m00 / mat00;
+        this.m01 = this.m01 / mat01;
+        this.m02 = this.m02 / mat02;
+        this.m03 = this.m03 / mat03;
+        this.m10 = this.m10 / mat10;
+        this.m11 = this.m11 / mat11;
+        this.m12 = this.m12 / mat12;
+        this.m13 = this.m13 / mat13;
+        this.m20 = this.m20 / mat20;
+        this.m21 = this.m21 / mat21;
+        this.m22 = this.m22 / mat22;
+        this.m23 = this.m23 / mat23;
+        this.m30 = this.m30 / mat30;
+        this.m31 = this.m31 / mat31;
+        this.m32 = this.m32 / mat32;
+        this.m33 = this.m33 / mat33;
+        return this;
+    }
+    
     public Mat4x4 divElWiseRvs(Mat4x4 mat) {
         this.m00 = mat.m00 / this.m00;
         this.m01 = mat.m01 / this.m01;
@@ -802,6 +918,29 @@ public class Mat4x4 extends Matrix {
         this.m31 = mat.m31 / this.m31;
         this.m32 = mat.m32 / this.m32;
         this.m33 = mat.m33 / this.m33;
+        return this;
+    }
+
+    public Mat4x4 divElWiseRvs(float mat00, float mat01, float mat02, float mat03,
+                               float mat10, float mat11, float mat12, float mat13,
+                               float mat20, float mat21, float mat22, float mat23,
+                               float mat30, float mat31, float mat32, float mat33) {
+        this.m00 = mat00 / this.m00;
+        this.m01 = mat01 / this.m01;
+        this.m02 = mat02 / this.m02;
+        this.m03 = mat03 / this.m03;
+        this.m10 = mat10 / this.m10;
+        this.m11 = mat11 / this.m11;
+        this.m12 = mat12 / this.m12;
+        this.m13 = mat13 / this.m13;
+        this.m20 = mat20 / this.m20;
+        this.m21 = mat21 / this.m21;
+        this.m22 = mat22 / this.m22;
+        this.m23 = mat23 / this.m23;
+        this.m30 = mat30 / this.m30;
+        this.m31 = mat31 / this.m31;
+        this.m32 = mat32 / this.m32;
+        this.m33 = mat33 / this.m33;
         return this;
     }
 
