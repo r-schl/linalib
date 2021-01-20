@@ -443,20 +443,20 @@ public class Vec4 extends Matrix {
         return new Vec2(x, y);
     }
 
-    public void copyTo(Vec4 v) {
+    public void to(Vec4 v) {
         v.x = this.x;
         v.y = this.y;
         v.z = this.z;
         v.w = this.w;
     }
 
-    public void copyTo(Vec3 v) {
+    public void to(Vec3 v) {
         v.x = this.x;
         v.y = this.y;
         v.z = this.z;
     }
 
-    public void copyTo(Vec2 v) {
+    public void to(Vec2 v) {
         v.x = this.x;
         v.y = this.y;
     }

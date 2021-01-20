@@ -171,51 +171,7 @@ public class Mat4x4 extends Matrix {
 
     @Override
     public int getInt(int row, int col) {
-        if (row >= this.rows || col >= this.columns) {
-            throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
-        }
-        if (row == 0) {
-            if (col == 0) {
-                return (int) m00;
-            } else if (col == 1) {
-                return (int) m01;
-            } else if (col == 2) {
-                return (int) m02;
-            } else if (col == 3) {
-                return (int) m03;
-            }
-        } else if (row == 1) {
-            if (col == 0) {
-                return (int) m10;
-            } else if (col == 1) {
-                return (int) m11;
-            } else if (col == 2) {
-                return (int) m12;
-            } else if (col == 3) {
-                return (int) m13;
-            }
-        } else if (row == 2) {
-            if (col == 0) {
-                return (int) m20;
-            } else if (col == 1) {
-                return (int) m21;
-            } else if (col == 2) {
-                return (int) m22;
-            } else if (col == 3) {
-                return (int) m23;
-            }
-        } else if (row == 3) {
-            if (col == 0) {
-                return (int) m30;
-            } else if (col == 1) {
-                return (int) m31;
-            } else if (col == 2) {
-                return (int) m32;
-            } else if (col == 3) {
-                return (int) m33;
-            }
-        }
-        throw new IllegalArgumentException("Row and/or column out of range. " + row + " " + col);
+        return (int) get(row, col);
     }
 
     @Override

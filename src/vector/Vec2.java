@@ -364,17 +364,17 @@ public class Vec2 extends Matrix {
         return this;
     }
 
-    public void copyTo(Vec2 v) {
+    public void to(Vec2 v) {
         v.x = this.x;
         v.y = this.y;
     }
 
-    public void copyTo(Vec3 v) {
+    public void to(Vec3 v) {
         v.x = this.x;
         v.y = this.y;
     }
 
-    public void copyTo(Vec4 v) {
+    public void to(Vec4 v) {
         v.x = this.x;
         v.y = this.y;
     }
