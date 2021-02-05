@@ -6,7 +6,7 @@ import quat.QuatReadable;
 import vec.Vec2Readable;
 import vec.Vec3Readable;
 
-public class Mat3 implements Mat3Writable {
+public class Mat3 implements Mat3Readable, MatWritable {
 
     public static final Mat3 IDENTITY = new Mat3(1, 0, 0, 0, 1, 0, 0, 0, 1);
 
@@ -353,61 +353,51 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 set00(float val) {
         this.m00 = val;
         return this;
     }
 
-    @Override
     public Mat3 set01(float val) {
         this.m01 = val;
         return this;
     }
 
-    @Override
     public Mat3 set02(float val) {
         this.m02 = val;
         return this;
     }
 
-    @Override
     public Mat3 set10(float val) {
         this.m10 = val;
         return this;
     }
 
-    @Override
     public Mat3 set11(float val) {
         this.m11 = val;
         return this;
     }
 
-    @Override
     public Mat3 set12(float val) {
         this.m12 = val;
         return this;
     }
 
-    @Override
     public Mat3 set20(float val) {
         this.m20 = val;
         return this;
     }
 
-    @Override
     public Mat3 set21(float val) {
         this.m21 = val;
         return this;
     }
 
-    @Override
     public Mat3 set22(float val) {
         this.m22 = val;
         return this;
     }
 
-    @Override
     public Mat3 set(Mat3Readable mat) {
         this.m00 = mat.get00();
         this.m01 = mat.get01();
@@ -421,7 +411,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 set(float mat00, float mat01, float mat02,
     float mat10, float mat11, float mat12,
     float mat20, float mat21, float mat22) {
@@ -437,7 +426,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 addElWise(Mat3Readable mat) {
         this.m00 = this.m00 + mat.get00();
         this.m01 = this.m01 + mat.get01();
@@ -451,7 +439,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 addElWise(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
             float mat20, float mat21, float mat22) {
         this.m00 = this.m00 + mat00;
@@ -466,7 +453,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 subElWise(Mat3Readable mat) {
         this.m00 = this.m00 - mat.get00();
         this.m01 = this.m01 - mat.get01();
@@ -480,7 +466,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 subElWise(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
             float mat20, float mat21, float mat22) {
         this.m00 = this.m00 - mat00;
@@ -495,7 +480,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 presubElWise(Mat3Readable mat) {
         this.m00 = mat.get00() - this.m00;
         this.m01 = mat.get01() - this.m01;
@@ -509,7 +493,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 presubElWise(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
             float mat20, float mat21, float mat22) {
         this.m00 = mat00 - this.m00;
@@ -524,7 +507,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 mulElWise(Mat3Readable mat) {
         this.m00 = this.m00 * mat.get00();
         this.m01 = this.m01 * mat.get01();
@@ -538,7 +520,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 mulElWise(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
             float mat20, float mat21, float mat22) {
         this.m00 = this.m00 * mat00;
@@ -553,7 +534,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 divElWise(Mat3Readable mat) {
         this.m00 = this.m00 / mat.get00();
         this.m01 = this.m01 / mat.get01();
@@ -567,7 +547,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 divElWise(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
             float mat20, float mat21, float mat22) {
         this.m00 = this.m00 / mat00;
@@ -582,7 +561,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 predivElWise(Mat3Readable mat) {
         this.m00 = mat.get00() / this.m00;
         this.m01 = mat.get01() / this.m01;
@@ -596,7 +574,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 predivElWise(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
             float mat20, float mat21, float mat22) {
         this.m00 = mat00 / this.m00;
@@ -611,7 +588,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 mul(Mat3Readable mat) {
         float m00 = this.m00 * mat.get00() + this.m01 * mat.get10() + this.m02 * mat.get20();
         float m01 = this.m00 * mat.get01() + this.m01 * mat.get11() + this.m02 * mat.get21();
@@ -634,7 +610,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 mul(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12, float mat20,
             float mat21, float mat22) {
         float m00 = this.m00 * mat00 + this.m01 * mat10 + this.m02 * mat20;
@@ -658,7 +633,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 premul(Mat3Readable mat) {
         float m00 = mat.get00() * this.m00 + mat.get01() * this.m10 + mat.get02() * this.m20;
         float m01 = mat.get00() * this.m01 + mat.get01() * this.m11 + mat.get02() * this.m21;
@@ -681,7 +655,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 premul(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
             float mat20, float mat21, float mat22) {
         float m00 = mat00 * this.m00 + mat01 * this.m10 + mat02 * this.m20;
@@ -705,7 +678,6 @@ public class Mat3 implements Mat3Writable {
         return this;
     }
 
-    @Override
     public Mat3 rotation2d(float angle) {
         float cosA = (float) Math.cos(Math.toRadians(-angle));
         float sinA = (float) Math.sin(Math.toRadians(-angle));
@@ -716,12 +688,10 @@ public class Mat3 implements Mat3Writable {
         );
     }
 
-    @Override
     public Mat3 rot3dAroundAxis(Vec3Readable axis, float angle) {
         return rot3dAroundAxis(axis.getX(), axis.getY(), axis.getZ(), angle);
     }
 
-    @Override
     public Mat3 rot3dAroundAxis(float axisX, float axisY, float axisZ, float angle) {
         float a = (float) Math.toRadians(angle);
         float sinA = (float) Math.sin(a);
@@ -733,7 +703,6 @@ public class Mat3 implements Mat3Writable {
         );
     }
 
-    @Override
     public Mat3 rot3dAroundXAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
@@ -744,7 +713,6 @@ public class Mat3 implements Mat3Writable {
         );
     }
 
-    @Override
     public Mat3 rot3dAroundYAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
@@ -755,7 +723,6 @@ public class Mat3 implements Mat3Writable {
         );
     }
 
-    @Override
     public Mat3 rot3dAroundZAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
@@ -767,12 +734,10 @@ public class Mat3 implements Mat3Writable {
         );
     }
 
-    @Override
     public Mat3 rotation3d(Vec3Readable forward, Vec3Readable up, Vec3Readable right) {
         return rotation3d(forward.getX(), forward.getY(), forward.getZ(), up.getX(), up.getY(), up.getZ(), right.getX(), right.getY(), right.getZ());
     }
 
-    @Override
     public Mat3 rotation3d(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
         return this.mul(
             rX, rY, rZ,
@@ -781,12 +746,10 @@ public class Mat3 implements Mat3Writable {
         );
     }
 
-    @Override
     public Mat3 rot3dFromQuaternion(QuatReadable q) {
         return rot3dFromQuaternion(q.getW(), q.getX(), q.getY(), q.getZ());
     }
 
-    @Override
     public Mat3 rot3dFromQuaternion(float qw, float qx, float qy, float qz) {
         // normalize the quaternion
         float len = (float) Math.sqrt(qw * qw + qx * qx + qy * qy + qz * qz);
@@ -802,12 +765,10 @@ public class Mat3 implements Mat3Writable {
         );
     }
 
-    @Override
     public Mat3 translation2d(Vec2Readable v) {
         return translation2d(v.getX(), v.getY());
     }
 
-    @Override
     public Mat3 translation2d(float dX, float dY) {
         return this.mul(
             1, 0, dX,
@@ -816,12 +777,10 @@ public class Mat3 implements Mat3Writable {
         );
     }
 
-    @Override
     public Mat3 scale2d(Vec2Readable v) {
         return scale2d(v.getX(), v.getY());
     }
 
-    @Override
     public Mat3 scale2d(float scaleX, float scaleY) {
         return this.mul(
             scaleX, 0, 0,
@@ -830,12 +789,10 @@ public class Mat3 implements Mat3Writable {
         );
     }
 
-    @Override
     public Mat3 scale3d(Vec3Readable v) {
         return scale3d(v.getX(), v.getY(), v.getZ());
     }
     
-    @Override
     public Mat3 scale3d(float scaleX, float scaleY, float scaleZ) {
         return this.mul(
             scaleX, 0, 0,
