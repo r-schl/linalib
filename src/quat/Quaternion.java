@@ -22,7 +22,7 @@ public class Quaternion implements QuatWritable {
         this.set(w, x, y, z);
     }
 
-    public Quaternion(Quaternion other) {
+    public Quaternion(QuatReadable other) {
         this.set(other);
     }
 
@@ -292,13 +292,6 @@ public class Quaternion implements QuatWritable {
         return this.mul(thisW, -thisX, -thisY, -thisZ);
     }
 
-    /**
-     * This method multiplies this quaternion with another quaternion constructed by an angle and and rotation axis.
-     * 
-     * @param angle angle of rotation (in Degrees)
-     * @param axis  rotation axis
-     * @return
-     */
     @Override
     public Quaternion mulWithRotation(float angle, Vec3Readable axis) {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(angle) / 2);

@@ -33,7 +33,7 @@ public class RotationTaitBryan  {
         }
     }
 
-    public Vec3 applyOn(Vec3 v) {
+    public Vec3 apply(Vec3 v) {
         this.recalculate();
         if (v.isHor())
             return v.transpose().premul(mat).transpose();
