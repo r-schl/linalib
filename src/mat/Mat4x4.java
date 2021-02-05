@@ -1225,10 +1225,10 @@ public class Mat4x4 implements Mat4x4Writable {
     @Override
     public Mat4x4 translation2d(float dX, float dY) {
         return this.mul(
-            1, 0, 0, 0,
-            0, 1, 0, 0,
+            1, 0, 0, dX,
+            0, 1, 0, dY,
             0, 0, 1, 0,
-            dX, dY, 0, 1
+            0, 0, 0, 1
         );
     }
 
@@ -1240,10 +1240,10 @@ public class Mat4x4 implements Mat4x4Writable {
     @Override
     public Mat4x4 translation3d(float dX, float dY, float dZ) {
         return this.mul(
-            1, 0, 0, 0,
-            0, 1, 0, 0,
-            0, 0, 1, 0,
-            dX, dY, dZ, 1
+            1, 0, 0, dX,
+            0, 1, 0, dY,
+            0, 0, 1, dZ,
+            0, 0, 0, 1
         );
     }
 

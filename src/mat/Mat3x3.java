@@ -794,9 +794,9 @@ public class Mat3x3 implements Mat3x3Writable {
     @Override
     public Mat3x3 translation2d(float dX, float dY) {
         return this.mul(
-            1, 0, 0,
-            0, 1, 0,
-            dX, dY, 1
+            1, 0, dX,
+            0, 1, dY,
+            0, 0, 1
         );
     }
 
