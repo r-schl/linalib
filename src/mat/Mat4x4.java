@@ -279,7 +279,7 @@ public class Mat4x4 implements Mat4x4Writable {
 
     @Override
     public Mat4x4 flipVer() {
-        return this.mulRvs(Mat4x4.FLIP);
+        return this.premul(Mat4x4.FLIP);
     }
 
     @Override
@@ -452,7 +452,7 @@ public class Mat4x4 implements Mat4x4Writable {
     }
 
     @Override
-    public Mat4x4 subElWiseRvs(float r) {
+    public Mat4x4 presubElWise(float r) {
         this.m00 = r - this.m00;
         this.m01 = r - this.m01;
         this.m02 = r - this.m02;
@@ -515,7 +515,7 @@ public class Mat4x4 implements Mat4x4Writable {
     }
 
     @Override
-    public Mat4x4 divElWiseRvs(float r) {
+    public Mat4x4 predivElWise(float r) {
         this.m00 = r - this.m00;
         this.m01 = r - this.m01;
         this.m02 = r - this.m02;
@@ -771,7 +771,7 @@ public class Mat4x4 implements Mat4x4Writable {
     }
 
     @Override
-    public Mat4x4 subElWiseRvs(Mat4x4Readable mat) {
+    public Mat4x4 presubElWise(Mat4x4Readable mat) {
         this.m00 = mat.get00() - this.m00;
         this.m01 = mat.get01() - this.m01;
         this.m02 = mat.get02() - this.m02;
@@ -792,7 +792,7 @@ public class Mat4x4 implements Mat4x4Writable {
     }
 
     @Override
-    public Mat4x4 subElWiseRvs(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    public Mat4x4 presubElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
         this.m00 = mat00 - this.m00;
@@ -903,7 +903,7 @@ public class Mat4x4 implements Mat4x4Writable {
     }
 
     @Override
-    public Mat4x4 divElWiseRvs(Mat4x4Readable mat) {
+    public Mat4x4 predivElWise(Mat4x4Readable mat) {
         this.m00 = mat.get00() / this.m00;
         this.m01 = mat.get01() / this.m01;
         this.m02 = mat.get02() / this.m02;
@@ -924,7 +924,7 @@ public class Mat4x4 implements Mat4x4Writable {
     }
 
     @Override
-    public Mat4x4 divElWiseRvs(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    public Mat4x4 predivElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
         this.m00 = mat00 / this.m00;
@@ -1033,7 +1033,7 @@ public class Mat4x4 implements Mat4x4Writable {
     }
 
     @Override
-    public Mat4x4 mulRvs(Mat4x4Readable mat) {
+    public Mat4x4 premul(Mat4x4Readable mat) {
          // row 1
          float m00 = mat.get00() * this.m00 + mat.get01() * this.m10 + mat.get02() * this.m20 + mat.get03() * this.m30;
          float m01 = mat.get00() * this.m01 + mat.get01() * this.m11 + mat.get02() * this.m21 + mat.get03() * this.m31;
@@ -1075,7 +1075,7 @@ public class Mat4x4 implements Mat4x4Writable {
     }
 
     @Override
-    public Mat4x4 mulRvs(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    public Mat4x4 premul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
          // row 1

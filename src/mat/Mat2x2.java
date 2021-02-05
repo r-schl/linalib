@@ -119,7 +119,7 @@ public class Mat2x2 implements Mat2x2Writable {
 
     @Override
     public Mat2x2 flipVer() {
-        return this.mulRvs(Mat2x2.FLIP);
+        return this.premul(Mat2x2.FLIP);
     }
 
     @Override
@@ -196,7 +196,7 @@ public class Mat2x2 implements Mat2x2Writable {
     }
 
     @Override
-    public Mat2x2 subElWiseRvs(float r) {
+    public Mat2x2 presubElWise(float r) {
         this.m00 = r - this.m00;
         this.m01 = r - this.m01;
         this.m10 = r - this.m10;
@@ -223,7 +223,7 @@ public class Mat2x2 implements Mat2x2Writable {
     }
 
     @Override
-    public Mat2x2 divElWiseRvs(float r) {
+    public Mat2x2 predivElWise(float r) {
         this.m00 = r / this.m00;
         this.m01 = r / this.m01;
         this.m10 = r / this.m10;
@@ -316,7 +316,7 @@ public class Mat2x2 implements Mat2x2Writable {
     }
 
     @Override
-    public Mat2x2 subElWiseRvs(Mat2x2Readable mat) {
+    public Mat2x2 presubElWise(Mat2x2Readable mat) {
         this.m00 = mat.get00() - this.m00;
         this.m01 = mat.get01() - this.m01;
         this.m10 = mat.get10() - this.m10;
@@ -325,7 +325,7 @@ public class Mat2x2 implements Mat2x2Writable {
     }
 
     @Override
-    public Mat2x2 subElWiseRvs(float mat00, float mat01, float mat10, float mat11) {
+    public Mat2x2 presubElWise(float mat00, float mat01, float mat10, float mat11) {
         this.m00 = mat00 - this.m00;
         this.m01 = mat01 - this.m01;
         this.m10 = mat10 - this.m10;
@@ -370,7 +370,7 @@ public class Mat2x2 implements Mat2x2Writable {
     }
 
     @Override
-    public Mat2x2 divElWiseRvs(Mat2x2Readable mat) {
+    public Mat2x2 predivElWise(Mat2x2Readable mat) {
         this.m00 = mat.get00() / this.m00;
         this.m01 = mat.get01() / this.m01;
         this.m10 = mat.get10() / this.m10;
@@ -379,7 +379,7 @@ public class Mat2x2 implements Mat2x2Writable {
     }
 
     @Override
-    public Mat2x2 divElWiseRvs(float mat00, float mat01, float mat10, float mat11) {
+    public Mat2x2 predivElWise(float mat00, float mat01, float mat10, float mat11) {
         this.m00 = mat00 / this.m00;
         this.m01 = mat01 / this.m01;
         this.m10 = mat10 / this.m10;
@@ -414,7 +414,7 @@ public class Mat2x2 implements Mat2x2Writable {
     }
 
     @Override
-    public Mat2x2 mulRvs(Mat2x2Readable mat) {
+    public Mat2x2 premul(Mat2x2Readable mat) {
         float m00 = mat.get00() * this.m00 + mat.get01() * this.m10;
         float m01 = mat.get00() * this.m01 + mat.get01() * this.m11;
         float m10 = mat.get10() * this.m00 + mat.get11() * this.m10;
@@ -427,7 +427,7 @@ public class Mat2x2 implements Mat2x2Writable {
     }
 
     @Override
-    public Mat2x2 mulRvs(float mat00, float mat01, float mat10, float mat11) {
+    public Mat2x2 premul(float mat00, float mat01, float mat10, float mat11) {
         float m00 = mat00 * this.m00 + mat01 * this.m10;
         float m01 = mat00 * this.m01 + mat01 * this.m11;
         float m10 = mat10 * this.m00 + mat11 * this.m10;

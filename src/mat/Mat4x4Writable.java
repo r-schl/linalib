@@ -57,9 +57,9 @@ public interface Mat4x4Writable extends Mat4x4Readable, MatWritable {
             float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31, float mat32,
             float mat33);
 
-    Mat4x4Writable subElWiseRvs(Mat4x4Readable mat);
+    Mat4x4Writable presubElWise(Mat4x4Readable mat);
 
-    Mat4x4Writable subElWiseRvs(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    Mat4x4Writable presubElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33);
 
@@ -75,9 +75,9 @@ public interface Mat4x4Writable extends Mat4x4Readable, MatWritable {
             float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31, float mat32,
             float mat33);
 
-    Mat4x4Writable divElWiseRvs(Mat4x4Readable mat);
+    Mat4x4Writable predivElWise(Mat4x4Readable mat);
 
-    Mat4x4Writable divElWiseRvs(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    Mat4x4Writable predivElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33);
 
@@ -87,9 +87,9 @@ public interface Mat4x4Writable extends Mat4x4Readable, MatWritable {
             float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31, float mat32,
             float mat33);
 
-    Mat4x4Writable mulRvs(Mat4x4Readable mat);
+    Mat4x4Writable premul(Mat4x4Readable mat);
 
-    Mat4x4Writable mulRvs(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
+    Mat4x4Writable premul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
             float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31, float mat32,
             float mat33);
 

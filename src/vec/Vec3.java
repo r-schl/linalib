@@ -203,7 +203,7 @@ public class Vec3 implements Vec3Writable {
     }
 
     @Override
-    public Vec3 subRvs(float r) {
+    public Vec3 presub(float r) {
         this.x = r - this.x;
         this.y = r - this.y;
         this.z = r - this.z;
@@ -229,7 +229,7 @@ public class Vec3 implements Vec3Writable {
     }
 
     @Override
-    public Vec3 divRvs(float r) {
+    public Vec3 prediv(float r) {
         if (this.contains(0))
             throw new IllegalArgumentException("Cannot divide by 0");
         this.x = r / this.x;
@@ -271,7 +271,7 @@ public class Vec3 implements Vec3Writable {
     public Vec3 flip() {
         if (this.isHor())
             return this.mul(Mat3x3.FLIP);
-        return this.mulRvs(Mat3x3.FLIP);
+        return this.premul(Mat3x3.FLIP);
     }
 
     @Override
@@ -351,7 +351,7 @@ public class Vec3 implements Vec3Writable {
     }
 
     @Override
-    public Vec3 crossRvs(Vec3Readable v) {
+    public Vec3 precross(Vec3Readable v) {
         float x = v.getY() * this.z - v.getZ() * this.y;
         float y = v.getZ() * this.x - v.getX() * this.z;
         float z = v.getX() * this.y - v.getY() * this.x;
@@ -362,7 +362,7 @@ public class Vec3 implements Vec3Writable {
     }
 
     @Override
-    public Vec3 crossRvs(float vX, float vY, float vZ) {
+    public Vec3 precross(float vX, float vY, float vZ) {
         float x = vY * this.z - vZ * this.y;
         float y = vZ * this.x - vX * this.z;
         float z = vX * this.y - vY * this.x;
@@ -405,7 +405,7 @@ public class Vec3 implements Vec3Writable {
     }
 
     @Override
-    public Vec3 subRvs(Vec3Readable v) {
+    public Vec3 presub(Vec3Readable v) {
         this.x = v.getX() - this.x;
         this.y = v.getY() - this.y;
         this.z = v.getZ() - this.z;
@@ -413,7 +413,7 @@ public class Vec3 implements Vec3Writable {
     }
 
     @Override
-    public Vec3 subRvs(float vX, float vY, float vZ) {
+    public Vec3 presub(float vX, float vY, float vZ) {
         this.x = vX - this.x;
         this.y = vY - this.y;
         this.z = vZ - this.z;
@@ -452,7 +452,7 @@ public class Vec3 implements Vec3Writable {
     }
 
     @Override
-    public Vec3 mulRvs(Mat3x3Readable mat) {
+    public Vec3 premul(Mat3x3Readable mat) {
         if (isHor()) {
             new Exception("Cannot multiply 3x3 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);
@@ -467,7 +467,7 @@ public class Vec3 implements Vec3Writable {
     }
 
     @Override
-    public Vec3 mulRvs(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12, float mat20,
+    public Vec3 premul(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12, float mat20,
             float mat21, float mat22) {
         if (isHor()) {
             new Exception("Cannot multiply 3x3 matrix with an horizontal vector.").printStackTrace();

@@ -208,7 +208,7 @@ public class Vec4 implements Vec4Writable {
     }
 
     @Override
-    public Vec4 subRvs(float r) {
+    public Vec4 presub(float r) {
         this.x = r - this.x;
         this.y = r - this.y;
         this.z = r - this.z;
@@ -237,7 +237,7 @@ public class Vec4 implements Vec4Writable {
     }
 
     @Override
-    public Vec4 divRvs(float r) {
+    public Vec4 prediv(float r) {
         if (this.contains(0))
             throw new IllegalArgumentException("Cannot divide by 0");
         this.x = r / this.x;
@@ -283,7 +283,7 @@ public class Vec4 implements Vec4Writable {
     public Vec4 flip() {
         if (this.isHor())
             return this.mul(Mat4x4.FLIP);
-        return this.mulRvs(Mat4x4.FLIP);
+        return this.premul(Mat4x4.FLIP);
     }
 
     @Override
@@ -381,7 +381,7 @@ public class Vec4 implements Vec4Writable {
     }
 
     @Override
-    public Vec4 subRvs(Vec4Readable v) {
+    public Vec4 presub(Vec4Readable v) {
         this.x = v.getX() - this.x;
         this.y = v.getY() - this.y;
         this.z = v.getZ() - this.z;
@@ -390,7 +390,7 @@ public class Vec4 implements Vec4Writable {
     }
 
     @Override
-    public Vec4 subRvs(float vX, float vY, float vZ, float vW) {
+    public Vec4 presub(float vX, float vY, float vZ, float vW) {
         this.x = vX - this.x;
         this.y = vY - this.y;
         this.z = vZ - this.z;
@@ -435,7 +435,7 @@ public class Vec4 implements Vec4Writable {
     }
 
     @Override
-    public Vec4 mulRvs(Mat4x4Readable mat) {
+    public Vec4 premul(Mat4x4Readable mat) {
         if (isHor()) {
             new Exception("Cannot multiply a 4x4 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);
@@ -452,7 +452,7 @@ public class Vec4 implements Vec4Writable {
     }
 
     @Override
-    public Vec4 mulRvs(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
+    public Vec4 premul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
             float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31, float mat32,
             float mat33) {
         if (isHor()) {

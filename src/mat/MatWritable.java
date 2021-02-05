@@ -24,13 +24,13 @@ public interface MatWritable extends MatReadable {
 
     MatWritable subElWise(float r);
 
-    MatWritable subElWiseRvs(float r);
+    MatWritable presubElWise(float r);
 
     MatWritable mulElWise(float r);
 
     MatWritable divElWise(float r);
 
-    MatWritable divElWiseRvs(float r);
+    MatWritable predivElWise(float r);
     
     default MatWritable rotate(int n) {
         if (n == 0) return this;

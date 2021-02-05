@@ -30,9 +30,9 @@ public interface QuatWritable extends QuatReadable {
 
     QuatWritable mul(float w, float x, float y, float z);
 
-    QuatWritable mulRvs(QuatReadable q);
+    QuatWritable premul(QuatReadable q);
 
-    QuatWritable mulRvs(float w, float x, float y, float z);
+    QuatWritable premul(float w, float x, float y, float z);
 
     QuatWritable mulThisVecConjugate(Vec3Readable v);
 
@@ -42,9 +42,9 @@ public interface QuatWritable extends QuatReadable {
 
     QuatWritable mulWithRotation(float angle, float axisX, float axisY, float axisZ);
 
-    QuatWritable mulRvsWithRotation(float angle, Vec3Readable axis);
+    QuatWritable premulWithRotation(float angle, Vec3Readable axis);
 
-    QuatWritable mulRvsWithRotation(float angle, float axisX, float axisY, float axisZ);
+    QuatWritable premulWithRotation(float angle, float axisX, float axisY, float axisZ);
 
     QuatWritable mul(Vec3Readable v);
 

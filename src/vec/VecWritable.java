@@ -13,13 +13,13 @@ public interface VecWritable extends VecReadable {
 
     VecWritable sub(float r);
 
-    VecWritable subRvs(float r);
+    VecWritable presub(float r);
 
     VecWritable mul(float r);
 
     VecWritable div(float r);
 
-    VecWritable divRvs(float r);
+    VecWritable prediv(float r);
 
     VecWritable negate();
 

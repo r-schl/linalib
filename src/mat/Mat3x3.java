@@ -175,7 +175,7 @@ public class Mat3x3 implements Mat3x3Writable {
 
     @Override
     public Mat3x3 flipVer() {
-        return this.mulRvs(Mat3x3.FLIP);
+        return this.premul(Mat3x3.FLIP);
     }
 
     @Override
@@ -292,7 +292,7 @@ public class Mat3x3 implements Mat3x3Writable {
     }
 
     @Override
-    public Mat3x3 subElWiseRvs(float r) {
+    public Mat3x3 presubElWise(float r) {
         this.m00 = r - this.m00;
         this.m01 = r - this.m01;
         this.m02 = r - this.m02;
@@ -334,7 +334,7 @@ public class Mat3x3 implements Mat3x3Writable {
     }
 
     @Override
-    public Mat3x3 divElWiseRvs(float r) {
+    public Mat3x3 predivElWise(float r) {
         this.m00 = r / this.m00;
         this.m01 = r / this.m01;
         this.m02 = r / this.m02;
@@ -496,7 +496,7 @@ public class Mat3x3 implements Mat3x3Writable {
     }
 
     @Override
-    public Mat3x3 subElWiseRvs(Mat3x3Readable mat) {
+    public Mat3x3 presubElWise(Mat3x3Readable mat) {
         this.m00 = mat.get00() - this.m00;
         this.m01 = mat.get01() - this.m01;
         this.m02 = mat.get02() - this.m02;
@@ -510,7 +510,7 @@ public class Mat3x3 implements Mat3x3Writable {
     }
 
     @Override
-    public Mat3x3 subElWiseRvs(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
+    public Mat3x3 presubElWise(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
             float mat20, float mat21, float mat22) {
         this.m00 = mat00 - this.m00;
         this.m01 = mat01 - this.m01;
@@ -583,7 +583,7 @@ public class Mat3x3 implements Mat3x3Writable {
     }
 
     @Override
-    public Mat3x3 divElWiseRvs(Mat3x3Readable mat) {
+    public Mat3x3 predivElWise(Mat3x3Readable mat) {
         this.m00 = mat.get00() / this.m00;
         this.m01 = mat.get01() / this.m01;
         this.m02 = mat.get02() / this.m02;
@@ -597,7 +597,7 @@ public class Mat3x3 implements Mat3x3Writable {
     }
 
     @Override
-    public Mat3x3 divElWiseRvs(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
+    public Mat3x3 predivElWise(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
             float mat20, float mat21, float mat22) {
         this.m00 = mat00 / this.m00;
         this.m01 = mat01 / this.m01;
@@ -659,7 +659,7 @@ public class Mat3x3 implements Mat3x3Writable {
     }
 
     @Override
-    public Mat3x3 mulRvs(Mat3x3Readable mat) {
+    public Mat3x3 premul(Mat3x3Readable mat) {
         float m00 = mat.get00() * this.m00 + mat.get01() * this.m10 + mat.get02() * this.m20;
         float m01 = mat.get00() * this.m01 + mat.get01() * this.m11 + mat.get02() * this.m21;
         float m02 = mat.get00() * this.m02 + mat.get01() * this.m12 + mat.get02() * this.m22;
@@ -682,7 +682,7 @@ public class Mat3x3 implements Mat3x3Writable {
     }
 
     @Override
-    public Mat3x3 mulRvs(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
+    public Mat3x3 premul(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12,
             float mat20, float mat21, float mat22) {
         float m00 = mat00 * this.m00 + mat01 * this.m10 + mat02 * this.m20;
         float m01 = mat00 * this.m01 + mat01 * this.m11 + mat02 * this.m21;

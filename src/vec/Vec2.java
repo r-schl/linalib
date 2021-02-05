@@ -168,7 +168,7 @@ public class Vec2 implements Vec2Writable {
     }
 
     @Override
-    public Vec2 subRvs(float r) {
+    public Vec2 presub(float r) {
         this.x = r - this.x;
         this.y = r - this.y;
         return this;
@@ -190,7 +190,7 @@ public class Vec2 implements Vec2Writable {
     }
 
     @Override
-    public Vec2 divRvs(float r) {
+    public Vec2 prediv(float r) {
         if (this.contains(0)) throw new IllegalArgumentException("Cannot divide by 0");
         this.x = r / this.x;
         this.y = r / this.y;
@@ -226,7 +226,7 @@ public class Vec2 implements Vec2Writable {
     @Override
     public Vec2 flip() {
         if (this.isHor()) return this.mul(Mat2x2.FLIP);
-        return this.mulRvs(Mat2x2.FLIP);
+        return this.premul(Mat2x2.FLIP);
     }
 
     @Override
@@ -308,14 +308,14 @@ public class Vec2 implements Vec2Writable {
     }
 
     @Override
-    public Vec2 subRvs(Vec2Readable v) {
+    public Vec2 presub(Vec2Readable v) {
         this.x = v.getX() - this.x;
         this.y = v.getY() - this.y;
         return this;
     }
 
     @Override
-    public Vec2 subRvs(float vX, float vY) {
+    public Vec2 presub(float vX, float vY) {
         this.x = vX - this.x;
         this.y = vY - this.y;
         return this;
@@ -348,7 +348,7 @@ public class Vec2 implements Vec2Writable {
     }
 
     @Override
-    public Vec2 mulRvs(Mat2x2Readable mat) {
+    public Vec2 premul(Mat2x2Readable mat) {
         if (isHor()) {
             new Exception("Cannot multiply 2x2 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);
@@ -361,7 +361,7 @@ public class Vec2 implements Vec2Writable {
     }
 
     @Override
-    public Vec2 mulRvs(float mat00, float mat01, float mat10, float mat11) {
+    public Vec2 premul(float mat00, float mat01, float mat10, float mat11) {
         if (isHor()) {
             new Exception("Cannot multiply 2x2 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);

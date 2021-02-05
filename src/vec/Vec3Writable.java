@@ -25,9 +25,9 @@ public interface Vec3Writable extends Vec3Readable, VecWritable {
 
     Vec3Writable cross(float vX, float vY, float vZ);
 
-    Vec3Writable crossRvs(Vec3Readable v);
+    Vec3Writable precross(Vec3Readable v);
 
-    Vec3Writable crossRvs(float vX, float vY, float vZ);
+    Vec3Writable precross(float vX, float vY, float vZ);
 
     Vec3Writable add(Vec3Readable v);
 
@@ -37,9 +37,9 @@ public interface Vec3Writable extends Vec3Readable, VecWritable {
 
     Vec3Writable sub(float vX, float vY, float vZ);
 
-    Vec3Writable subRvs(Vec3Readable v);
+    Vec3Writable presub(Vec3Readable v);
 
-    Vec3Writable subRvs(float vX, float vY, float vZ);
+    Vec3Writable presub(float vX, float vY, float vZ);
 
     Vec3Writable mul(Mat3x3Readable mat);
 
@@ -47,9 +47,9 @@ public interface Vec3Writable extends Vec3Readable, VecWritable {
              float mat10, float mat11, float mat12,
              float mat20, float mat21, float mat22);
 
-    Vec3Writable mulRvs(Mat3x3Readable mat);
+    Vec3Writable premul(Mat3x3Readable mat);
 
-    Vec3Writable mulRvs(float mat00, float mat01, float mat02,
+    Vec3Writable premul(float mat00, float mat01, float mat02,
                 float mat10, float mat11, float mat12,
                 float mat20, float mat21, float mat22);
 

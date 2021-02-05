@@ -35,9 +35,9 @@ public interface Mat3x3Writable extends Mat3x3Readable, MatWritable {
     float mat10, float mat11, float mat12,
     float mat20, float mat21, float mat22);
 
-    Mat3x3Writable subElWiseRvs(Mat3x3Readable mat);
+    Mat3x3Writable presubElWise(Mat3x3Readable mat);
 
-    Mat3x3Writable subElWiseRvs(float mat00, float mat01, float mat02,
+    Mat3x3Writable presubElWise(float mat00, float mat01, float mat02,
     float mat10, float mat11, float mat12,
     float mat20, float mat21, float mat22);
 
@@ -53,9 +53,9 @@ public interface Mat3x3Writable extends Mat3x3Readable, MatWritable {
     float mat10, float mat11, float mat12,
     float mat20, float mat21, float mat22);
 
-    Mat3x3Writable divElWiseRvs(Mat3x3Readable mat);
+    Mat3x3Writable predivElWise(Mat3x3Readable mat);
 
-    Mat3x3Writable divElWiseRvs(float mat00, float mat01, float mat02,
+    Mat3x3Writable predivElWise(float mat00, float mat01, float mat02,
     float mat10, float mat11, float mat12,
     float mat20, float mat21, float mat22);
 
@@ -65,9 +65,9 @@ public interface Mat3x3Writable extends Mat3x3Readable, MatWritable {
     float mat10, float mat11, float mat12,
     float mat20, float mat21, float mat22);
 
-    Mat3x3Writable mulRvs(Mat3x3Readable mat);
+    Mat3x3Writable premul(Mat3x3Readable mat);
 
-    Mat3x3Writable mulRvs(float mat00, float mat01, float mat02,
+    Mat3x3Writable premul(float mat00, float mat01, float mat02,
     float mat10, float mat11, float mat12,
     float mat20, float mat21, float mat22);
 

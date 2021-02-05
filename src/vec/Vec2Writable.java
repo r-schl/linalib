@@ -26,18 +26,18 @@ public interface Vec2Writable extends Vec2Readable, VecWritable {
 
     Vec2Writable sub(float vX, float vY);
 
-    Vec2Writable subRvs(Vec2Readable v);
+    Vec2Writable presub(Vec2Readable v);
 
-    Vec2Writable subRvs(float vX, float vY);
+    Vec2Writable presub(float vX, float vY);
 
     Vec2Writable mul(Mat2x2Readable mat);
 
     Vec2Writable mul(float mat00, float mat01,
                 float mat10, float mat11);
 
-    Vec2Writable mulRvs(Mat2x2Readable mat);
+    Vec2Writable premul(Mat2x2Readable mat);
 
-    Vec2Writable mulRvs(float mat00, float mat01,
+    Vec2Writable premul(float mat00, float mat01,
                 float mat10, float mat11);
 
     Vec2Writable swap(Vec2Writable v);

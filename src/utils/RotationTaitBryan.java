@@ -17,7 +17,7 @@ public class RotationTaitBryan  {
         this.setOrder(axes);
     }
 
-    private void recalc() {
+    private void recalculate() {
         if (!this.angle.equals(this.lastAngle)) {
             // recalculate the rotation matrix
             mat.set(Mat3x3.IDENTITY);
@@ -34,15 +34,15 @@ public class RotationTaitBryan  {
     }
 
     public Vec3 applyOn(Vec3 v) {
-        this.recalc();
+        this.recalculate();
         if (v.isHor())
-            return v.transpose().mulRvs(mat).transpose();
+            return v.transpose().premul(mat).transpose();
         else
-            return v.mulRvs(mat);
+            return v.premul(mat);
     }
 
     public Mat3x3Readable getMat() {
-        this.recalc();
+        this.recalculate();
         return mat;
     }
 

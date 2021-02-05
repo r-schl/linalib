@@ -244,7 +244,7 @@ public class Quaternion implements QuatWritable {
     }
 
     @Override
-    public Quaternion mulRvs(QuatReadable q) {
+    public Quaternion premul(QuatReadable q) {
         final float thisW = this.getW();
         final float thisX = this.getX();
         final float thisY = this.getY();
@@ -257,7 +257,7 @@ public class Quaternion implements QuatWritable {
     }
 
     @Override
-    public Quaternion mulRvs(float w, float x, float y, float z) {
+    public Quaternion premul(float w, float x, float y, float z) {
          final float thisW = this.getW();
          final float thisX = this.getX();
          final float thisY = this.getY();
@@ -314,17 +314,17 @@ public class Quaternion implements QuatWritable {
     }
 
     @Override
-    public Quaternion mulRvsWithRotation(float angle, Vec3Readable axis) {
+    public Quaternion premulWithRotation(float angle, Vec3Readable axis) {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(angle) / 2);
         float cosHalfAngle = (float) Math.cos(Math.toRadians(angle) / 2);
-        return this.mulRvs(cosHalfAngle, axis.getX() * sinHalfAngle, axis.getY() * sinHalfAngle, axis.getZ() * sinHalfAngle);
+        return this.premul(cosHalfAngle, axis.getX() * sinHalfAngle, axis.getY() * sinHalfAngle, axis.getZ() * sinHalfAngle);
     }
 
     @Override
-    public Quaternion mulRvsWithRotation(float angle, float axisX, float axisY, float axisZ) {
+    public Quaternion premulWithRotation(float angle, float axisX, float axisY, float axisZ) {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(angle) / 2);
         float cosHalfAngle = (float) Math.cos(Math.toRadians(angle) / 2);
-        return this.mulRvs(cosHalfAngle, axisX * sinHalfAngle, axisY * sinHalfAngle, axisZ * sinHalfAngle);
+        return this.premul(cosHalfAngle, axisX * sinHalfAngle, axisY * sinHalfAngle, axisZ * sinHalfAngle);
     }
 
     @Override

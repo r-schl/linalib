@@ -22,9 +22,9 @@ public interface Mat2x2Writable extends Mat2x2Readable, MatWritable {
 
     Mat2x2Writable subElWise(float mat00, float mat01, float mat10, float mat11);
 
-    Mat2x2Writable subElWiseRvs(Mat2x2Readable mat);
+    Mat2x2Writable presubElWise(Mat2x2Readable mat);
 
-    Mat2x2Writable subElWiseRvs(float mat00, float mat01, float mat10, float mat11);
+    Mat2x2Writable presubElWise(float mat00, float mat01, float mat10, float mat11);
 
     Mat2x2Writable mulElWise(Mat2x2Readable mat);
 
@@ -34,17 +34,17 @@ public interface Mat2x2Writable extends Mat2x2Readable, MatWritable {
 
     Mat2x2Writable divElWise(float mat00, float mat01, float mat10, float mat11);
 
-    Mat2x2Writable divElWiseRvs(Mat2x2Readable mat);
+    Mat2x2Writable predivElWise(Mat2x2Readable mat);
 
-    Mat2x2Writable divElWiseRvs(float mat00, float mat01, float mat10, float mat11);
+    Mat2x2Writable predivElWise(float mat00, float mat01, float mat10, float mat11);
 
     Mat2x2Writable mul(Mat2x2Readable mat);
 
     Mat2x2Writable mul(float mat00, float mat01, float mat10, float mat11);
 
-    Mat2x2Writable mulRvs(Mat2x2Readable mat);
+    Mat2x2Writable premul(Mat2x2Readable mat);
 
-    Mat2x2Writable mulRvs(float mat00, float mat01, float mat10, float mat11);
+    Mat2x2Writable premul(float mat00, float mat01, float mat10, float mat11);
 
     Mat2x2Writable rotation2d(float angle);
 
