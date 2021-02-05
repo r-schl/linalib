@@ -1,6 +1,6 @@
 package vec;
 
-import mat.Mat3x3Readable;
+import mat.Mat3Readable;
 import quat.QuatReadable;
 
 public interface Vec3Writable extends Vec3Readable, VecWritable {
@@ -41,13 +41,13 @@ public interface Vec3Writable extends Vec3Readable, VecWritable {
 
     Vec3Writable presub(float vX, float vY, float vZ);
 
-    Vec3Writable mul(Mat3x3Readable mat);
+    Vec3Writable mul(Mat3Readable mat);
 
     Vec3Writable mul(float mat00, float mat01, float mat02,
              float mat10, float mat11, float mat12,
              float mat20, float mat21, float mat22);
 
-    Vec3Writable premul(Mat3x3Readable mat);
+    Vec3Writable premul(Mat3Readable mat);
 
     Vec3Writable premul(float mat00, float mat01, float mat02,
                 float mat10, float mat11, float mat12,

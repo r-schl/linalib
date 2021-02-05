@@ -1,6 +1,6 @@
 package vec;
 
-import mat.Mat4x4Readable;
+import mat.Mat4Readable;
 
 public interface Vec4Writable extends Vec4Readable, VecWritable {
 
@@ -32,14 +32,14 @@ public interface Vec4Writable extends Vec4Readable, VecWritable {
 
     Vec4Writable presub(float vX, float vY, float vZ, float vW);
 
-    Vec4Writable mul(Mat4x4Readable mat);
+    Vec4Writable mul(Mat4Readable mat);
 
     Vec4Writable mul(float mat00, float mat01, float mat02, float mat03,
              float mat10, float mat11, float mat12, float mat13,
              float mat20, float mat21, float mat22, float mat23,
              float mat30, float mat31, float mat32, float mat33);
 
-    Vec4Writable premul(Mat4x4Readable mat);
+    Vec4Writable premul(Mat4Readable mat);
 
     Vec4Writable premul(float mat00, float mat01, float mat02, float mat03,
              float mat10, float mat11, float mat12, float mat13,

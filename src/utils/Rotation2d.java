@@ -1,13 +1,13 @@
 package utils;
 
-import mat.Mat2x2;
+import mat.Mat2;
 import vec.Vec2;
 
 public class Rotation2d {
 
     private float angle;
     private float lastAngle;
-    private Mat2x2 mat = new Mat2x2();
+    private Mat2 mat = new Mat2();
 
     public Rotation2d(float angle) {
         this.angle = angle;
@@ -19,7 +19,7 @@ public class Rotation2d {
 
     private void recalculate() {
         if (this.angle == this.lastAngle) return;
-        mat.set(Mat2x2.IDENTITY);
+        mat.set(Mat2.IDENTITY);
         mat.rotation2d(this.angle);
         this.lastAngle = this.angle;
     }

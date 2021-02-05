@@ -1,12 +1,12 @@
 package utils;
 
-import mat.Mat3x3;
-import mat.Mat3x3Readable;
+import mat.Mat3;
+import mat.Mat3Readable;
 import vec.Vec3;
 
 public class RotationTaitBryan  {
 
-    private Mat3x3 mat = new Mat3x3();
+    private Mat3 mat = new Mat3();
 
     private Vec3 angle = new Vec3(0);
     private Vec3 lastAngle = new Vec3(0);
@@ -20,7 +20,7 @@ public class RotationTaitBryan  {
     private void recalculate() {
         if (!this.angle.equals(this.lastAngle)) {
             // recalculate the rotation matrix
-            mat.set(Mat3x3.IDENTITY);
+            mat.set(Mat3.IDENTITY);
             for (Axis a : orderOfApplying) {
                 if (a == Axis.X)
                     mat.rot3dAroundXAxis(angle.x); // around x axis
@@ -41,7 +41,7 @@ public class RotationTaitBryan  {
             return v.premul(mat);
     }
 
-    public Mat3x3Readable getMat() {
+    public Mat3Readable getMat() {
         this.recalculate();
         return mat;
     }

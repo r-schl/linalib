@@ -2,8 +2,8 @@ package vec;
 
 import java.nio.FloatBuffer;
 
-import mat.Mat4x4;
-import mat.Mat4x4Readable;
+import mat.Mat4;
+import mat.Mat4Readable;
 
 public class Vec4 implements Vec4Writable {
 
@@ -282,8 +282,8 @@ public class Vec4 implements Vec4Writable {
     @Override
     public Vec4 flip() {
         if (this.isHor())
-            return this.mul(Mat4x4.FLIP);
-        return this.premul(Mat4x4.FLIP);
+            return this.mul(Mat4.FLIP);
+        return this.premul(Mat4.FLIP);
     }
 
     @Override
@@ -399,7 +399,7 @@ public class Vec4 implements Vec4Writable {
     }
 
     @Override
-    public Vec4 mul(Mat4x4Readable mat) {
+    public Vec4 mul(Mat4Readable mat) {
         if (isVer()) {
             new Exception("Cannot multiply a vertical vector with a 3x3 matrix.").printStackTrace();
             System.exit(-1);
@@ -435,7 +435,7 @@ public class Vec4 implements Vec4Writable {
     }
 
     @Override
-    public Vec4 premul(Mat4x4Readable mat) {
+    public Vec4 premul(Mat4Readable mat) {
         if (isHor()) {
             new Exception("Cannot multiply a 4x4 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);

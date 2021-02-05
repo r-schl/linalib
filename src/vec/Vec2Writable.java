@@ -1,6 +1,6 @@
 package vec;
 
-import mat.Mat2x2Readable;
+import mat.Mat2Readable;
 
 public interface Vec2Writable extends Vec2Readable, VecWritable {
     
@@ -30,12 +30,12 @@ public interface Vec2Writable extends Vec2Readable, VecWritable {
 
     Vec2Writable presub(float vX, float vY);
 
-    Vec2Writable mul(Mat2x2Readable mat);
+    Vec2Writable mul(Mat2Readable mat);
 
     Vec2Writable mul(float mat00, float mat01,
                 float mat10, float mat11);
 
-    Vec2Writable premul(Mat2x2Readable mat);
+    Vec2Writable premul(Mat2Readable mat);
 
     Vec2Writable premul(float mat00, float mat01,
                 float mat10, float mat11);

@@ -1,6 +1,6 @@
 package mat;
 
-public interface Mat4x4Readable extends MatReadable {
+public interface Mat4Readable extends MatReadable {
     
     float get00();
     float get01();

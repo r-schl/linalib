@@ -1,8 +1,8 @@
 package vec;
 
 import java.nio.FloatBuffer;
-import mat.Mat2x2;
-import mat.Mat2x2Readable;
+import mat.Mat2;
+import mat.Mat2Readable;
 
 
 public class Vec2 implements Vec2Writable {
@@ -225,8 +225,8 @@ public class Vec2 implements Vec2Writable {
 
     @Override
     public Vec2 flip() {
-        if (this.isHor()) return this.mul(Mat2x2.FLIP);
-        return this.premul(Mat2x2.FLIP);
+        if (this.isHor()) return this.mul(Mat2.FLIP);
+        return this.premul(Mat2.FLIP);
     }
 
     @Override
@@ -322,7 +322,7 @@ public class Vec2 implements Vec2Writable {
     }
 
     @Override
-    public Vec2 mul(Mat2x2Readable mat) {
+    public Vec2 mul(Mat2Readable mat) {
         if (isVer()) {
             new Exception("Cannot multiply a vertical vector with a 2x2 matrix.").printStackTrace();
             System.exit(-1);
@@ -348,7 +348,7 @@ public class Vec2 implements Vec2Writable {
     }
 
     @Override
-    public Vec2 premul(Mat2x2Readable mat) {
+    public Vec2 premul(Mat2Readable mat) {
         if (isHor()) {
             new Exception("Cannot multiply 2x2 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);
