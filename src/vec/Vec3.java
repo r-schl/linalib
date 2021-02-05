@@ -6,7 +6,7 @@ import mat.Mat3Readable;
 import quat.QuatReadable;
 import mat.Mat3;
 
-public class Vec3 implements Vec3Writable {
+public class Vec3 implements Vec3Readable, VecWritable {
 
     // static presets
     public static final Vec3Readable XAXIS = new Vec3(1, 0, 0);
@@ -280,25 +280,21 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 setX(float val) {
         this.x = val;
         return this;
     }
 
-    @Override
     public Vec3 setY(float val) {
         this.y = val;
         return this;
     }
 
-    @Override
     public Vec3 setZ(float val) {
         this.z = val;
         return this;
     }
 
-    @Override
     public Vec3 set(Vec3Readable v) {
         this.x = v.getX();
         this.y = v.getY();
@@ -306,7 +302,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 set(float vX, float vY, float vZ) {
         this.x = vX;
         this.y = vY;
@@ -314,12 +309,10 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 set(Vec2Readable v, float z) {
         return this.set(v.getX(), v.getY(), z);
     }
 
-    @Override
     public Vec3 set(Vec4Readable v) {
         return this.set(v.getX(), v.getY(), v.getZ());
     }
@@ -328,7 +321,6 @@ public class Vec3 implements Vec3Writable {
         return this.set(q.getX(), q.getY(), q.getZ());
     }
 
-    @Override
     public Vec3 cross(Vec3Readable v) {
         float x = this.y * v.getZ() - this.z * v.getY();
         float y = this.z * v.getX() - this.x * v.getZ();
@@ -339,7 +331,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 cross(float vX, float vY, float vZ) {
         float x = this.y * vZ - this.z * vY;
         float y = this.z * vX - this.x * vZ;
@@ -350,7 +341,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 precross(Vec3Readable v) {
         float x = v.getY() * this.z - v.getZ() * this.y;
         float y = v.getZ() * this.x - v.getX() * this.z;
@@ -361,7 +351,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 precross(float vX, float vY, float vZ) {
         float x = vY * this.z - vZ * this.y;
         float y = vZ * this.x - vX * this.z;
@@ -372,7 +361,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 add(Vec3Readable v) {
         this.x = this.x + v.getX();
         this.y = this.y + v.getY();
@@ -380,7 +368,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 add(float vX, float vY, float vZ) {
         this.x = this.x + vX;
         this.y = this.y + vY;
@@ -388,7 +375,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 sub(Vec3Readable v) {
         this.x = this.x - v.getX();
         this.y = this.y - v.getY();
@@ -396,7 +382,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 sub(float vX, float vY, float vZ) {
         this.x = this.x - vX;
         this.y = this.y - vY;
@@ -404,7 +389,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 presub(Vec3Readable v) {
         this.x = v.getX() - this.x;
         this.y = v.getY() - this.y;
@@ -412,7 +396,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 presub(float vX, float vY, float vZ) {
         this.x = vX - this.x;
         this.y = vY - this.y;
@@ -420,7 +403,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 mul(Mat3Readable mat) {
         if (isVer()) {
             new Exception("Cannot multiply a vertical vector with a 3x3 matrix.").printStackTrace();
@@ -435,7 +417,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 mul(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12, float mat20,
             float mat21, float mat22) {
         if (isVer()) {
@@ -451,7 +432,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 premul(Mat3Readable mat) {
         if (isHor()) {
             new Exception("Cannot multiply 3x3 matrix with an horizontal vector.").printStackTrace();
@@ -466,7 +446,6 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
     public Vec3 premul(float mat00, float mat01, float mat02, float mat10, float mat11, float mat12, float mat20,
             float mat21, float mat22) {
         if (isHor()) {
@@ -482,8 +461,7 @@ public class Vec3 implements Vec3Writable {
         return this;
     }
 
-    @Override
-    public Vec3 swap(Vec3Writable v) {
+    public Vec3 swap(Vec3 v) {
         float tempX = this.x;
         float tempY = this.y;
         float tempZ = this.z;
@@ -501,19 +479,16 @@ public class Vec3 implements Vec3Writable {
         return (this.isHor() ? "hor" : "ver") + "(" + this.x + " " + this.y + " " + this.z + ")";
     }
 
-    @Override
     public Vec3 to(VecWritable v) {
         this.extractTo(v);
         return this;
     }
 
-    @Override
     public Vec3 from(VecReadable v) {
         this.extractFrom(v);
         return this;
     }
 
-    @Override
     public boolean equals(Object o) {
         if (o instanceof Vec3Readable) {
             Vec3Readable vec = (Vec3Readable) o;
@@ -522,12 +497,10 @@ public class Vec3 implements Vec3Writable {
         return false;
     }
 
-    @Override
     public Vec3 rotate(float angle, Vec3Readable axis) {
         return this.rotate(angle, axis.getX(), axis.getY(), axis.getZ());
     }
 
-    @Override
     public Vec3 rotate(float angle, float axisX, float axisY, float axisZ) {
         angle = (float) Math.toRadians(angle);
         // normalize axis vector
@@ -543,7 +516,6 @@ public class Vec3 implements Vec3Writable {
         return this.add(p2).add(p3);
     }
 
-    @Override
     public Vec3 rotate(QuatReadable q) {
          // Multiply the quaternion with this vector and store result in temporary variables.
          float tw = -q.getX() * this.x - q.getY() * this.y - q.getZ() * this.z;

@@ -5,7 +5,7 @@ import java.nio.FloatBuffer;
 import mat.Mat4;
 import mat.Mat4Readable;
 
-public class Vec4 implements Vec4Writable {
+public class Vec4 implements Vec4Readable, VecWritable {
 
     public float x;
     public float y;
@@ -292,31 +292,26 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 setX(float val) {
         this.x = val;
         return this;
     }
 
-    @Override
     public Vec4 setY(float val) {
         this.y = val;
         return this;
     }
 
-    @Override
     public Vec4 setZ(float val) {
         this.z = val;
         return this;
     }
 
-    @Override
     public Vec4 setW(float val) {
         this.w = val;
         return this;
     }
 
-    @Override
     public Vec4 set(Vec4Readable v) {
         this.x = v.getX();
         this.y = v.getY();
@@ -325,7 +320,6 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 set(float vX, float vY, float vZ, float vW) {
         this.x = vX;
         this.y = vY;
@@ -334,17 +328,14 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 set(Vec3Readable v, float w) {
         return this.set(v.getX(), v.getY(), v.getZ(), w);
     }
 
-    @Override
     public Vec4 set(Vec2Readable v, float z, float w) {
         return this.set(v.getX(), v.getY(), z, w);
     }
 
-    @Override
     public Vec4 add(Vec4Readable v) {
         this.x = this.x + v.getX();
         this.y = this.y + v.getY();
@@ -353,7 +344,6 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 add(float vX, float vY, float vZ, float vW) {
         this.x = this.x + vX;
         this.y = this.y + vY;
@@ -362,7 +352,6 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 sub(Vec4Readable v) {
         this.x = this.x - v.getX();
         this.y = this.y - v.getY();
@@ -371,7 +360,6 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 sub(float vX, float vY, float vZ, float vW) {
         this.x = this.x - vX;
         this.y = this.y - vY;
@@ -380,7 +368,6 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 presub(Vec4Readable v) {
         this.x = v.getX() - this.x;
         this.y = v.getY() - this.y;
@@ -389,7 +376,6 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 presub(float vX, float vY, float vZ, float vW) {
         this.x = vX - this.x;
         this.y = vY - this.y;
@@ -398,7 +384,6 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 mul(Mat4Readable mat) {
         if (isVer()) {
             new Exception("Cannot multiply a vertical vector with a 3x3 matrix.").printStackTrace();
@@ -415,7 +400,6 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 mul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
             float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31, float mat32,
             float mat33) {
@@ -434,7 +418,6 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 premul(Mat4Readable mat) {
         if (isHor()) {
             new Exception("Cannot multiply a 4x4 matrix with an horizontal vector.").printStackTrace();
@@ -451,7 +434,6 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
     public Vec4 premul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
             float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31, float mat32,
             float mat33) {
@@ -470,8 +452,7 @@ public class Vec4 implements Vec4Writable {
         return this;
     }
 
-    @Override
-    public Vec4 swap(Vec4Writable v) {
+    public Vec4 swap(Vec4 v) {
         float tempX = this.x;
         float tempY = this.y;
         float tempZ = this.z;
@@ -492,19 +473,16 @@ public class Vec4 implements Vec4Writable {
         return (this.isHor() ? "hor" : "ver") + "(" + this.x + " " + this.y + " " + this.z + " " + this.w + ")";
     }
 
-    @Override
     public Vec4 to(VecWritable v) {
         this.extractTo(v);
         return this;
     }
 
-    @Override
     public Vec4 from(VecReadable v) {
         this.extractFrom(v);
         return this;
     }
 
-    @Override
     public boolean equals(Object o) {
         if (o instanceof Vec4Readable) {
             Vec4Readable vec = (Vec4Readable) o;

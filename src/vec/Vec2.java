@@ -5,7 +5,7 @@ import mat.Mat2;
 import mat.Mat2Readable;
 
 
-public class Vec2 implements Vec2Writable {
+public class Vec2 implements Vec2Readable, VecWritable {
 
     // static presets
     public static final Vec2Readable YAXIS = new Vec2(0, 1);
@@ -235,43 +235,36 @@ public class Vec2 implements Vec2Writable {
         return this;
     }
 
-    @Override
     public Vec2 setX(float val) {
         this.x = val;
         return this;
     }
 
-    @Override
     public Vec2 setY(float val) {
         this.y = val;
         return this;
     }
 
-    @Override
     public Vec2 set(Vec2Readable v) {
         this.x = v.getX();
         this.y = v.getY();
         return this;
     }
 
-    @Override
     public Vec2 set(float vX, float vY) {
         this.x = vX;
         this.y = vY;
         return this;
     }
 
-    @Override
     public Vec2 set(Vec3Readable v) {
         return this.set(v.getX(), v.getY());
     }
 
-    @Override
     public Vec2 set(Vec4Readable v) {
         return this.set(v.getX(), v.getY());
     }
     
-    @Override
     public Vec2 perpendicular() {
         float tempX = this.x;
         this.x = this.y;
@@ -279,49 +272,42 @@ public class Vec2 implements Vec2Writable {
         return this;
     }
 
-    @Override
     public Vec2 add(Vec2Readable v) {
         this.x = this.x + v.getX();
         this.y = this.y + v.getY();
         return this;
     }
 
-    @Override
     public Vec2 add(float vX, float vY) {
         this.x = this.x + vX;
         this.y = this.y + vY;
         return this;   
     }
 
-    @Override
     public Vec2 sub(Vec2Readable v) {
         this.x = this.x - v.getX();
         this.y = this.y - v.getY();
         return this;
     }
 
-    @Override
     public Vec2 sub(float vX, float vY) {
         this.x = this.x - vX;
         this.y = this.y - vY;
         return this;
     }
 
-    @Override
     public Vec2 presub(Vec2Readable v) {
         this.x = v.getX() - this.x;
         this.y = v.getY() - this.y;
         return this;
     }
 
-    @Override
     public Vec2 presub(float vX, float vY) {
         this.x = vX - this.x;
         this.y = vY - this.y;
         return this;
     }
 
-    @Override
     public Vec2 mul(Mat2Readable mat) {
         if (isVer()) {
             new Exception("Cannot multiply a vertical vector with a 2x2 matrix.").printStackTrace();
@@ -334,7 +320,6 @@ public class Vec2 implements Vec2Writable {
         return this;
     }
 
-    @Override
     public Vec2 mul(float mat00, float mat01, float mat10, float mat11) {
         if (isVer()) {
             new Exception("Cannot multiply a vertical vector with a 2x2 matrix.").printStackTrace();
@@ -347,7 +332,6 @@ public class Vec2 implements Vec2Writable {
         return this;
     }
 
-    @Override
     public Vec2 premul(Mat2Readable mat) {
         if (isHor()) {
             new Exception("Cannot multiply 2x2 matrix with an horizontal vector.").printStackTrace();
@@ -360,7 +344,6 @@ public class Vec2 implements Vec2Writable {
         return this;
     }
 
-    @Override
     public Vec2 premul(float mat00, float mat01, float mat10, float mat11) {
         if (isHor()) {
             new Exception("Cannot multiply 2x2 matrix with an horizontal vector.").printStackTrace();
@@ -373,8 +356,7 @@ public class Vec2 implements Vec2Writable {
         return this;
     }
 
-    @Override
-    public Vec2 swap(Vec2Writable v) {
+    public Vec2 swap(Vec2 v) {
         float tempX = this.x;
         float tempY = this.y;
         this.x = v.getX();
@@ -384,7 +366,6 @@ public class Vec2 implements Vec2Writable {
         return this;
     }
     
-
     @Override
     public String toString() {
         return (this.isHor() ? "hor" : "ver") + "(" + this.x + " " + this.y + ")";
