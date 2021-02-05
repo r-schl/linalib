@@ -5,7 +5,7 @@ import java.nio.FloatBuffer;
 import vec.Vec3Readable;
 
 
-public class Quaternion implements QuatWritable {
+public class Quaternion implements QuatReadable {
 
     public static final QuatReadable IDENTITY = new Quaternion(1, 0, 0, 0);
 
@@ -104,7 +104,6 @@ public class Quaternion implements QuatWritable {
         return w == r || x == r || y == r || z == r;
     }
 
-    @Override
     public Quaternion set(int i, float r) {
         if (i == 0)
             this.w = r;
@@ -117,31 +116,26 @@ public class Quaternion implements QuatWritable {
         return this;
     }
 
-    @Override
     public Quaternion setW(float r) {
         this.w = r;
         return this;
     }
 
-    @Override
     public Quaternion setX(float r) {
         this.x = r;
         return this;
     }
 
-    @Override
     public Quaternion setY(float r) {
         this.y = r;
         return this;
     }
 
-    @Override
     public Quaternion setZ(float r) {
         this.z = r;
         return this;
     }
 
-    @Override
     public Quaternion set(QuatReadable q) {
         this.w = q.getW();
         this.x = q.getX();
@@ -150,7 +144,6 @@ public class Quaternion implements QuatWritable {
         return this;
     }
 
-    @Override
     public Quaternion set(float w, float x, float y, float z) {
         this.w = w;
         this.x = x;
@@ -159,12 +152,10 @@ public class Quaternion implements QuatWritable {
         return this;
     }
 
-    @Override
     public Quaternion initRotation(float angle, Vec3Readable axis) {
         return this.initRotation(angle, axis.getX(), axis.getY(), axis.getZ());
     }
 
-    @Override
     public Quaternion initRotation(float angle, float axisX, float axisY, float axisZ) {
         float len = (float) Math.sqrt(axisX * axisX + axisY * axisY + axisZ * axisZ);
         axisX = axisX / len;
@@ -199,7 +190,6 @@ public class Quaternion implements QuatWritable {
         return this.z / sinHalfAngle;
     }
 
-    @Override
     public Quaternion normalize() {
         float len = this.len();
         this.w /= len;
@@ -209,7 +199,6 @@ public class Quaternion implements QuatWritable {
         return this;
     }
 
-    @Override
     public Quaternion conjugate() {
         this.x = -this.x;
         this.y = -this.y;
@@ -217,7 +206,6 @@ public class Quaternion implements QuatWritable {
         return this;
     }
 
-    @Override
     public Quaternion mul(QuatReadable q) {
         final float thisW = this.getW();
         final float thisX = this.getX();
@@ -230,7 +218,6 @@ public class Quaternion implements QuatWritable {
         return this;
     }
 
-    @Override
     public Quaternion mul(float w, float x, float y, float z) {
         final float thisW = this.w;
         final float thisX = this.x;
@@ -243,7 +230,6 @@ public class Quaternion implements QuatWritable {
         return this;
     }
 
-    @Override
     public Quaternion premul(QuatReadable q) {
         final float thisW = this.getW();
         final float thisX = this.getX();
@@ -256,7 +242,6 @@ public class Quaternion implements QuatWritable {
         return this;
     }
 
-    @Override
     public Quaternion premul(float w, float x, float y, float z) {
          final float thisW = this.getW();
          final float thisX = this.getX();
@@ -269,7 +254,6 @@ public class Quaternion implements QuatWritable {
          return this;
     }
 
-    @Override
     public Quaternion mulThisVecConjugate(Vec3Readable v) {
         float thisW = this.w;
         float thisX = this.x;
@@ -282,7 +266,6 @@ public class Quaternion implements QuatWritable {
         return this;
     }
 
-    @Override
     public Quaternion mulThisVecConjugate(float x, float y, float z) {
         float thisW = this.w;
         float thisX = this.x;
@@ -292,35 +275,30 @@ public class Quaternion implements QuatWritable {
         return this.mul(thisW, -thisX, -thisY, -thisZ);
     }
 
-    @Override
     public Quaternion mulWithRotation(float angle, Vec3Readable axis) {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(angle) / 2);
         float cosHalfAngle = (float) Math.cos(Math.toRadians(angle) / 2);
         return this.mul(cosHalfAngle, axis.getX() * sinHalfAngle, axis.getY() * sinHalfAngle, axis.getZ() * sinHalfAngle);
     }
 
-    @Override
     public Quaternion mulWithRotation(float angle, float axisX, float axisY, float axisZ) {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(angle) / 2);
         float cosHalfAngle = (float) Math.cos(Math.toRadians(angle) / 2);
         return this.mul(cosHalfAngle, axisX * sinHalfAngle, axisY * sinHalfAngle, axisZ * sinHalfAngle);
     }
 
-    @Override
     public Quaternion premulWithRotation(float angle, Vec3Readable axis) {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(angle) / 2);
         float cosHalfAngle = (float) Math.cos(Math.toRadians(angle) / 2);
         return this.premul(cosHalfAngle, axis.getX() * sinHalfAngle, axis.getY() * sinHalfAngle, axis.getZ() * sinHalfAngle);
     }
 
-    @Override
     public Quaternion premulWithRotation(float angle, float axisX, float axisY, float axisZ) {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(angle) / 2);
         float cosHalfAngle = (float) Math.cos(Math.toRadians(angle) / 2);
         return this.premul(cosHalfAngle, axisX * sinHalfAngle, axisY * sinHalfAngle, axisZ * sinHalfAngle);
     }
 
-    @Override
     public Quaternion mul(Vec3Readable v) {
         float thisW = this.w;
         float thisX = this.x;
@@ -333,7 +311,6 @@ public class Quaternion implements QuatWritable {
         return this;
     }
 
-    @Override
     public Quaternion mul(float x, float y, float z) {
         float thisW = this.w;
         float thisX = this.x;

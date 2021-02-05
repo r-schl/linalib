@@ -8,7 +8,7 @@ import vec.Vec3;
 import vec.Vec3Readable;
 import vec.Vec4Readable;
 
-public class Mat4 implements Mat4Writable {
+public class Mat4 implements Mat4Readable, MatWritable {
 
     public static final Mat4Readable IDENTITY = new Mat4(
         1, 0, 0, 0,
@@ -542,103 +542,86 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 set00(float val) {
         this.m00 = val;
         return this;
     }
 
-    @Override
     public Mat4 set01(float val) {
         this.m01 = val;
         return this;
     }
 
-    @Override
     public Mat4 set02(float val) {
         this.m02 = val;
         return this;
     }
 
-    @Override
     public Mat4 set03(float val) {
         this.m03 = val;
         return this;
     }
 
-    @Override
     public Mat4 set10(float val) {
         this.m10 = val;
         return this;
     }
 
-    @Override
     public Mat4 set11(float val) {
         this.m11 = val;
         return this;
     }
 
-    @Override
     public Mat4 set12(float val) {
         this.m12 = val;
         return this;
     }
 
-    @Override
     public Mat4 set13(float val) {
         this.m13 = val;
         return this;
     }
 
-    @Override
     public Mat4 set20(float val) {
         this.m20 = val;
         return this;
     }
 
-    @Override
     public Mat4 set21(float val) {
         this.m21 = val;
         return this;
     }
 
-    @Override
     public Mat4 set22(float val) {
         this.m22 = val;
         return this;
     }
 
-    @Override
     public Mat4 set23(float val) {
         this.m23 = val;
         return this;
     }
 
-    @Override
     public Mat4 set30(float val) {
         this.m30 = val;
         return this;
     }
 
-    @Override
     public Mat4 set31(float val) {
         this.m31 = val;
         return this;
     }
 
-    @Override
     public Mat4 set32(float val) {
         this.m32 = val;
         return this;
     }
 
-    @Override
     public Mat4 set33(float val) {
         this.m33 = val;
         return this;
     }
 
-    @Override
     public Mat4 set(Mat4Readable mat) {
         this.m00 = mat.get00();
         this.m01 = mat.get01();
@@ -659,7 +642,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 set(float mat00, float mat01, float mat02, float mat03,
     float mat10, float mat11, float mat12, float mat13,
     float mat20, float mat21, float mat22, float mat23,
@@ -683,7 +665,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 addElWise(Mat4Readable mat) {
         this.m00 = this.m00 + mat.get00();
         this.m01 = this.m01 + mat.get01();
@@ -704,7 +685,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 addElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
@@ -727,7 +707,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 subElWise(Mat4Readable mat) {
         this.m00 = this.m00 - mat.get00();
         this.m01 = this.m01 - mat.get01();
@@ -748,7 +727,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 subElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
@@ -771,7 +749,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 presubElWise(Mat4Readable mat) {
         this.m00 = mat.get00() - this.m00;
         this.m01 = mat.get01() - this.m01;
@@ -792,7 +769,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 presubElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
@@ -815,7 +791,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 mulElWise(Mat4Readable mat) {
         this.m00 = this.m00 * mat.get00();
         this.m01 = this.m01 * mat.get01();
@@ -836,7 +811,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 mulElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
@@ -859,7 +833,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 divElWise(Mat4Readable mat) {
         this.m00 = this.m00 / mat.get00();
         this.m01 = this.m01 / mat.get01();
@@ -880,7 +853,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 divElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
@@ -903,7 +875,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 predivElWise(Mat4Readable mat) {
         this.m00 = mat.get00() / this.m00;
         this.m01 = mat.get01() / this.m01;
@@ -924,7 +895,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 predivElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
@@ -947,7 +917,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 mul(Mat4Readable mat) {
         // row 1
         float m00 = this.m00 * mat.get00() + this.m01 * mat.get10() + this.m02 * mat.get20() + this.m03 * mat.get30();
@@ -989,7 +958,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 mul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
             float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31, float mat32,
             float mat33) {
@@ -1033,7 +1001,6 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 premul(Mat4Readable mat) {
          // row 1
          float m00 = mat.get00() * this.m00 + mat.get01() * this.m10 + mat.get02() * this.m20 + mat.get03() * this.m30;
@@ -1075,7 +1042,6 @@ public class Mat4 implements Mat4Writable {
          return this;
     }
 
-    @Override
     public Mat4 premul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
@@ -1119,7 +1085,6 @@ public class Mat4 implements Mat4Writable {
          return this;
     }
 
-    @Override
     public Mat4 rotation2d(float angle) {
         float cosA = (float) Math.cos(Math.toRadians(-angle));
         float sinA = (float) Math.sin(Math.toRadians(-angle));
@@ -1131,12 +1096,10 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 rot3dAroundAxis(Vec3Readable axis, float angle) {
         return rot3dAroundAxis(axis.getX(), axis.getY(), axis.getZ(), angle);
     }
 
-    @Override
     public Mat4 rot3dAroundAxis(float axisX, float axisY, float axisZ, float angle) {
         float a = (float) Math.toRadians(angle);
         float sinA = (float) Math.sin(a);
@@ -1149,7 +1112,6 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 rot3dAroundXAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
@@ -1161,7 +1123,6 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 rot3dAroundYAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
@@ -1173,7 +1134,6 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 rot3dAroundZAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
@@ -1186,12 +1146,10 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 rotation3d(Vec3Readable forward, Vec3Readable up, Vec3Readable right) {
         return rotation3d(forward.getX(), forward.getY(), forward.getZ(), up.getX(), up.getY(), up.getZ(), right.getX(), right.getY(), right.getZ());
     }
 
-    @Override
     public Mat4 rotation3d(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
         return this.mul(
             rX, rY, rZ, 0,
@@ -1201,12 +1159,10 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 rot3dFromQuaternion(QuatReadable q) {
         return rot3dFromQuaternion(q.getW(), q.getX(), q.getY(), q.getZ());
     }
 
-    @Override
     public Mat4 rot3dFromQuaternion(float qw, float qx, float qy, float qz) {
         // normalize the quaternion
         float len = (float) Math.sqrt(qw * qw + qx * qx + qy * qy + qz * qz);
@@ -1222,12 +1178,10 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 translation2d(Vec2Readable v) {
         return translation2d(v.getX(), v.getY());
     }
 
-    @Override
     public Mat4 translation2d(float dX, float dY) {
         return this.mul(
             1, 0, 0, dX,
@@ -1237,12 +1191,10 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 translation3d(Vec3Readable v) {
         return translation3d(v.getX(), v.getY(), v.getZ());
     }
 
-    @Override
     public Mat4 translation3d(float dX, float dY, float dZ) {
         return this.mul(
             1, 0, 0, dX,
@@ -1252,12 +1204,10 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 scale2d(Vec2Readable v) {
         return scale2d(v.getX(), v.getY());
     }
 
-    @Override
     public Mat4 scale2d(float scaleX, float scaleY) {
         return this.mul(
             scaleX, 0, 0, 0,
@@ -1267,12 +1217,10 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 scale3d(Vec3Readable v) {
         return scale3d(v.getX(), v.getY(), v.getZ());
     }
 
-    @Override
     public Mat4 scale3d(float scaleX, float scaleY, float scaleZ) {
         return this.mul(
             scaleX, 0, 0, 0,
@@ -1282,12 +1230,10 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 scale4d(Vec4Readable v) {
         return scale4d(v.getX(), v.getY(), v.getZ(), v.getW());
     }
 
-    @Override
     public Mat4 scale4d(float scaleX, float scaleY, float scaleZ, float scaleW) {
         return this.mul(
             scaleX, 0, 0, 0,
@@ -1297,12 +1243,10 @@ public class Mat4 implements Mat4Writable {
         );
     }
 
-    @Override
     public Mat4 lookAt3d(Vec3Readable pos, Vec3Readable tgt, Vec3Readable up) {
         return lookAt3d(pos.getX(), pos.getY(), pos.getZ(), tgt.getX(), tgt.getY(), tgt.getZ(), up.getX(), up.getY(), up.getZ());
     }
 
-    @Override
     public Mat4 lookAt3d(float posX, float posY, float posZ, float tgtX, float tgtY, float tgtZ, float upX, float upY, float upZ) {
         Vec3 zAxis = new Vec3(tgtX, tgtY, tgtZ).sub(posX, posY, posZ).normalize();
         Vec3 xAxis = new Vec3(upX, upY, upZ).cross(zAxis).normalize();
@@ -1317,12 +1261,10 @@ public class Mat4 implements Mat4Writable {
         return this;
     }
 
-    @Override
     public Mat4 view3dFromQuaternion(Vec3Readable p, QuatReadable q) {
         return this.view3dFromQuaternion(p.getX(), p.getY(), p.getZ(), q.getW(), q.getX(), q.getY(), q.getZ());
     }
 
-    @Override
     public Mat4 view3dFromQuaternion(float pX, float pY, float pZ, float qw, float qx, float qy, float qz) {
         this.rot3dFromQuaternion(qw, qx, qy, qz);
         float t03 = -(pX * this.m00 + pY * this.m10 + pZ * this.m20);
@@ -1373,7 +1315,6 @@ public class Mat4 implements Mat4Writable {
      * @param fovY      field of view y axis (in degrees)
      * @return          this matrix
      */
-    @Override
     public Mat4 perspective3dFov(float aspect, float near, float far, float fovY) {
         float tanHalfFov = (float) Math.tan(Math.toRadians(fovY / 2.0));
         float pWidth = (2 * near) / (1 / tanHalfFov);
@@ -1396,7 +1337,6 @@ public class Mat4 implements Mat4Writable {
      * @param far       far clipping plane
      * @return          this matrix
      */
-    @Override
     public Mat4 orthographic3d(float left, float right, float bottom, float top, float near, float far) {
         float l = left;
         float r = right;
@@ -1425,7 +1365,6 @@ public class Mat4 implements Mat4Writable {
      * @param beta      angle (in degrees) for the ratio between the actual length in z and the projected length in z 
      * @return          this matrix
      */
-    @Override
     public Mat4 oblique3d(float left, float right, float bottom, float top, float near, float far, float alpha, float beta) {
         float cosA = (float) Math.cos(Math.toRadians(alpha));
         float sinA = (float) Math.sin(Math.toRadians(alpha));
@@ -1451,7 +1390,6 @@ public class Mat4 implements Mat4Writable {
      * @param angle     angle (int degrees) between x axis and z axis in projection
      * @return          this matrix
      */
-    @Override
     public Mat4 cabinet3d(float left, float right, float bottom, float top, float near, float far, float angle) {
         return this.oblique3d(left, right, bottom, top, near, far, angle, (float) Math.toDegrees(Math.atan(2)));
     }
@@ -1469,7 +1407,6 @@ public class Mat4 implements Mat4Writable {
      * @param angle     angle (int degrees) between x axis and z axis in projection
      * @return          this matrix
      */
-    @Override
     public Mat4 cavalier3d(float left, float right, float bottom, float top, float near, float far, float angle) {
         return this.oblique3d(left, right, bottom, top, near, far, angle, (float) Math.toDegrees(Math.atan(1)));
     }
