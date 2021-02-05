@@ -4,7 +4,7 @@ import java.nio.FloatBuffer;
 
 import vec.Vec2Readable;
 
-public class Mat2 implements Mat2Writable {
+public class Mat2 implements Mat2Readable, MatWritable {
 
     public static final Mat2 IDENTITY = new Mat2(1, 0, 0, 1);
 
@@ -231,38 +231,32 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 from(MatReadable mat) {
         this.extractFrom(mat);
         return this;
     }
 
-    @Override
     public Mat2 set00(float val) {
         this.m00 = val;
         return this;
     }
 
-    @Override
     public Mat2 set01(float val) {
         this.m01 = val;
         return this;
     }
 
-    @Override
     public Mat2 set10(float val) {
         this.m10 = val;
         return this;
     }
 
-    @Override
     public Mat2 set11(float val) {
         this.m11 = val;
         return this;
     }
 
-    @Override
-    public Mat2 set(Mat2Writable mat) {
+    public Mat2 set(Mat2Readable mat) {
         this.m00 = mat.get00();
         this.m01 = mat.get01();
         this.m10 = mat.get10();
@@ -270,7 +264,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 set(float mat00, float mat01, float mat10, float mat11) {
         this.m00 = mat00;
         this.m01 = mat01;
@@ -279,7 +272,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 addElWise(Mat2Readable mat) {
         this.m00 = this.m00 + mat.get00();
         this.m01 = this.m01 + mat.get01();
@@ -288,7 +280,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 addElWise(float mat00, float mat01, float mat10, float mat11) {
         this.m00 = this.m00 + mat00;
         this.m01 = this.m01 + mat01;
@@ -297,7 +288,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 subElWise(Mat2Readable mat) {
         this.m00 = this.m00 - mat.get00();
         this.m01 = this.m01 - mat.get01();
@@ -306,7 +296,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 subElWise(float mat00, float mat01, float mat10, float mat11) {
         this.m00 = this.m00 - mat00;
         this.m01 = this.m01 - mat01;
@@ -315,7 +304,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 presubElWise(Mat2Readable mat) {
         this.m00 = mat.get00() - this.m00;
         this.m01 = mat.get01() - this.m01;
@@ -324,7 +312,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 presubElWise(float mat00, float mat01, float mat10, float mat11) {
         this.m00 = mat00 - this.m00;
         this.m01 = mat01 - this.m01;
@@ -333,7 +320,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 mulElWise(Mat2Readable mat) {
         this.m00 = this.m00 * mat.get00();
         this.m01 = this.m01 * mat.get01();
@@ -342,7 +328,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 mulElWise(float mat00, float mat01, float mat10, float mat11) {
         this.m00 = this.m00 * mat00;
         this.m01 = this.m01 * mat01;
@@ -351,7 +336,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 divElWise(Mat2Readable mat) {
         this.m00 = this.m00 / mat.get00();
         this.m01 = this.m01 / mat.get01();
@@ -360,7 +344,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 divElWise(float mat00, float mat01, float mat10, float mat11) {
         this.m00 = this.m00 / mat00;
         this.m01 = this.m01 / mat01;
@@ -369,7 +352,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 predivElWise(Mat2Readable mat) {
         this.m00 = mat.get00() / this.m00;
         this.m01 = mat.get01() / this.m01;
@@ -378,7 +360,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 predivElWise(float mat00, float mat01, float mat10, float mat11) {
         this.m00 = mat00 / this.m00;
         this.m01 = mat01 / this.m01;
@@ -387,7 +368,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 mul(Mat2Readable mat) {
         float m00 = this.m00 * mat.get00() + this.m01 * mat.get10();
         float m01 = this.m00 * mat.get01() + this.m01 * mat.get11();
@@ -400,7 +380,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 mul(float mat00, float mat01, float mat10, float mat11) {
         float m00 = this.m00 * mat00 + this.m01 * mat10;
         float m01 = this.m00 * mat01 + this.m01 * mat11;
@@ -413,7 +392,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 premul(Mat2Readable mat) {
         float m00 = mat.get00() * this.m00 + mat.get01() * this.m10;
         float m01 = mat.get00() * this.m01 + mat.get01() * this.m11;
@@ -426,7 +404,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 premul(float mat00, float mat01, float mat10, float mat11) {
         float m00 = mat00 * this.m00 + mat01 * this.m10;
         float m01 = mat00 * this.m01 + mat01 * this.m11;
@@ -439,7 +416,6 @@ public class Mat2 implements Mat2Writable {
         return this;
     }
 
-    @Override
     public Mat2 rotation2d(float angle) {
         float cosA = (float) Math.cos(Math.toRadians(-angle));
         float sinA = (float) Math.sin(Math.toRadians(-angle));
@@ -449,12 +425,10 @@ public class Mat2 implements Mat2Writable {
         );
     }
 
-    @Override
     public Mat2 scale2d(Vec2Readable v) {
         return scale2d(v.getX(), v.getY());
     }
 
-    @Override
     public Mat2 scale2d(float scaleX, float scaleY) {
         return this.mul(
             scaleX, 0,
