@@ -1,10 +1,10 @@
-package mat;
+package linalib.mat;
 
 import java.nio.FloatBuffer;
 
-import quat.QuatReadable;
-import vec.Vec2Readable;
-import vec.Vec3Readable;
+import linalib.quat.QuatReadable;
+import linalib.vec.Vec2Readable;
+import linalib.vec.Vec3Readable;
 
 public class Mat3 implements Mat3Readable, MatWritable {
 

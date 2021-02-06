@@ -1,9 +1,9 @@
-package utils;
+package linalib.utils;
 
-import mat.Mat2;
-import mat.Mat2Readable;
-import use.Mat2Container;
-import vec.Vec2;
+import linalib.mat.Mat2;
+import linalib.mat.Mat2Readable;
+import linalib.use.Mat2Container;
+import linalib.vec.Vec2;
 
 public class Rotation2d implements Mat2Container {
 

@@ -1,4 +1,4 @@
-package vec;
+package linalib.vec;
 
 
 public interface VecWritable extends VecReadable {

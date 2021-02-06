@@ -1,6 +1,6 @@
-package use;
+package linalib.use;
 
-import vec.Vec4Readable;
+import linalib.vec.Vec4Readable;
 
 public interface Vec4Container {
 

@@ -1,4 +1,4 @@
-package mat;
+package linalib.mat;
 
 public interface MatWritable extends MatReadable {
 

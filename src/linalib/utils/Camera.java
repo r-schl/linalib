@@ -1,10 +1,10 @@
-package utils;
+package linalib.utils;
 
-import mat.Mat4;
-import mat.Mat4Readable;
-import quat.Quaternion;
-import use.Mat4Container;
-import vec.Vec3;
+import linalib.mat.Mat4;
+import linalib.mat.Mat4Readable;
+import linalib.quat.Quaternion;
+import linalib.use.Mat4Container;
+import linalib.vec.Vec3;
 
 public class Camera implements Mat4Container {
 

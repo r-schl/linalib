@@ -1,9 +1,9 @@
-package vec;
+package linalib.vec;
 
 import java.nio.FloatBuffer;
 
-import mat.Mat4;
-import mat.Mat4Readable;
+import linalib.mat.Mat4;
+import linalib.mat.Mat4Readable;
 
 public class Vec4 implements Vec4Readable, VecWritable {
 

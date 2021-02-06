@@ -1,4 +1,4 @@
-package mat;
+package linalib.mat;
 
 public interface Mat2Readable extends MatReadable {
     

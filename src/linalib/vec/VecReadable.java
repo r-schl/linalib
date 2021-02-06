@@ -1,4 +1,4 @@
-package vec;
+package linalib.vec;
 
 import java.nio.FloatBuffer;
 

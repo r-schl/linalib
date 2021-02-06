@@ -1,6 +1,6 @@
-package use;
+package linalib.use;
 
-import mat.Mat2Readable;
+import linalib.mat.Mat2Readable;
 
 public interface Mat2Container {
 

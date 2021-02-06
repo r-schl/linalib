@@ -1,8 +1,8 @@
-package utils;
+package linalib.utils;
 
-import mat.Mat4;
-import mat.Mat4Readable;
-import use.Mat4Container;
+import linalib.mat.Mat4;
+import linalib.mat.Mat4Readable;
+import linalib.use.Mat4Container;
 
 public class Orthographic implements Mat4Container {
 

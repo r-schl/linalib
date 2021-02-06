@@ -1,4 +1,4 @@
-package mat;
+package linalib.mat;
 
 import java.nio.FloatBuffer;
 

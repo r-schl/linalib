@@ -1,4 +1,4 @@
-package quat;
+package linalib.quat;
 
 import java.nio.FloatBuffer;
 

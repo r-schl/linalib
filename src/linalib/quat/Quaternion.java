@@ -1,8 +1,8 @@
-package quat;
+package linalib.quat;
 
 import java.nio.FloatBuffer;
 
-import vec.Vec3Readable;
+import linalib.vec.Vec3Readable;
 
 
 public class Quaternion implements QuatReadable {

@@ -1,6 +1,6 @@
-package use;
+package linalib.use;
 
-import vec.Vec3Readable;
+import linalib.vec.Vec3Readable;
 
 public interface Vec3Container {
     

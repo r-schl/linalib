@@ -1,6 +1,6 @@
-package use;
+package linalib.use;
 
-import mat.Mat3Readable;
+import linalib.mat.Mat3Readable;
 
 public interface Mat3Container {
     

@@ -1,6 +1,6 @@
-package utils;
+package linalib.utils;
 
-import vec.Vec2;
+import linalib.vec.Vec2;
 
 
 public class Clipper {

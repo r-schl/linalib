@@ -1,4 +1,4 @@
-package utils;
+package linalib.utils;
 
 public class GameLoop {
 

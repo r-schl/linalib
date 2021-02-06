@@ -1,6 +1,6 @@
-package use;
+package linalib.use;
 
-import mat.Mat4Readable;
+import linalib.mat.Mat4Readable;
 
 public interface Mat4Container {
 

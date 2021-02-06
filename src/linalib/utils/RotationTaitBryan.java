@@ -1,9 +1,9 @@
-package utils;
+package linalib.utils;
 
-import mat.Mat3;
-import mat.Mat3Readable;
-import use.Mat3Container;
-import vec.Vec3;
+import linalib.mat.Mat3;
+import linalib.mat.Mat3Readable;
+import linalib.use.Mat3Container;
+import linalib.vec.Vec3;
 
 public class RotationTaitBryan implements Mat3Container {
 

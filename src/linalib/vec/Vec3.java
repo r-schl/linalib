@@ -1,10 +1,10 @@
-package vec;
+package linalib.vec;
 
 import java.nio.FloatBuffer;
 
-import mat.Mat3Readable;
-import quat.QuatReadable;
-import mat.Mat3;
+import linalib.mat.Mat3Readable;
+import linalib.quat.QuatReadable;
+import linalib.mat.Mat3;
 
 public class Vec3 implements Vec3Readable, VecWritable {
 
