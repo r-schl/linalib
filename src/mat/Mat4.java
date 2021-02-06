@@ -1085,7 +1085,7 @@ public class Mat4 implements Mat4Readable, MatWritable {
          return this;
     }
 
-    public Mat4 rotation2d(float angle) {
+    public Mat4 mulRotation2d(float angle) {
         float cosA = (float) Math.cos(Math.toRadians(-angle));
         float sinA = (float) Math.sin(Math.toRadians(-angle));
         return this.mul(
@@ -1096,11 +1096,11 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 rot3dAroundAxis(Vec3Readable axis, float angle) {
-        return rot3dAroundAxis(axis.getX(), axis.getY(), axis.getZ(), angle);
+    public Mat4 mulRot3dAroundAxis(Vec3Readable axis, float angle) {
+        return mulRot3dAroundAxis(axis.getX(), axis.getY(), axis.getZ(), angle);
     }
 
-    public Mat4 rot3dAroundAxis(float axisX, float axisY, float axisZ, float angle) {
+    public Mat4 mulRot3dAroundAxis(float axisX, float axisY, float axisZ, float angle) {
         float a = (float) Math.toRadians(angle);
         float sinA = (float) Math.sin(a);
         float cosA = (float) Math.cos(a);
@@ -1112,7 +1112,7 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 rot3dAroundXAxis(float angle) {
+    public Mat4 mulRot3dAroundXAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
         return this.mul(
@@ -1123,7 +1123,7 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 rot3dAroundYAxis(float angle) {
+    public Mat4 mulRot3dAroundYAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
         return this.mul(
@@ -1134,7 +1134,7 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 rot3dAroundZAxis(float angle) {
+    public Mat4 mulRot3dAroundZAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
         // rotation around z axis
@@ -1146,11 +1146,11 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 rotation3d(Vec3Readable forward, Vec3Readable up, Vec3Readable right) {
-        return rotation3d(forward.getX(), forward.getY(), forward.getZ(), up.getX(), up.getY(), up.getZ(), right.getX(), right.getY(), right.getZ());
+    public Mat4 mulRotation3d(Vec3Readable forward, Vec3Readable up, Vec3Readable right) {
+        return mulRotation3d(forward.getX(), forward.getY(), forward.getZ(), up.getX(), up.getY(), up.getZ(), right.getX(), right.getY(), right.getZ());
     }
 
-    public Mat4 rotation3d(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
+    public Mat4 mulRotation3d(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
         return this.mul(
             rX, rY, rZ, 0,
             uX, uY, uZ, 0,
@@ -1159,11 +1159,11 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 rot3dFromQuaternion(QuatReadable q) {
-        return rot3dFromQuaternion(q.getW(), q.getX(), q.getY(), q.getZ());
+    public Mat4 mulRot3dFromQuaternion(QuatReadable q) {
+        return mulRot3dFromQuaternion(q.getW(), q.getX(), q.getY(), q.getZ());
     }
 
-    public Mat4 rot3dFromQuaternion(float qw, float qx, float qy, float qz) {
+    public Mat4 mulRot3dFromQuaternion(float qw, float qx, float qy, float qz) {
         // normalize the quaternion
         float len = (float) Math.sqrt(qw * qw + qx * qx + qy * qy + qz * qz);
         float w = qw / len;
@@ -1178,11 +1178,11 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 translation2d(Vec2Readable v) {
-        return translation2d(v.getX(), v.getY());
+    public Mat4 mulTranslation2d(Vec2Readable v) {
+        return mulTranslation2d(v.getX(), v.getY());
     }
 
-    public Mat4 translation2d(float dX, float dY) {
+    public Mat4 mulTranslation2d(float dX, float dY) {
         return this.mul(
             1, 0, 0, dX,
             0, 1, 0, dY,
@@ -1191,11 +1191,11 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 translation3d(Vec3Readable v) {
-        return translation3d(v.getX(), v.getY(), v.getZ());
+    public Mat4 mulTranslation3d(Vec3Readable v) {
+        return mulTranslation3d(v.getX(), v.getY(), v.getZ());
     }
 
-    public Mat4 translation3d(float dX, float dY, float dZ) {
+    public Mat4 mulTranslation3d(float dX, float dY, float dZ) {
         return this.mul(
             1, 0, 0, dX,
             0, 1, 0, dY,
@@ -1204,11 +1204,11 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 scale2d(Vec2Readable v) {
-        return scale2d(v.getX(), v.getY());
+    public Mat4 mulScale2d(Vec2Readable v) {
+        return mulScale2d(v.getX(), v.getY());
     }
 
-    public Mat4 scale2d(float scaleX, float scaleY) {
+    public Mat4 mulScale2d(float scaleX, float scaleY) {
         return this.mul(
             scaleX, 0, 0, 0,
             0, scaleY, 0, 0,
@@ -1217,11 +1217,11 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 scale3d(Vec3Readable v) {
-        return scale3d(v.getX(), v.getY(), v.getZ());
+    public Mat4 mulScale3d(Vec3Readable v) {
+        return mulScale3d(v.getX(), v.getY(), v.getZ());
     }
 
-    public Mat4 scale3d(float scaleX, float scaleY, float scaleZ) {
+    public Mat4 mulScale3d(float scaleX, float scaleY, float scaleZ) {
         return this.mul(
             scaleX, 0, 0, 0,
             0, scaleY, 0, 0,
@@ -1230,11 +1230,11 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 scale4d(Vec4Readable v) {
-        return scale4d(v.getX(), v.getY(), v.getZ(), v.getW());
+    public Mat4 mulScale4d(Vec4Readable v) {
+        return mulScale4d(v.getX(), v.getY(), v.getZ(), v.getW());
     }
 
-    public Mat4 scale4d(float scaleX, float scaleY, float scaleZ, float scaleW) {
+    public Mat4 mulScale4d(float scaleX, float scaleY, float scaleZ, float scaleW) {
         return this.mul(
             scaleX, 0, 0, 0,
             0, scaleY, 0, 0,
@@ -1243,11 +1243,11 @@ public class Mat4 implements Mat4Readable, MatWritable {
         );
     }
 
-    public Mat4 lookAt3d(Vec3Readable pos, Vec3Readable tgt, Vec3Readable up) {
-        return lookAt3d(pos.getX(), pos.getY(), pos.getZ(), tgt.getX(), tgt.getY(), tgt.getZ(), up.getX(), up.getY(), up.getZ());
+    public Mat4 mulLookAt3d(Vec3Readable pos, Vec3Readable tgt, Vec3Readable up) {
+        return mulLookAt3d(pos.getX(), pos.getY(), pos.getZ(), tgt.getX(), tgt.getY(), tgt.getZ(), up.getX(), up.getY(), up.getZ());
     }
 
-    public Mat4 lookAt3d(float posX, float posY, float posZ, float tgtX, float tgtY, float tgtZ, float upX, float upY, float upZ) {
+    public Mat4 mulLookAt3d(float posX, float posY, float posZ, float tgtX, float tgtY, float tgtZ, float upX, float upY, float upZ) {
         Vec3 zAxis = new Vec3(tgtX, tgtY, tgtZ).sub(posX, posY, posZ).normalize();
         Vec3 xAxis = new Vec3(upX, upY, upZ).cross(zAxis).normalize();
         Vec3 yAxis = new Vec3(zAxis).cross(xAxis);
@@ -1261,12 +1261,12 @@ public class Mat4 implements Mat4Readable, MatWritable {
         return this;
     }
 
-    public Mat4 view3dFromQuaternion(Vec3Readable p, QuatReadable q) {
-        return this.view3dFromQuaternion(p.getX(), p.getY(), p.getZ(), q.getW(), q.getX(), q.getY(), q.getZ());
+    public Mat4 mulView3dFromQuaternion(Vec3Readable p, QuatReadable q) {
+        return this.mulView3dFromQuaternion(p.getX(), p.getY(), p.getZ(), q.getW(), q.getX(), q.getY(), q.getZ());
     }
 
-    public Mat4 view3dFromQuaternion(float pX, float pY, float pZ, float qw, float qx, float qy, float qz) {
-        this.rot3dFromQuaternion(qw, qx, qy, qz);
+    public Mat4 mulView3dFromQuaternion(float pX, float pY, float pZ, float qw, float qx, float qy, float qz) {
+        this.mulRot3dFromQuaternion(qw, qx, qy, qz);
         float t03 = -(pX * this.m00 + pY * this.m10 + pZ * this.m20);
         float t13 = -(pX * this.m01 + pY * this.m11 + pZ * this.m21);
         float t23 = -(pX * this.m02 + pY * this.m12 + pZ * this.m22);
@@ -1290,7 +1290,7 @@ public class Mat4 implements Mat4Readable, MatWritable {
      * @param far       far clipping plane
      * @return          this matrix
      */ 
-    public Mat4 perspective3d(float left, float right, float bottom, float top, float near, float far) {
+    public Mat4 mulPerspective3d(float left, float right, float bottom, float top, float near, float far) {
         float l = left;
         float r = right;
         float b = bottom;
@@ -1315,7 +1315,7 @@ public class Mat4 implements Mat4Readable, MatWritable {
      * @param fovY      field of view y axis (in degrees)
      * @return          this matrix
      */
-    public Mat4 perspective3dFov(float aspect, float near, float far, float fovY) {
+    public Mat4 mulPerspective3dFov(float aspect, float near, float far, float fovY) {
         float tanHalfFov = (float) Math.tan(Math.toRadians(fovY / 2.0));
         float pWidth = (2 * near) / (1 / tanHalfFov);
         float pHeight = (2 * near) / (1 / tanHalfFov * aspect);
@@ -1323,7 +1323,7 @@ public class Mat4 implements Mat4Readable, MatWritable {
         float left = -pWidth / 2;
         float top = pHeight / 2;
         float bottom = -pHeight / 2;
-        return perspective3d(left, right, bottom, top, near, far);
+        return mulPerspective3d(left, right, bottom, top, near, far);
     }
 
     /**
@@ -1337,7 +1337,7 @@ public class Mat4 implements Mat4Readable, MatWritable {
      * @param far       far clipping plane
      * @return          this matrix
      */
-    public Mat4 orthographic3d(float left, float right, float bottom, float top, float near, float far) {
+    public Mat4 mulOrthographic3d(float left, float right, float bottom, float top, float near, float far) {
         float l = left;
         float r = right;
         float b = bottom;
@@ -1365,12 +1365,12 @@ public class Mat4 implements Mat4Readable, MatWritable {
      * @param beta      angle (in degrees) for the ratio between the actual length in z and the projected length in z 
      * @return          this matrix
      */
-    public Mat4 oblique3d(float left, float right, float bottom, float top, float near, float far, float alpha, float beta) {
+    public Mat4 mulOblique3d(float left, float right, float bottom, float top, float near, float far, float alpha, float beta) {
         float cosA = (float) Math.cos(Math.toRadians(alpha));
         float sinA = (float) Math.sin(Math.toRadians(alpha));
         float tanB = (float) Math.tan(Math.toRadians(beta));
         float sinB = (float) Math.sin(Math.toRadians(beta));
-        return this.orthographic3d(left, right, bottom, top, near, far).mul(
+        return this.mulOrthographic3d(left, right, bottom, top, near, far).mul(
             1, 0, -cosA / tanB, 0,
             0, 1, sinA / tanB, 0, 
             0, 0, -1 / sinB, 0,
@@ -1390,8 +1390,8 @@ public class Mat4 implements Mat4Readable, MatWritable {
      * @param angle     angle (int degrees) between x axis and z axis in projection
      * @return          this matrix
      */
-    public Mat4 cabinet3d(float left, float right, float bottom, float top, float near, float far, float angle) {
-        return this.oblique3d(left, right, bottom, top, near, far, angle, (float) Math.toDegrees(Math.atan(2)));
+    public Mat4 mulCabinet3d(float left, float right, float bottom, float top, float near, float far, float angle) {
+        return this.mulOblique3d(left, right, bottom, top, near, far, angle, (float) Math.toDegrees(Math.atan(2)));
     }
 
 
@@ -1407,8 +1407,8 @@ public class Mat4 implements Mat4Readable, MatWritable {
      * @param angle     angle (int degrees) between x axis and z axis in projection
      * @return          this matrix
      */
-    public Mat4 cavalier3d(float left, float right, float bottom, float top, float near, float far, float angle) {
-        return this.oblique3d(left, right, bottom, top, near, far, angle, (float) Math.toDegrees(Math.atan(1)));
+    public Mat4 mulCavalier3d(float left, float right, float bottom, float top, float near, float far, float angle) {
+        return this.mulOblique3d(left, right, bottom, top, near, far, angle, (float) Math.toDegrees(Math.atan(1)));
     }
 
 
@@ -1420,123 +1420,123 @@ public class Mat4 implements Mat4Readable, MatWritable {
     // STATIC METHODS TO CONSTRUCT A MATRIX
 
     public static Mat4 newRotation2d(float angle) {
-        return new Mat4().rotation2d(angle);
+        return new Mat4(IDENTITY).mulRotation2d(angle);
     }
 
     public static Mat4 newRot3dAroundAxis(Vec3Readable axis, float angle) {
-        return new Mat4().rot3dAroundAxis(axis, angle);
+        return new Mat4(IDENTITY).mulRot3dAroundAxis(axis, angle);
     }
 
     public static Mat4 newRot3dAroundAxis(float axisX, float axisY, float axisZ, float angle) {
-        return new Mat4().rot3dAroundAxis(axisX, axisY, axisZ, angle);
+        return new Mat4(IDENTITY).mulRot3dAroundAxis(axisX, axisY, axisZ, angle);
     }
 
     public static Mat4 newRot3dAroundXAxis(float angle) {
-        return new Mat4().rot3dAroundXAxis(angle);
+        return new Mat4(IDENTITY).mulRot3dAroundXAxis(angle);
     }
 
     public static Mat4 newRot3dAroundYAxis(float angle) {
-        return new Mat4().rot3dAroundYAxis(angle);
+        return new Mat4(IDENTITY).mulRot3dAroundYAxis(angle);
     }
 
     public static Mat4 newRot3dAroundZAxis(float angle) {
-        return new Mat4().rot3dAroundZAxis(angle);
+        return new Mat4(IDENTITY).mulRot3dAroundZAxis(angle);
     }
 
     public static Mat4 newRotation3d(Vec3Readable forward, Vec3Readable up, Vec3Readable right) {
-        return new Mat4().rotation3d(forward, up, right);
+        return new Mat4(IDENTITY).mulRotation3d(forward, up, right);
     }
     
     public static Mat4 newRotation3d(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
-        return new Mat4().rotation3d(fX, fY, fZ, uX, uY, uZ, rX, rY, rZ);
+        return new Mat4(IDENTITY).mulRotation3d(fX, fY, fZ, uX, uY, uZ, rX, rY, rZ);
     }
 
     public static Mat4 newRot3dFromQuaternion(QuatReadable q) {
-        return new Mat4().rot3dFromQuaternion(q);
+        return new Mat4(IDENTITY).mulRot3dFromQuaternion(q);
     }
 
     public static Mat4 newRot3dFromQuaternion(float qw, float qx, float qy, float qz) {
-        return new Mat4().rot3dFromQuaternion(qw, qx, qy, qz);
+        return new Mat4(IDENTITY).mulRot3dFromQuaternion(qw, qx, qy, qz);
     }
 
     public static Mat4 newTranslation2d(Vec2Readable translation) {
-        return new Mat4().translation2d(translation);
+        return new Mat4(IDENTITY).mulTranslation2d(translation);
     }
 
     public static Mat4 newTranslation2d(float dX, float dY) {
-        return new Mat4().translation2d(dX, dY);
+        return new Mat4(IDENTITY).mulTranslation2d(dX, dY);
     }
 
     public static Mat4 newTranslation3d(Vec3Readable translation) {
-        return new Mat4().translation3d(translation);
+        return new Mat4(IDENTITY).mulTranslation3d(translation);
     }
 
     public static Mat4 newTranslation3d(float dX, float dY, float dZ) {
-        return new Mat4().translation3d(dX, dY, dZ);
+        return new Mat4(IDENTITY).mulTranslation3d(dX, dY, dZ);
     }
 
     public static Mat4 newScale2d(Vec2Readable scale) {
-        return new Mat4().scale2d(scale);
+        return new Mat4(IDENTITY).mulScale2d(scale);
     }
 
     public static Mat4 newScale2d(float scaleX, float scaleY) {
-        return new Mat4().scale2d(scaleX, scaleY);
+        return new Mat4(IDENTITY).mulScale2d(scaleX, scaleY);
     }
 
     public static Mat4 newScale3d(Vec3Readable scale) {
-        return new Mat4().scale3d(scale);
+        return new Mat4(IDENTITY).mulScale3d(scale);
     }
 
     public static Mat4 newScale3d(float scaleX, float scaleY, float scaleZ) {
-        return new Mat4().scale3d(scaleX, scaleY, scaleZ);
+        return new Mat4(IDENTITY).mulScale3d(scaleX, scaleY, scaleZ);
     }
 
     public static Mat4 newScale4d(Vec4Readable scale) {
-        return new Mat4().scale4d(scale);
+        return new Mat4(IDENTITY).mulScale4d(scale);
     }
 
     public static Mat4 newScale4d(float scaleX, float scaleY, float scaleZ, float scaleW) {
-        return new Mat4().scale4d(scaleX, scaleY, scaleZ, scaleW);
+        return new Mat4(IDENTITY).mulScale4d(scaleX, scaleY, scaleZ, scaleW);
     }
 
     public static Mat4 newLookAt3d(Vec3Readable pos, Vec3Readable tgt, Vec3Readable up) {
-        return new Mat4().lookAt3d(pos, tgt, up);
+        return new Mat4(IDENTITY).mulLookAt3d(pos, tgt, up);
     }
 
     public static Mat4 newLookAt3d(float posX, float posY, float posZ, float tgtX, float tgtY, float tgtZ, float upX, float upY, float upZ) {
-        return new Mat4().lookAt3d(posX, posY, posZ, tgtX, tgtY, tgtZ, upX, upY, upZ);
+        return new Mat4(IDENTITY).mulLookAt3d(posX, posY, posZ, tgtX, tgtY, tgtZ, upX, upY, upZ);
     }
 
     public static Mat4 newView3dFromQuaternion(Vec3Readable p, QuatReadable q) {
-        return new Mat4().view3dFromQuaternion(p, q);
+        return new Mat4(IDENTITY).mulView3dFromQuaternion(p, q);
     }
 
     public static Mat4 newView3dFromQuaternion(float pX, float pY, float pZ, float qw, float qx, float qy, float qz) {
-        return new Mat4().view3dFromQuaternion(pX, pY, pZ, qw, qx, qy, qz);
+        return new Mat4(IDENTITY).mulView3dFromQuaternion(pX, pY, pZ, qw, qx, qy, qz);
     }
 
     public static Mat4 newPerspective3d(float l, float r, float b, float t, float n, float f) {
-        return new Mat4().perspective3d(l, r, b, t, n, f);
+        return new Mat4(IDENTITY).mulPerspective3d(l, r, b, t, n, f);
     }
 
     public static Mat4 newPerspective3dFov(float aspect, float near, float far, float fovY) {
-        return new Mat4().perspective3dFov(aspect, near, far, fovY);
+        return new Mat4(IDENTITY).mulPerspective3dFov(aspect, near, far, fovY);
     }
 
     public static Mat4 newOrthographic3d(float l, float r, float b, float t, float n, float f) {
-        return new Mat4().orthographic3d(l, r, b, t, n, f);
+        return new Mat4(IDENTITY).mulOrthographic3d(l, r, b, t, n, f);
     }
 
     public static Mat4 newOblique3d(float l, float r, float b, float t, float n, float f, float alpha, float beta) {
-        return new Mat4().oblique3d(l, r, b, t, n, f, alpha, beta);
+        return new Mat4(IDENTITY).mulOblique3d(l, r, b, t, n, f, alpha, beta);
     }
 
     public static Mat4 newCabinet3d(float l, float r, float b, float t, float n, float f, float angle) {
-        return new Mat4().cabinet3d(l, r, b, t, n, f, angle);
+        return new Mat4(IDENTITY).mulCabinet3d(l, r, b, t, n, f, angle);
     }
 
     public static Mat4 newCavalier3d(float l, float r, float b, float t, float n, float f, float angle) {
-        return new Mat4().cavalier3d(l, r, b, t, n, f, angle);
+        return new Mat4(IDENTITY).mulCavalier3d(l, r, b, t, n, f, angle);
     }
     
 }

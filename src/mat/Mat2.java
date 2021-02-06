@@ -416,7 +416,7 @@ public class Mat2 implements Mat2Readable, MatWritable {
         return this;
     }
 
-    public Mat2 rotation2d(float angle) {
+    public Mat2 mulRotation2d(float angle) {
         float cosA = (float) Math.cos(Math.toRadians(-angle));
         float sinA = (float) Math.sin(Math.toRadians(-angle));
         return this.mul(
@@ -425,11 +425,11 @@ public class Mat2 implements Mat2Readable, MatWritable {
         );
     }
 
-    public Mat2 scale2d(Vec2Readable v) {
-        return scale2d(v.getX(), v.getY());
+    public Mat2 mulScale2d(Vec2Readable v) {
+        return mulScale2d(v.getX(), v.getY());
     }
 
-    public Mat2 scale2d(float scaleX, float scaleY) {
+    public Mat2 mulScale2d(float scaleX, float scaleY) {
         return this.mul(
             scaleX, 0,
             0, scaleY
@@ -444,15 +444,15 @@ public class Mat2 implements Mat2Readable, MatWritable {
      // STATIC METHODS TO CONSTRUCT A MATRIX
 
      public static Mat2 newRotation2d(float angle) {
-        return new Mat2().rotation2d(angle);
+        return new Mat2().mulRotation2d(angle);
     }
 
     public static Mat2 newScale2d(Vec2Readable scale) {
-        return new Mat2().scale2d(scale);
+        return new Mat2().mulScale2d(scale);
     }
 
     public static Mat2 newScale2d(float scaleX, float scaleY) {
-        return new Mat2().scale2d(scaleX, scaleY);
+        return new Mat2().mulScale2d(scaleX, scaleY);
     }
 
     

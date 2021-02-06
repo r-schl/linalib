@@ -678,7 +678,7 @@ public class Mat3 implements Mat3Readable, MatWritable {
         return this;
     }
 
-    public Mat3 rotation2d(float angle) {
+    public Mat3 mulRotation2d(float angle) {
         float cosA = (float) Math.cos(Math.toRadians(-angle));
         float sinA = (float) Math.sin(Math.toRadians(-angle));
         return this.mul(
@@ -688,11 +688,11 @@ public class Mat3 implements Mat3Readable, MatWritable {
         );
     }
 
-    public Mat3 rot3dAroundAxis(Vec3Readable axis, float angle) {
-        return rot3dAroundAxis(axis.getX(), axis.getY(), axis.getZ(), angle);
+    public Mat3 mulRot3dAroundAxis(Vec3Readable axis, float angle) {
+        return mulRot3dAroundAxis(axis.getX(), axis.getY(), axis.getZ(), angle);
     }
 
-    public Mat3 rot3dAroundAxis(float axisX, float axisY, float axisZ, float angle) {
+    public Mat3 mulRot3dAroundAxis(float axisX, float axisY, float axisZ, float angle) {
         float a = (float) Math.toRadians(angle);
         float sinA = (float) Math.sin(a);
         float cosA = (float) Math.cos(a);
@@ -703,7 +703,7 @@ public class Mat3 implements Mat3Readable, MatWritable {
         );
     }
 
-    public Mat3 rot3dAroundXAxis(float angle) {
+    public Mat3 mulRot3dAroundXAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
         return this.mul(
@@ -713,7 +713,7 @@ public class Mat3 implements Mat3Readable, MatWritable {
         );
     }
 
-    public Mat3 rot3dAroundYAxis(float angle) {
+    public Mat3 mulRot3dAroundYAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
         return this.mul(
@@ -723,7 +723,7 @@ public class Mat3 implements Mat3Readable, MatWritable {
         );
     }
 
-    public Mat3 rot3dAroundZAxis(float angle) {
+    public Mat3 mulRot3dAroundZAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
         // rotation around z axis
@@ -734,11 +734,11 @@ public class Mat3 implements Mat3Readable, MatWritable {
         );
     }
 
-    public Mat3 rotation3d(Vec3Readable forward, Vec3Readable up, Vec3Readable right) {
-        return rotation3d(forward.getX(), forward.getY(), forward.getZ(), up.getX(), up.getY(), up.getZ(), right.getX(), right.getY(), right.getZ());
+    public Mat3 mulRotation3d(Vec3Readable forward, Vec3Readable up, Vec3Readable right) {
+        return mulRotation3d(forward.getX(), forward.getY(), forward.getZ(), up.getX(), up.getY(), up.getZ(), right.getX(), right.getY(), right.getZ());
     }
 
-    public Mat3 rotation3d(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
+    public Mat3 mulRotation3d(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
         return this.mul(
             rX, rY, rZ,
             uX, uY, uZ,
@@ -746,11 +746,11 @@ public class Mat3 implements Mat3Readable, MatWritable {
         );
     }
 
-    public Mat3 rot3dFromQuaternion(QuatReadable q) {
-        return rot3dFromQuaternion(q.getW(), q.getX(), q.getY(), q.getZ());
+    public Mat3 mulRot3dFromQuaternion(QuatReadable q) {
+        return mulRot3dFromQuaternion(q.getW(), q.getX(), q.getY(), q.getZ());
     }
 
-    public Mat3 rot3dFromQuaternion(float qw, float qx, float qy, float qz) {
+    public Mat3 mulRot3dFromQuaternion(float qw, float qx, float qy, float qz) {
         // normalize the quaternion
         float len = (float) Math.sqrt(qw * qw + qx * qx + qy * qy + qz * qz);
         float w = qw / len;
@@ -765,11 +765,11 @@ public class Mat3 implements Mat3Readable, MatWritable {
         );
     }
 
-    public Mat3 translation2d(Vec2Readable v) {
-        return translation2d(v.getX(), v.getY());
+    public Mat3 mulTranslation2d(Vec2Readable v) {
+        return mulTranslation2d(v.getX(), v.getY());
     }
 
-    public Mat3 translation2d(float dX, float dY) {
+    public Mat3 mulTranslation2d(float dX, float dY) {
         return this.mul(
             1, 0, dX,
             0, 1, dY,
@@ -777,11 +777,11 @@ public class Mat3 implements Mat3Readable, MatWritable {
         );
     }
 
-    public Mat3 scale2d(Vec2Readable v) {
-        return scale2d(v.getX(), v.getY());
+    public Mat3 mulScale2d(Vec2Readable v) {
+        return mulScale2d(v.getX(), v.getY());
     }
 
-    public Mat3 scale2d(float scaleX, float scaleY) {
+    public Mat3 mulScale2d(float scaleX, float scaleY) {
         return this.mul(
             scaleX, 0, 0,
             0, scaleY, 0,
@@ -789,11 +789,11 @@ public class Mat3 implements Mat3Readable, MatWritable {
         );
     }
 
-    public Mat3 scale3d(Vec3Readable v) {
-        return scale3d(v.getX(), v.getY(), v.getZ());
+    public Mat3 mulScale3d(Vec3Readable v) {
+        return mulScale3d(v.getX(), v.getY(), v.getZ());
     }
     
-    public Mat3 scale3d(float scaleX, float scaleY, float scaleZ) {
+    public Mat3 mulScale3d(float scaleX, float scaleY, float scaleZ) {
         return this.mul(
             scaleX, 0, 0,
             0, scaleY, 0,
@@ -810,67 +810,67 @@ public class Mat3 implements Mat3Readable, MatWritable {
     // STATIC METHODS TO CONSTRUCT A MATRIX
 
     public static Mat3 newRotation2d(float angle) {
-        return new Mat3().rotation2d(angle);
+        return new Mat3(IDENTITY).mulRotation2d(angle);
     }
 
     public static Mat3 newRot3dAroundAxis(Vec3Readable axis, float angle) {
-        return new Mat3().rot3dAroundAxis(axis, angle);
+        return new Mat3(IDENTITY).mulRot3dAroundAxis(axis, angle);
     }
 
     public static Mat3 newRot3dAroundAxis(float axisX, float axisY, float axisZ, float angle) {
-        return new Mat3().rot3dAroundAxis(axisX, axisY, axisZ, angle);
+        return new Mat3(IDENTITY).mulRot3dAroundAxis(axisX, axisY, axisZ, angle);
     }
 
     public static Mat3 newRot3dAroundXAxis(float angle) {
-        return new Mat3().rot3dAroundXAxis(angle);
+        return new Mat3(IDENTITY).mulRot3dAroundXAxis(angle);
     }
 
     public static Mat3 newRot3dAroundYAxis(float angle) {
-        return new Mat3().rot3dAroundYAxis(angle);
+        return new Mat3(IDENTITY).mulRot3dAroundYAxis(angle);
     }
 
     public static Mat3 newRot3dAroundZAxis(float angle) {
-        return new Mat3().rot3dAroundZAxis(angle);
+        return new Mat3(IDENTITY).mulRot3dAroundZAxis(angle);
     }
 
     public static Mat3 newRotation3d(Vec3Readable forward, Vec3Readable up, Vec3Readable right) {
-        return new Mat3().rotation3d(forward, up, right);
+        return new Mat3(IDENTITY).mulRotation3d(forward, up, right);
     }
     
     public static Mat3 newRotation3d(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
-        return new Mat3().rotation3d(fX, fY, fZ, uX, uY, uZ, rX, rY, rZ);
+        return new Mat3(IDENTITY).mulRotation3d(fX, fY, fZ, uX, uY, uZ, rX, rY, rZ);
     }
 
     public static Mat3 newRot3dFromQuaternion(QuatReadable q) {
-        return new Mat3().rot3dFromQuaternion(q);
+        return new Mat3(IDENTITY).mulRot3dFromQuaternion(q);
     }
 
     public static Mat3 newRot3dFromQuaternion(float qw, float qx, float qy, float qz) {
-        return new Mat3().rot3dFromQuaternion(qw, qx, qy, qz);
+        return new Mat3(IDENTITY).mulRot3dFromQuaternion(qw, qx, qy, qz);
     }
 
     public static Mat3 newTranslation2d(Vec2Readable translation) {
-        return new Mat3().translation2d(translation);
+        return new Mat3(IDENTITY).mulTranslation2d(translation);
     }
 
     public static Mat3 newTranslation2d(float dX, float dY) {
-        return new Mat3().translation2d(dX, dY);
+        return new Mat3(IDENTITY).mulTranslation2d(dX, dY);
     }
 
     public static Mat3 newScale2d(Vec2Readable scale) {
-        return new Mat3().scale2d(scale);
+        return new Mat3(IDENTITY).mulScale2d(scale);
     }
 
     public static Mat3 newScale2d(float scaleX, float scaleY) {
-        return new Mat3().scale2d(scaleX, scaleY);
+        return new Mat3(IDENTITY).mulScale2d(scaleX, scaleY);
     }
 
     public static Mat3 newScale3d(Vec3Readable scale) {
-        return new Mat3().scale3d(scale);
+        return new Mat3(IDENTITY).mulScale3d(scale);
     }
 
     public static Mat3 newScale3d(float scaleX, float scaleY, float scaleZ) {
-        return new Mat3().scale3d(scaleX, scaleY, scaleZ);
+        return new Mat3(IDENTITY).mulScale3d(scaleX, scaleY, scaleZ);
     }
 
 }

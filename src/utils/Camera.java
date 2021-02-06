@@ -2,33 +2,32 @@ package utils;
 
 import mat.Mat4;
 import mat.Mat4Readable;
-import quat.QuatReadable;
 import quat.Quaternion;
+import use.Mat4Container;
 import vec.Vec3;
-import vec.Vec3Readable;
 
-public class Camera {
+public class Camera implements Mat4Container {
 
     private Vec3 position;
     private Quaternion rotation;
     private Mat4 matrix = new Mat4();
-    private Projection projection;
+    private Mat4Container projection;
 
-
-    public Camera(Vec3Readable position, QuatReadable q, Projection p) {
-        this.position = new Vec3(position);
-        this.rotation = new Quaternion(q);
-    
+    public Camera(Vec3 pos, Quaternion quat, Mat4Container proj) {
+        this.position = pos;
+        this.rotation = quat;
+        this.projection = proj;
     }
     
-    private void recalculate() {
+    private void update() {
         this.matrix.set(Mat4.IDENTITY);
-       // this.matrix.perspective3dFov(aspect, near, far, fovY);
-        this.matrix.view3dFromQuaternion(position, rotation);
+        this.matrix.mul(this.projection.matrix4());
+        this.matrix.mulView3dFromQuaternion(position, rotation);
     }
 
-    public Mat4Readable matrix() {
-        recalculate();
+    @Override
+    public Mat4Readable matrix4() {
+        this.update();
         return matrix;
     }
 

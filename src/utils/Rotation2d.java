@@ -1,9 +1,11 @@
 package utils;
 
 import mat.Mat2;
+import mat.Mat2Readable;
+import use.Mat2Container;
 import vec.Vec2;
 
-public class Rotation2d {
+public class Rotation2d implements Mat2Container {
 
     private float angle;
     private float lastAngle;
@@ -17,17 +19,20 @@ public class Rotation2d {
         this(0);
     }
 
-    private void recalculate() {
-        if (this.angle == this.lastAngle) return;
+    private void update() {
+        if (this.angle == this.lastAngle)
+            return;
         mat.set(Mat2.IDENTITY);
-        mat.rotation2d(this.angle);
+        mat.mulRotation2d(this.angle);
         this.lastAngle = this.angle;
     }
 
     public Vec2 apply(Vec2 v) {
-        this.recalculate();
-        if (v.isHor()) return v.transpose().premul(mat).transpose();
-        else return v.premul(mat);
+        this.update();
+        if (v.isHor())
+            return v.transpose().premul(mat).transpose();
+        else
+            return v.premul(mat);
     }
 
     public void rotate(Rotation2d r) {
@@ -44,6 +49,12 @@ public class Rotation2d {
 
     public void reset() {
         this.angle = 0;
+    }
+
+    @Override
+    public Mat2Readable matrix2() {
+        this.update();
+        return mat;
     }
     
 }

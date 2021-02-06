@@ -2,12 +2,12 @@ package utils;
 
 import mat.Mat3;
 import mat.Mat3Readable;
+import use.Mat3Container;
 import vec.Vec3;
 
-public class RotationTaitBryan  {
+public class RotationTaitBryan implements Mat3Container {
 
-    private Mat3 mat = new Mat3();
-
+    private Mat3 matrix = new Mat3();
     private Vec3 angle = new Vec3(0);
     private Vec3 lastAngle = new Vec3(0);
 
@@ -17,41 +17,36 @@ public class RotationTaitBryan  {
         this.setOrder(axes);
     }
 
-    private void recalculate() {
+    private void update() {
         if (!this.angle.equals(this.lastAngle)) {
             // recalculate the rotation matrix
-            mat.set(Mat3.IDENTITY);
+            matrix.set(Mat3.IDENTITY);
             for (Axis a : orderOfApplying) {
                 if (a == Axis.X)
-                    mat.rot3dAroundXAxis(angle.x); // around x axis
+                    matrix.mulRot3dAroundXAxis(angle.x); // around x axis
                 if (a == Axis.Y)
-                    mat.rot3dAroundYAxis(angle.y); // around y axis
+                    matrix.mulRot3dAroundYAxis(angle.y); // around y axis
                 if (a == Axis.Z)
-                    mat.rot3dAroundZAxis(angle.z); // around z axis
+                    matrix.mulRot3dAroundZAxis(angle.z); // around z axis
             }
             this.lastAngle.from(this.angle);
         }
     }
 
     public Vec3 apply(Vec3 v) {
-        this.recalculate();
+        this.update();
         if (v.isHor())
-            return v.transpose().premul(mat).transpose();
+            return v.transpose().premul(matrix).transpose();
         else
-            return v.premul(mat);
+            return v.premul(matrix);
     }
 
-    public Mat3Readable getMat() {
-        this.recalculate();
-        return mat;
-    }
-
-    public RotationTaitBryan  set(float angleX, float angleY, float angleZ) {
+    public RotationTaitBryan set(float angleX, float angleY, float angleZ) {
         this.angle.set(angleX, angleY, angleZ);
         return this;
     }
 
-    public RotationTaitBryan  increase(float dAngleX, float dAngleY, float dAngleZ) {
+    public RotationTaitBryan increase(float dAngleX, float dAngleY, float dAngleZ) {
         this.angle.add(dAngleX, dAngleY, dAngleZ);
         return this;
     }
@@ -60,7 +55,7 @@ public class RotationTaitBryan  {
         return angle;
     }
 
-    public RotationTaitBryan  reset() {
+    public RotationTaitBryan reset() {
         this.angle.set(0, 0, 0);
         return this;
     }
@@ -69,8 +64,10 @@ public class RotationTaitBryan  {
         this.orderOfApplying = axes;
     }
 
-    public void from(Vec3 forward, Vec3 upward) {
-        // TODO
+    @Override
+    public Mat3Readable matrix3() {
+        this.update();
+        return matrix;
     }
 
 }
