@@ -1,10 +1,10 @@
 package linalib.utils;
 
-import linalib.mat.Mat4;
-import linalib.mat.Mat4Readable;
-import linalib.use.Mat4Container;
+import linalib.f.matrix.FMat4;
+import linalib.f.matrix.FMat4Readable;
+import linalib.f.usage.FMat4Container;
 
-public class Perspective implements Mat4Container {
+public class Perspective implements FMat4Container {
 
     public float left;
     public float right;
@@ -20,7 +20,7 @@ public class Perspective implements Mat4Container {
     private float _near;
     private float _far;
 
-    private Mat4 matrix;
+    private FMat4 matrix;
 
     public Perspective(float aspect, float near, float far, float fovY) {
         float tanHalfFov = (float) Math.tan(Math.toRadians(fovY / 2.0));
@@ -32,7 +32,7 @@ public class Perspective implements Mat4Container {
         this.bottom = -pHeight / 2;
         this.near = near;
         this.far = far;
-        this.matrix = new Mat4();
+        this.matrix = new FMat4();
     }
 
     public Perspective(float left, float right, float bottom, float top, float near, float far) {
@@ -42,18 +42,18 @@ public class Perspective implements Mat4Container {
         this.top = top;
         this.near = near;
         this.far = far;
-        this.matrix = new Mat4();
+        this.matrix = new FMat4();
     }
 
-    private void update() {
+    public void update() {
         // if nothing has changed the matrix does not need to be updated
         if (left == _left && right == _right && bottom == _bottom && top == _top && near == _near && far == _far) return;
         // recalculate matrix
-        this.matrix.set(Mat4.IDENTITY).mulPerspective3d(left, right, bottom, top, near, far);
+        this.matrix.set(FMat4.IDENTITY).mulPerspective3(left, right, bottom, top, near, far);
     }
 
     @Override
-    public Mat4Readable matrix4() {
+    public FMat4Readable matrix4() {
         this.update();
         return this.matrix;
     }

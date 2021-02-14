@@ -1,6 +1,6 @@
 package linalib.utils;
 
-import linalib.vec.Vec2;
+import linalib.f.vector.FVec2;
 
 
 public class Clipper {
@@ -42,7 +42,7 @@ public class Clipper {
      * @param res1
      * @return
      */
-	public static boolean clip2d(float xmin, float xmax, float ymin, float ymax, Vec2 p0, Vec2 p1, Vec2 res0, Vec2 res1) {
+	public static boolean clip2d(float xmin, float xmax, float ymin, float ymax, FVec2 p0, FVec2 p1, FVec2 res0, FVec2 res1) {
 
 		float x0 = p0.x;
 		float y0 = p0.y;

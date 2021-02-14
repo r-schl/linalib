@@ -1,15 +1,15 @@
 package linalib.utils;
 
-import linalib.mat.Mat3;
-import linalib.mat.Mat3Readable;
-import linalib.use.Mat3Container;
-import linalib.vec.Vec3;
+import linalib.f.matrix.FMat3;
+import linalib.f.matrix.FMat3Readable;
+import linalib.f.usage.FMat3Container;
+import linalib.f.vector.FVec3;
 
-public class RotationTaitBryan implements Mat3Container {
+public class RotationTaitBryan implements FMat3Container {
 
-    private Mat3 matrix = new Mat3();
-    private Vec3 angle = new Vec3(0);
-    private Vec3 lastAngle = new Vec3(0);
+    private FMat3 matrix = new FMat3();
+    private FVec3 angle = new FVec3(0);
+    private FVec3 lastAngle = new FVec3(0);
 
     private Axis[] orderOfApplying;
 
@@ -17,23 +17,24 @@ public class RotationTaitBryan implements Mat3Container {
         this.setOrder(axes);
     }
 
-    private void update() {
+    @Override
+    public void update() {
         if (!this.angle.equals(this.lastAngle)) {
             // recalculate the rotation matrix
-            matrix.set(Mat3.IDENTITY);
+            matrix.set(FMat3.IDENTITY);
             for (Axis a : orderOfApplying) {
                 if (a == Axis.X)
-                    matrix.mulRot3dAroundXAxis(angle.x); // around x axis
+                    matrix.mulRot3AroundXAxis(angle.x); // around x axis
                 if (a == Axis.Y)
-                    matrix.mulRot3dAroundYAxis(angle.y); // around y axis
+                    matrix.mulRot3AroundYAxis(angle.y); // around y axis
                 if (a == Axis.Z)
-                    matrix.mulRot3dAroundZAxis(angle.z); // around z axis
+                    matrix.mulRot3AroundZAxis(angle.z); // around z axis
             }
             this.lastAngle.from(this.angle);
         }
     }
 
-    public Vec3 apply(Vec3 v) {
+    public FVec3 apply(FVec3 v) {
         this.update();
         if (v.isHor())
             return v.transpose().premul(matrix).transpose();
@@ -51,7 +52,7 @@ public class RotationTaitBryan implements Mat3Container {
         return this;
     }
 
-    public Vec3 getAngles() {
+    public FVec3 getAngles() {
         return angle;
     }
 
@@ -65,7 +66,7 @@ public class RotationTaitBryan implements Mat3Container {
     }
 
     @Override
-    public Mat3Readable matrix3() {
+    public FMat3Readable matrix3() {
         this.update();
         return matrix;
     }
