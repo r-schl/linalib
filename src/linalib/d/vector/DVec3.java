@@ -552,4 +552,94 @@ public class DVec3 implements DVec3Readable, DVecWritable {
          double resZ = tw * conjZ + tx * conjY - ty * conjX + tz * conjW;
          return this.set(resX, resY, resZ);
     }
+
+    // STATIC FUNCTIONS
+
+    public static DVec3 norm(DVec3Readable a) {
+        return new DVec3(a).normalize();
+    }
+
+    public static double dot(DVec3Readable a, DVec3Readable b) {
+        return a.dot(b);
+    }
+
+    public static double len(DVec3Readable a) {
+        return a.len();
+    }
+
+    public static DVec3 add(DVec3Readable a, double r) {
+        return new DVec3(a).add(r);
+    }
+
+    public static DVec3 sub(DVec3Readable a, double r) {
+        return new DVec3(a).sub(r);
+    }
+
+    public static DVec3 sub(double r, DVec3Readable a) {
+        return new DVec3(a).presub(r);
+    }
+
+    public static DVec3 mul(DVec3Readable a, double r) {
+        return new DVec3(a).mul(r);
+    }
+
+    public static DVec3 div(DVec3Readable a, double r) {
+        return new DVec3(a).div(r);
+    }
+
+    public static DVec3 div(double r, DVec3Readable a) {
+        return new DVec3(a).prediv(r);
+    }
+
+    public static DVec3 negate(DVec3Readable a) {
+        return new DVec3(a).negate();
+    }
+
+    public static DVec3 floor(DVec3Readable a, double r) {
+        return new DVec3(a).floor(r);
+    }
+
+    public static DVec3 round(DVec3Readable a) {
+        return new DVec3(a).round();
+    }
+
+    public static DVec3 flip(DVec3Readable a) {
+        return new DVec3(a).flip();
+    }
+
+    public static DVec3 transpose(DVec3Readable a) {
+        return new DVec3(a).transpose();
+    }
+
+    public static DVec3 cross(DVec3Readable a, DVec3Readable b) {
+        return new DVec3(a).cross(b);
+    }
+
+    public static DVec3 add(DVec3Readable a, DVec3Readable b) {
+        return new DVec3(a).add(b);
+    }
+
+    public static DVec3 sub(DVec3Readable a, DVec3Readable b) {
+        return new DVec3(a).sub(b);
+    }
+
+    public static DVec3 mul(DVec3Readable a, DMat3Readable b) {
+        return new DVec3(a).mul(b);
+    }
+
+    public static DVec3 mul(DMat3Readable a, DVec3Readable b) {
+        return new DVec3(b).premul(a);
+    }
+
+    public static void swap(DVec3 a, DVec3 b) {
+        a.swap(b);
+    }
+
+    public static DVec3 rotAngleAxis(DVec3Readable a, DVec3Readable axis, double angle) {
+        return new DVec3(a).rotateAngleAxis(angle, axis);
+    }
+
+    public static DVec3 rotQuaternion(DVec3Readable a, DQuaternionReadable q) {
+        return new DVec3(a).rotateQuaternion(q);
+    }
 }
