@@ -1161,15 +1161,22 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         // normalize the quaternion
         float len = (float) Math.sqrt(qw * qw + qx * qx + qy * qy + qz * qz);
         float w = qw / len;
-        float x = qx / len;
-        float y = qy / len;
-        float z = qz / len;
-        return this.mul(
+        float x = -qx / len;
+        float y = -qy / len;
+        float z = -qz / len;
+        /* return this.mul(
             (1.0f - (2.0f * ((y * y) + (z * z)))), (2.0f * ((x * y) - (z * w))), (float) (2.0f * ((x * z) + (y * w))), 0,
             (2.0f * ((x * y) + (z * w))), (1.0f - (2.0f * ((x * x) + (z * z)))), (float) (2.0f * ((y * z) - (x * w))), 0,
             (float) (2.0f * ((x * z) - (y * w))), (float) (2.0f * ((y * z) + (x * w))), (float) (1.0f - (2.0f * ((x * x) + (y * y)))), 0,
             0, 0, 0, 1
-        );
+        ); */
+
+        return this.mul(
+            (1.0f - (2.0f * ((y * y) + (z * z)))), (2.0f * ((x * y) - (z * w))), (float) (2.0f * ((x * z) + (y * w))), 0,
+            (2.0f * ((x * y) + (z * w))), (1.0f - (2.0f * ((x * x) + (z * z)))), (float) (2.0f * ((y * z) - (x * w))), 0,
+            -(float) (2.0f * ((x * z) - (y * w))), -(float) (2.0f * ((y * z) + (x * w))), -(float) (1.0f - (2.0f * ((x * x) + (y * y)))), 0,
+            0, 0, 0, 1
+        ); 
     }
 
     public FMat4 mulTranslation2(FVec2Readable v) {
@@ -1265,9 +1272,9 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         float t13 = -(pX * this.m01 + pY * this.m11 + pZ * this.m21);
         float t23 = -(pX * this.m02 + pY * this.m12 + pZ * this.m22);
         return this.mul(
-            1, 0, 0, t03,
-            0, 1, 0, t13,
-            0, 0, 1, t23,
+            1, 0, 0, -pX, 
+            0, 1, 0, -pY, 
+            0, 0, 1, -pZ, 
             0, 0, 0, 1
         );
     }
@@ -1292,11 +1299,18 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         float n = near;
         float f = far;
         return this.mul(
+            (2 * n) / (r - l), 0, (r + l) / (r - l), 0, 
+            0, (2 * n) / (t - b), (t + b) / (t - b), 0, 
+            0, 0, -(f + n) / (f - n), -(2 * f * n) / (f - n), 
+            0, 0, -1, 0
+        );
+
+        /* return this.mul(
              (2 * n) / (r - l), 0, 0, 0,
              0, (2 * n) / (t - b), 0, 0,
              (r + l) / (r - l), (t + b) / (t - b), -(f + n) / (f - n), -1,
              0, 0, -(2 * f * n) / (f - n), 0
-         );
+         ); */
     }
 
     /**

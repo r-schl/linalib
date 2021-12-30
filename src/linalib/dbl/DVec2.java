@@ -2,7 +2,20 @@ package linalib.dbl;
 
 import java.nio.DoubleBuffer;
 
+
 public class DVec2 implements DVec2Readable, DVecWritable {
+
+    
+    /**
+     * This class is an implementation of a 2 dimensional vector.
+     * 
+     * In mathematics, physics and engineering, a Euclidean vector or simply a vector (sometimes called a geometric vector 
+     * or spatial vector[2]) is a geometric object that has magnitude (or length) and direction.
+     * 
+     * All methods return the object itself. All changes are in place.
+     */
+
+
     
     // static presets
     public static final DVec2Readable YAXIS = new DVec2(0, 1);

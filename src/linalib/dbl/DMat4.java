@@ -1292,11 +1292,11 @@ public class DMat4 implements DMat4Readable, DMatWritable {
         double n = near;
         double f = far;
         return this.mul(
-             (2 * n) / (r - l), 0, 0, 0,
-             0, (2 * n) / (t - b), 0, 0,
-             (r + l) / (r - l), (t + b) / (t - b), -(f + n) / (f - n), -1,
-             0, 0, -(2 * f * n) / (f - n), 0
-         );
+            (2 * n) / (r - l), 0, (r + l) / (r - l), 0, 
+            0, (2 * n) / (t - b), (t + b) / (t - b), 0, 
+            0, 0, -(f + n) / (f - n), -(2 * f * n) / (f - n), 
+            0, 0, -1, 0
+        );
     }
 
     /**
