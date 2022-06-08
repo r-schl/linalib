@@ -26,6 +26,12 @@ public class Vec3 implements Vec3Readable {
         this.z = z;
     }
 
+    public Vec3(Vec2 vec2, float z) {
+        this.x = vec2.getX();
+        this.y = vec2.getY();
+        this.z = z;
+    }
+
     public Vec3(float xyz) {
         this(xyz, xyz, xyz);
     }
@@ -245,39 +251,33 @@ public class Vec3 implements Vec3Readable {
         return this;
     }
 
-    /*
-     * public Vec3 mul(Mat3Readable mat) {
-     * if (isVer()) {
-     * new Exception("Cannot multiply a vertical vector with a 3x3 matrix.").
-     * printStackTrace();
-     * System.exit(-1);
-     * }
-     * float x = this.x * mat.get00() + this.y * mat.get10() + this.z * mat.get20();
-     * float y = this.x * mat.get01() + this.y * mat.get11() + this.z * mat.get21();
-     * float z = this.x * mat.get02() + this.y * mat.get12() + this.z * mat.get22();
-     * this.x = x;
-     * this.y = y;
-     * this.z = z;
-     * return this;
-     * }
-     */
+    public Vec3 mul(Mat3Readable mat) {
+        if (isVer()) {
+            new Exception("Cannot multiply a vertical vector with a 3x3 matrix.").printStackTrace();
+            System.exit(-1);
+        }
+        float x = this.x * mat.get00() + this.y * mat.get10() + this.z * mat.get20();
+        float y = this.x * mat.get01() + this.y * mat.get11() + this.z * mat.get21();
+        float z = this.x * mat.get02() + this.y * mat.get12() + this.z * mat.get22();
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
+    }
 
-    /*
-     * public Vec3 premul(Mat3Readable mat) {
-     * if (isHor()) {
-     * new Exception("Cannot multiply 3x3 matrix with an horizontal vector.").
-     * printStackTrace();
-     * System.exit(-1);
-     * }
-     * float x = mat.get00() * this.x + mat.get01() * this.y + mat.get02() * this.z;
-     * float y = mat.get10() * this.x + mat.get11() * this.y + mat.get12() * this.z;
-     * float z = mat.get20() * this.x + mat.get21() * this.y + mat.get22() * this.z;
-     * this.x = x;
-     * this.y = y;
-     * this.z = z;
-     * return this;
-     * }
-     */
+    public Vec3 premul(Mat3Readable mat) {
+        if (isHor()) {
+            new Exception("Cannot multiply 3x3 matrix with an horizontal vector.").printStackTrace();
+            System.exit(-1);
+        }
+        float x = mat.get00() * this.x + mat.get01() * this.y + mat.get02() * this.z;
+        float y = mat.get10() * this.x + mat.get11() * this.y + mat.get12() * this.z;
+        float z = mat.get20() * this.x + mat.get21() * this.y + mat.get22() * this.z;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
+    }
 
     public Vec3 swap(Vec3 v) {
         float tempX = this.x;
@@ -313,7 +313,7 @@ public class Vec3 implements Vec3Readable {
      * }
      */
 
-    public Vec3 rotateAxisAngle(float angle, Vec3Readable axis) {
+    public Vec3 rotateByAxisAngle(float angle, Vec3Readable axis) {
         float axisX = axis.getX();
         float axisY = axis.getY();
         float axisZ = axis.getZ();
@@ -331,8 +331,8 @@ public class Vec3 implements Vec3Readable {
         this.mul((float) Math.cos(angle));
         return this.add(p2).add(p3);
     }
-/* 
-    public Vec3 rotateQuaternion(QuaternionReadable q) {
+
+    public Vec3 rotateByQuaternion(QuaternionReadable q) {
         // Multiply the quaternion with this vector and store result in temporary
         // variables.
         float tw = -q.getX() * this.x - q.getY() * this.y - q.getZ() * this.z;
@@ -349,7 +349,7 @@ public class Vec3 implements Vec3Readable {
         float resY = tw * conjY - tx * conjZ + ty * conjW + tz * conjX;
         float resZ = tw * conjZ + tx * conjY - ty * conjX + tz * conjW;
         return this.set(resX, resY, resZ);
-    } */
+    }
 
     // STATIC METHODS
 
@@ -422,7 +422,19 @@ public class Vec3 implements Vec3Readable {
     }
 
     public static Vec3 rotateAxisAngle(Vec3Readable a, float angle, Vec3Readable axis) {
-        return new Vec3(a).rotateAxisAngle(angle, axis);
+        return new Vec3(a).rotateByAxisAngle(angle, axis);
+    }
+
+    public static Vec3 rotateByQuaternion(Vec3Readable v, QuaternionReadable q) {
+        return new Vec3(v).rotateByQuaternion(q);
+    }
+
+    public static Vec3 mul(Vec3Readable v, Mat3Readable m) {
+        return new Vec3(v).mul(m);
+    }
+
+    public static Vec3 mul(Mat3Readable m, Vec3Readable v) {
+        return new Vec3(v).premul(m);
     }
 
 }

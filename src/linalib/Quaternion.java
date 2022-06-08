@@ -108,6 +108,14 @@ public class Quaternion implements QuaternionReadable {
         return this;
     }
 
+    public Quaternion set(float w, float x, float y, float z) {
+        this.w = w;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
+    }
+
     public Quaternion setRotation(Vec3Readable axis, float angle) {
         float axisX = axis.getX();
         float axisY = axis.getY();

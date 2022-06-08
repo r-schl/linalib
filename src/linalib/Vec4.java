@@ -18,6 +18,20 @@ public class Vec4 implements Vec4Readable {
         this.w = w;
     }
 
+    public Vec4(Vec3Readable vec3, float w) {
+        this.x = vec3.getX();
+        this.y = vec3.getY();
+        this.z = vec3.getZ();
+        this.w = w;
+    }
+
+    public Vec4(Vec2Readable vec2, float z, float w) {
+        this.x = vec2.getX();
+        this.y = vec2.getY();
+        this.z = z;
+        this.w = w;
+    }
+
     public Vec4(float xyzw) {
         this(xyzw, xyzw, xyzw, xyzw);
     }

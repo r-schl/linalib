@@ -887,7 +887,24 @@ public class Mat4 implements Mat4Readable {
                 0, 0, 0, 1);
     }
 
-    // public static Mat4 initRot3FromQuaternion()
+    public static Mat4 initRot3FromQuaternion(QuaternionReadable q) {
+        // normalize the quaternion
+        float len = (float) Math
+                .sqrt(q.getW() * q.getW() + q.getX() * q.getX() + q.getY() * q.getY() + q.getZ() * q.getZ());
+        float w = q.getW() / len;
+        float x = -q.getX() / len;
+        float y = -q.getY() / len;
+        float z = -q.getZ() / len;
+
+        return new Mat4(
+                (1.0f - (2.0f * ((y * y) + (z * z)))), (2.0f * ((x * y) - (z * w))),
+                (float) (2.0f * ((x * z) + (y * w))), 0,
+                (2.0f * ((x * y) + (z * w))), (1.0f - (2.0f * ((x * x) + (z * z)))),
+                (float) (2.0f * ((y * z) - (x * w))), 0,
+                -(float) (2.0f * ((x * z) - (y * w))), -(float) (2.0f * ((y * z) + (x * w))),
+                -(float) (1.0f - (2.0f * ((x * x) + (y * y)))), 0,
+                0, 0, 0, 1);
+    }
 
     public static Mat4 initTranslation2(Vec2Readable d) {
         return new Mat4(
