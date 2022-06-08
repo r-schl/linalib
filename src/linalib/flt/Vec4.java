@@ -2,7 +2,7 @@ package linalib.flt;
 
 import java.nio.FloatBuffer;
 
-public class FVec4 implements FVec4Readable, FVecWritable {
+public class Vec4 implements Vec4Readable, VecWritable {
 
     public float x;
     public float y;
@@ -11,34 +11,34 @@ public class FVec4 implements FVec4Readable, FVecWritable {
 
     private boolean isTransposed;
 
-    public FVec4(float x, float y, float z, float w) {
+    public Vec4(float x, float y, float z, float w) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.w = w;
     }
 
-    public FVec4(float[] arr) {
+    public Vec4(float[] arr) {
         this(arr[0], arr[1], arr[2], arr[3]);
     }
 
-    public FVec4(float xyzw) {
+    public Vec4(float xyzw) {
         this(xyzw, xyzw, xyzw, xyzw);
     }
 
-    public FVec4(FVec2Readable other, float z, float w) {
+    public Vec4(Vec2Readable other, float z, float w) {
         this(other.getX(), other.getY(), z, w);
         if (other.isTransposed())
             this.transpose();
     }
 
-    public FVec4(FVec3Readable other, float w) {
+    public Vec4(Vec3Readable other, float w) {
         this(other.getX(), other.getY(), other.getZ(), w);
         if (other.isTransposed())
             this.transpose();
     }
 
-    public FVec4(FVec4Readable other) {
+    public Vec4(Vec4Readable other) {
         this(other.getX(), other.getY(), other.getZ(), other.getW());
         if (other.isTransposed())
             this.transpose();
@@ -65,7 +65,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public float dot(FVec4Readable v) {
+    public float dot(Vec4Readable v) {
         return this.x * v.getX() + this.y * v.getY() + this.z * v.getZ() + this.w * v.getW();
     }
 
@@ -132,7 +132,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 storeInside(FloatBuffer buf) {
+    public Vec4 storeInside(FloatBuffer buf) {
         buf.put(x);
         buf.put(y);
         buf.put(z);
@@ -156,7 +156,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 set(int i, float val) {
+    public Vec4 set(int i, float val) {
         if (i == 0)
             this.x = val;
         else if (i == 1)
@@ -169,7 +169,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 toInt() {
+    public Vec4 toInt() {
         this.x = (int) this.x;
         this.y = (int) this.y;
         this.z = (int) this.z;
@@ -178,7 +178,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 absElWise() {
+    public Vec4 absElWise() {
         this.x = Math.abs(this.x);
         this.y = Math.abs(this.y);
         this.z = Math.abs(this.z);
@@ -187,7 +187,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 add(float r) {
+    public Vec4 add(float r) {
         this.x = this.x + r;
         this.y = this.y + r;
         this.z = this.z + r;
@@ -196,7 +196,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 sub(float r) {
+    public Vec4 sub(float r) {
         this.x = this.x - r;
         this.y = this.y - r;
         this.z = this.z - r;
@@ -205,7 +205,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 presub(float r) {
+    public Vec4 presub(float r) {
         this.x = r - this.x;
         this.y = r - this.y;
         this.z = r - this.z;
@@ -214,7 +214,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 mul(float r) {
+    public Vec4 mul(float r) {
         this.x = this.x * r;
         this.y = this.y * r;
         this.z = this.z * r;
@@ -223,7 +223,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 div(float r) {
+    public Vec4 div(float r) {
         if (r == 0)
             throw new IllegalArgumentException("Cannot divide by 0");
         this.x = this.x / r;
@@ -234,7 +234,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 prediv(float r) {
+    public Vec4 prediv(float r) {
         if (this.contains(0))
             throw new IllegalArgumentException("Cannot divide by 0");
         this.x = r / this.x;
@@ -245,7 +245,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 negate() {
+    public Vec4 negate() {
         this.x = -this.x;
         this.y = -this.y;
         this.z = -this.z;
@@ -254,7 +254,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 floor(float r) {
+    public Vec4 floor(float r) {
         this.x = (this.x - (this.x % r));
         this.y = (this.y - (this.y % r));
         this.z = (this.z - (this.z % r));
@@ -263,7 +263,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 round() {
+    public Vec4 round() {
         this.x = Math.round(x);
         this.y = Math.round(y);
         this.z = Math.round(z);
@@ -272,44 +272,44 @@ public class FVec4 implements FVec4Readable, FVecWritable {
     }
 
     @Override
-    public FVec4 normalize() {
+    public Vec4 normalize() {
         return this.div(this.len());
     }
 
     @Override
-    public FVec4 flip() {
+    public Vec4 flip() {
         if (this.isHor())
-            return this.mul(FMat4.FLIP);
-        return this.premul(FMat4.FLIP);
+            return this.mul(Mat4.FLIP);
+        return this.premul(Mat4.FLIP);
     }
 
     @Override
-    public FVec4 transpose() {
+    public Vec4 transpose() {
         isTransposed = !isTransposed;
         return this;
     }
 
-    public FVec4 setX(float val) {
+    public Vec4 setX(float val) {
         this.x = val;
         return this;
     }
 
-    public FVec4 setY(float val) {
+    public Vec4 setY(float val) {
         this.y = val;
         return this;
     }
 
-    public FVec4 setZ(float val) {
+    public Vec4 setZ(float val) {
         this.z = val;
         return this;
     }
 
-    public FVec4 setW(float val) {
+    public Vec4 setW(float val) {
         this.w = val;
         return this;
     }
 
-    public FVec4 set(FVec4Readable v) {
+    public Vec4 set(Vec4Readable v) {
         this.x = v.getX();
         this.y = v.getY();
         this.z = v.getZ();
@@ -317,7 +317,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 set(float vX, float vY, float vZ, float vW) {
+    public Vec4 set(float vX, float vY, float vZ, float vW) {
         this.x = vX;
         this.y = vY;
         this.z = vZ;
@@ -325,15 +325,15 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 set(FVec3Readable v, float w) {
+    public Vec4 set(Vec3Readable v, float w) {
         return this.set(v.getX(), v.getY(), v.getZ(), w);
     }
 
-    public FVec4 set(FVec2Readable v, float z, float w) {
+    public Vec4 set(Vec2Readable v, float z, float w) {
         return this.set(v.getX(), v.getY(), z, w);
     }
 
-    public FVec4 add(FVec4Readable v) {
+    public Vec4 add(Vec4Readable v) {
         this.x = this.x + v.getX();
         this.y = this.y + v.getY();
         this.z = this.z + v.getZ();
@@ -341,7 +341,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 add(float vX, float vY, float vZ, float vW) {
+    public Vec4 add(float vX, float vY, float vZ, float vW) {
         this.x = this.x + vX;
         this.y = this.y + vY;
         this.z = this.z + vZ;
@@ -349,7 +349,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 sub(FVec4Readable v) {
+    public Vec4 sub(Vec4Readable v) {
         this.x = this.x - v.getX();
         this.y = this.y - v.getY();
         this.z = this.z - v.getZ();
@@ -357,7 +357,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 sub(float vX, float vY, float vZ, float vW) {
+    public Vec4 sub(float vX, float vY, float vZ, float vW) {
         this.x = this.x - vX;
         this.y = this.y - vY;
         this.z = this.z - vZ;
@@ -365,7 +365,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 presub(FVec4Readable v) {
+    public Vec4 presub(Vec4Readable v) {
         this.x = v.getX() - this.x;
         this.y = v.getY() - this.y;
         this.z = v.getZ() - this.z;
@@ -373,7 +373,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 presub(float vX, float vY, float vZ, float vW) {
+    public Vec4 presub(float vX, float vY, float vZ, float vW) {
         this.x = vX - this.x;
         this.y = vY - this.y;
         this.z = vZ - this.z;
@@ -381,7 +381,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 mul(FMat4Readable mat) {
+    public Vec4 mul(Mat4Readable mat) {
         if (isVer()) {
             new Exception("Cannot multiply a vertical vector with a 3x3 matrix.").printStackTrace();
             System.exit(-1);
@@ -397,7 +397,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 mul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
+    public Vec4 mul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
             float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31, float mat32,
             float mat33) {
         if (isVer()) {
@@ -415,7 +415,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 premul(FMat4Readable mat) {
+    public Vec4 premul(Mat4Readable mat) {
         if (isHor()) {
             new Exception("Cannot multiply a 4x4 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);
@@ -431,7 +431,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 premul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
+    public Vec4 premul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
             float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31, float mat32,
             float mat33) {
         if (isHor()) {
@@ -449,7 +449,7 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return this;
     }
 
-    public FVec4 swap(FVec4 v) {
+    public Vec4 swap(Vec4 v) {
         float tempX = this.x;
         float tempY = this.y;
         float tempZ = this.z;
@@ -470,19 +470,19 @@ public class FVec4 implements FVec4Readable, FVecWritable {
         return (this.isHor() ? "hor" : "ver") + "(" + this.x + " " + this.y + " " + this.z + " " + this.w + ")";
     }
 
-    public FVec4 to(FVecWritable v) {
+    public Vec4 to(VecWritable v) {
         this.extractTo(v);
         return this;
     }
 
-    public FVec4 from(FVecReadable v) {
+    public Vec4 from(VecReadable v) {
         this.extractFrom(v);
         return this;
     }
 
     public boolean equals(Object o) {
-        if (o instanceof FVec4Readable) {
-            FVec4Readable vec = (FVec4Readable) o;
+        if (o instanceof Vec4Readable) {
+            Vec4Readable vec = (Vec4Readable) o;
             return this.x == vec.getX() && this.y == vec.getY() && this.z == vec.getZ() && this.w == vec.getW();
         }
         return false;

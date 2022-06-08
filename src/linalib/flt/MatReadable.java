@@ -2,7 +2,7 @@ package linalib.flt;
 
 import java.nio.FloatBuffer;
 
-public interface FMatReadable {
+public interface MatReadable {
 
     int rowCount();
 
@@ -34,9 +34,9 @@ public interface FMatReadable {
 
     float[][] newArr2();
 
-    FMatReadable storeInside(FloatBuffer buf);
+    MatReadable storeInside(FloatBuffer buf);
 
-    default boolean hasSameSize(FMatReadable mat) {
+    default boolean hasSameSize(MatReadable mat) {
         return mat.rowCount() == this.rowCount() && mat.colCount() == this.colCount();
     }
 
@@ -56,7 +56,7 @@ public interface FMatReadable {
         System.out.println(this);
     }
 
-    default void extractTo(FMatWritable mat) {
+    default void extractTo(MatWritable mat) {
         for (int r = 0; r < this.rowCount(); r++) {
             for (int c = 0; c < this.colCount(); c++) {
                 if (r >= mat.rowCount() || c >= mat.colCount()) continue;
@@ -65,6 +65,6 @@ public interface FMatReadable {
         }
     }
 
-    FMatReadable to(FMatWritable mat);
+    MatReadable to(MatWritable mat);
     
 }

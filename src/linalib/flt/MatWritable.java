@@ -1,38 +1,38 @@
 package linalib.flt;
 
-public interface FMatWritable extends FMatReadable {
+public interface MatWritable extends MatReadable {
 
-    FMatWritable transpose();
+    MatWritable transpose();
 
-    FMatWritable flipHor();
+    MatWritable flipHor();
 
-    FMatWritable flipVer();
+    MatWritable flipVer();
 
-    FMatWritable set(int r, int c, float val);
+    MatWritable set(int r, int c, float val);
 
-    FMatWritable roundElWise();
+    MatWritable roundElWise();
 
-    FMatWritable floorElWise(float r);
+    MatWritable floorElWise(float r);
 
-    FMatWritable negateElWise();
+    MatWritable negateElWise();
 
-    FMatWritable toInt();
+    MatWritable toInt();
 
-    FMatWritable absElWise();
+    MatWritable absElWise();
 
-    FMatWritable addElWise(float r);
+    MatWritable addElWise(float r);
 
-    FMatWritable subElWise(float r);
+    MatWritable subElWise(float r);
 
-    FMatWritable presubElWise(float r);
+    MatWritable presubElWise(float r);
 
-    FMatWritable mulElWise(float r);
+    MatWritable mulElWise(float r);
 
-    FMatWritable divElWise(float r);
+    MatWritable divElWise(float r);
 
-    FMatWritable predivElWise(float r);
+    MatWritable predivElWise(float r);
     
-    default FMatWritable rotate(int n) {
+    default MatWritable rotate(int n) {
         if (n == 0) return this;
         if (n > 0) {
             // clockwise
@@ -51,7 +51,7 @@ public interface FMatWritable extends FMatReadable {
         return this;
     }
 
-    default void extractFrom(FMatReadable mat) {
+    default void extractFrom(MatReadable mat) {
         for (int r = 0; r < this.rowCount(); r++) {
             for (int c = 0; c < this.colCount(); c++) {
                 if (r >= mat.rowCount() || c >= mat.colCount()) continue;
@@ -60,5 +60,5 @@ public interface FMatWritable extends FMatReadable {
         }
     }
 
-    FMatWritable from(FMatReadable mat);
+    MatWritable from(MatReadable mat);
 }

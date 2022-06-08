@@ -1,49 +1,49 @@
 package linalib.flt;
 
 
-public interface FVecWritable extends FVecReadable {
+public interface VecWritable extends VecReadable {
 
-    FVecWritable set(int i, float val);
+    VecWritable set(int i, float val);
 
-    FVecWritable toInt();
+    VecWritable toInt();
 
-    FVecWritable absElWise();
+    VecWritable absElWise();
 
-    FVecWritable add(float r);
+    VecWritable add(float r);
 
-    FVecWritable sub(float r);
+    VecWritable sub(float r);
 
-    FVecWritable presub(float r);
+    VecWritable presub(float r);
 
-    FVecWritable mul(float r);
+    VecWritable mul(float r);
 
-    FVecWritable div(float r);
+    VecWritable div(float r);
 
-    FVecWritable prediv(float r);
+    VecWritable prediv(float r);
 
-    FVecWritable negate();
+    VecWritable negate();
 
-    FVecWritable floor(float r);
+    VecWritable floor(float r);
 
-    FVecWritable round();
+    VecWritable round();
 
-    FVecWritable normalize();
+    VecWritable normalize();
 
-    FVecWritable flip();
+    VecWritable flip();
 
-    default FVecWritable flipHor() {
+    default VecWritable flipHor() {
         if (isHor()) flip();
         return this;
     }
 
-    default FVecWritable flipVer() {
+    default VecWritable flipVer() {
         if (isVer()) flip();
         return this;
     }
 
-    FVecWritable transpose();
+    VecWritable transpose();
 
-    default FVecWritable rotate(int n) {
+    default VecWritable rotate(int n) {
         if (n == 0) return this;
         if (n > 0) {
             // clockwise
@@ -62,13 +62,13 @@ public interface FVecWritable extends FVecReadable {
         return this;
     }
 
-    default void extractFrom(FVecReadable v) {
+    default void extractFrom(VecReadable v) {
         for(int i = 0; i< this.size(); i++) {
             if (i >= v.size()) break;
             this.set(i, v.get(i));
         }
     }
 
-    FVecWritable from(FVecReadable v);
+    VecWritable from(VecReadable v);
 
 }

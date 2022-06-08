@@ -1,6 +1,6 @@
 package linalib.flt;
 
-public interface FMat3Readable extends FMatReadable {
+public interface Mat3Readable extends MatReadable {
     
     float get00();
     float get01();

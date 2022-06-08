@@ -3,41 +3,41 @@ package linalib.flt;
 import java.nio.FloatBuffer;
 
 
-public class FVec2 implements FVec2Readable, FVecWritable {
+public class Vec2 implements Vec2Readable, VecWritable {
 
     // static presets
-    public static final FVec2Readable YAXIS = new FVec2(0, 1);
-    public static final FVec2Readable XAXIS = new FVec2(1, 0);
-    public static final FVec2Readable UP = new FVec2(YAXIS);
-    public static final FVec2Readable DOWN = new FVec2(YAXIS).negate();
-    public static final FVec2Readable RIGHT = new FVec2(XAXIS);
-    public static final FVec2Readable LEFT = new FVec2(XAXIS).negate();
+    public static final Vec2Readable YAXIS = new Vec2(0, 1);
+    public static final Vec2Readable XAXIS = new Vec2(1, 0);
+    public static final Vec2Readable UP = new Vec2(YAXIS);
+    public static final Vec2Readable DOWN = new Vec2(YAXIS).negate();
+    public static final Vec2Readable RIGHT = new Vec2(XAXIS);
+    public static final Vec2Readable LEFT = new Vec2(XAXIS).negate();
 
     public float x;
     public float y;
 
     private boolean isTransposed;
 
-    public FVec2(float x, float y) {
+    public Vec2(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
-    public FVec2(float xy) {
+    public Vec2(float xy) {
         this(xy, xy);
     }
 
-    public FVec2(FVec2Readable other) {
+    public Vec2(Vec2Readable other) {
         this(other.getX(), other.getY());
         if (other.isTransposed()) this.transpose();
     }
 
-    public FVec2(FVec3Readable other) {
+    public Vec2(Vec3Readable other) {
         this(other.getX(), other.getY());
         if (other.isTransposed()) this.transpose();
     }
     
-    public FVec2(FVec4Readable other) {
+    public Vec2(Vec4Readable other) {
         this(other.getX(), other.getY());
         if (other.isTransposed()) this.transpose();
     }
@@ -53,7 +53,7 @@ public class FVec2 implements FVec2Readable, FVecWritable {
     }
 
     @Override
-    public float dot(FVec2Readable v) {
+    public float dot(Vec2Readable v) {
         return this.x * v.getX() + this.y * v.getY();
     }
 
@@ -109,7 +109,7 @@ public class FVec2 implements FVec2Readable, FVecWritable {
     }
 
     @Override
-    public FVec2 storeInside(FloatBuffer buf) {
+    public Vec2 storeInside(FloatBuffer buf) {
         buf.put(x);
         buf.put(y);
         return this;
@@ -131,56 +131,56 @@ public class FVec2 implements FVec2Readable, FVecWritable {
     }
 
     @Override
-    public FVec2 set(int i, float val) {
+    public Vec2 set(int i, float val) {
         if (i == 0) this.x = val;
         else if (i == 1) this.y = val;
         return this;
     }
 
     @Override
-    public FVec2 toInt() {
+    public Vec2 toInt() {
         this.x = (int) this.x;
         this.y = (int) this.y;
         return this;
     }
 
     @Override
-    public FVec2 absElWise() {
+    public Vec2 absElWise() {
         this.x = Math.abs(this.x);
         this.y = Math.abs(this.y);
         return this;
     }
 
     @Override
-    public FVec2 add(float r) {
+    public Vec2 add(float r) {
         this.x = this.x + r;
         this.y = this.y + r;
         return this;
     }
 
     @Override
-    public FVec2 sub(float r) {
+    public Vec2 sub(float r) {
         this.x = this.x - r;
         this.y = this.y - r;
         return this;
     }
 
     @Override
-    public FVec2 presub(float r) {
+    public Vec2 presub(float r) {
         this.x = r - this.x;
         this.y = r - this.y;
         return this;
     }
 
     @Override
-    public FVec2 mul(float r) {
+    public Vec2 mul(float r) {
         this.x = this.x * r;
         this.y = this.y * r;
         return this;
     }
 
     @Override
-    public FVec2 div(float r) {
+    public Vec2 div(float r) {
         if (r == 0) throw new IllegalArgumentException("Cannot divide by 0");
         this.x = this.x / r;
         this.y = this.y / r;
@@ -188,7 +188,7 @@ public class FVec2 implements FVec2Readable, FVecWritable {
     }
 
     @Override
-    public FVec2 prediv(float r) {
+    public Vec2 prediv(float r) {
         if (this.contains(0)) throw new IllegalArgumentException("Cannot divide by 0");
         this.x = r / this.x;
         this.y = r / this.y;
@@ -196,117 +196,117 @@ public class FVec2 implements FVec2Readable, FVecWritable {
     }
 
     @Override
-    public FVec2 negate() {
+    public Vec2 negate() {
         this.x = -this.x;
         this.y = -this.y;
         return this;
     }
 
     @Override
-    public FVec2 floor(float r) {
+    public Vec2 floor(float r) {
         this.x = (this.x - (this.x % r));
         this.y = (this.y - (this.y % r));
         return this;
     }
 
     @Override
-    public FVec2 round() {
+    public Vec2 round() {
         this.x = Math.round(x);
         this.y = Math.round(y);
         return this;
     }
 
     @Override
-    public FVec2 normalize() {
+    public Vec2 normalize() {
         return this.div(this.len());
     }
 
     @Override
-    public FVec2 flip() {
-        if (this.isHor()) return this.mul(FMat2.FLIP);
-        return this.premul(FMat2.FLIP);
+    public Vec2 flip() {
+        if (this.isHor()) return this.mul(Mat2.FLIP);
+        return this.premul(Mat2.FLIP);
     }
 
     @Override
-    public FVec2 transpose() {
+    public Vec2 transpose() {
         isTransposed = !isTransposed;
         return this;
     }
 
-    public FVec2 setX(float val) {
+    public Vec2 setX(float val) {
         this.x = val;
         return this;
     }
 
-    public FVec2 setY(float val) {
+    public Vec2 setY(float val) {
         this.y = val;
         return this;
     }
 
-    public FVec2 set(FVec2Readable v) {
+    public Vec2 set(Vec2Readable v) {
         this.x = v.getX();
         this.y = v.getY();
         return this;
     }
 
-    public FVec2 set(float vX, float vY) {
+    public Vec2 set(float vX, float vY) {
         this.x = vX;
         this.y = vY;
         return this;
     }
 
-    public FVec2 set(FVec3Readable v) {
+    public Vec2 set(Vec3Readable v) {
         return this.set(v.getX(), v.getY());
     }
 
-    public FVec2 set(FVec4Readable v) {
+    public Vec2 set(Vec4Readable v) {
         return this.set(v.getX(), v.getY());
     }
     
-    public FVec2 perpendicular() {
+    public Vec2 perpendicular() {
         float tempX = this.x;
         this.x = this.y;
         this.y = -tempX;
         return this;
     }
 
-    public FVec2 add(FVec2Readable v) {
+    public Vec2 add(Vec2Readable v) {
         this.x = this.x + v.getX();
         this.y = this.y + v.getY();
         return this;
     }
 
-    public FVec2 add(float vX, float vY) {
+    public Vec2 add(float vX, float vY) {
         this.x = this.x + vX;
         this.y = this.y + vY;
         return this;   
     }
 
-    public FVec2 sub(FVec2Readable v) {
+    public Vec2 sub(Vec2Readable v) {
         this.x = this.x - v.getX();
         this.y = this.y - v.getY();
         return this;
     }
 
-    public FVec2 sub(float vX, float vY) {
+    public Vec2 sub(float vX, float vY) {
         this.x = this.x - vX;
         this.y = this.y - vY;
         return this;
     }
 
-    public FVec2 presub(FVec2Readable v) {
+    public Vec2 presub(Vec2Readable v) {
         this.x = v.getX() - this.x;
         this.y = v.getY() - this.y;
         return this;
     }
 
-    public FVec2 presub(float vX, float vY) {
+    public Vec2 presub(float vX, float vY) {
         this.x = vX - this.x;
         this.y = vY - this.y;
         return this;
     }
 
-    public FVec2 mul(FMat2Readable mat) {
+    public Vec2 mul(Mat2Readable mat) {
         if (isVer()) {
             new Exception("Cannot multiply a vertical vector with a 2x2 matrix.").printStackTrace();
             System.exit(-1);
@@ -318,7 +318,7 @@ public class FVec2 implements FVec2Readable, FVecWritable {
         return this;
     }
 
-    public FVec2 mul(float mat00, float mat01, float mat10, float mat11) {
+    public Vec2 mul(float mat00, float mat01, float mat10, float mat11) {
         if (isVer()) {
             new Exception("Cannot multiply a vertical vector with a 2x2 matrix.").printStackTrace();
             System.exit(-1);
@@ -330,7 +330,7 @@ public class FVec2 implements FVec2Readable, FVecWritable {
         return this;
     }
 
-    public FVec2 premul(FMat2Readable mat) {
+    public Vec2 premul(Mat2Readable mat) {
         if (isHor()) {
             new Exception("Cannot multiply 2x2 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);
@@ -342,7 +342,7 @@ public class FVec2 implements FVec2Readable, FVecWritable {
         return this;
     }
 
-    public FVec2 premul(float mat00, float mat01, float mat10, float mat11) {
+    public Vec2 premul(float mat00, float mat01, float mat10, float mat11) {
         if (isHor()) {
             new Exception("Cannot multiply 2x2 matrix with an horizontal vector.").printStackTrace();
             System.exit(-1);
@@ -354,7 +354,7 @@ public class FVec2 implements FVec2Readable, FVecWritable {
         return this;
     }
 
-    public FVec2 swap(FVec2 v) {
+    public Vec2 swap(Vec2 v) {
         float tempX = this.x;
         float tempY = this.y;
         this.x = v.getX();
@@ -370,21 +370,21 @@ public class FVec2 implements FVec2Readable, FVecWritable {
     }
 
     @Override
-    public FVec2 to(FVecWritable v) {
+    public Vec2 to(VecWritable v) {
         this.extractTo(v);
         return this;
     }
 
     @Override
-    public FVec2 from(FVecReadable v) {
+    public Vec2 from(VecReadable v) {
         this.extractFrom(v);
         return this;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof FVec2Readable) {
-            FVec2Readable vec = (FVec2Readable) o;
+        if (o instanceof Vec2Readable) {
+            Vec2Readable vec = (Vec2Readable) o;
             return this.x == vec.getX() && this.y == vec.getY();
         }
         return false;

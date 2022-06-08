@@ -3,28 +3,28 @@ package linalib.flt;
 import java.nio.FloatBuffer;
 
 
-public class FQuaternion implements FQuaternionReadable {
+public class Quaternion implements QuaternionReadable {
 
-    public static final FQuaternionReadable IDENTITY = new FQuaternion(1, 0, 0, 0);
+    public static final QuaternionReadable IDENTITY = new Quaternion(1, 0, 0, 0);
 
     public float w; // the scalar value
     public float x; // i
     public float y; // j
     public float z; // k
 
-    public static FQuaternion newRotation(float angle, FVec3Readable axis) {
-        return new FQuaternion().initRotation(angle, axis);
+    public static Quaternion newRotation(float angle, Vec3Readable axis) {
+        return new Quaternion().initRotation(angle, axis);
     }
 
-    public FQuaternion(float w, float x, float y, float z) {
+    public Quaternion(float w, float x, float y, float z) {
         this.set(w, x, y, z);
     }
 
-    public FQuaternion(FQuaternionReadable other) {
+    public Quaternion(QuaternionReadable other) {
         this.set(other);
     }
 
-    public FQuaternion() {
+    public Quaternion() {
         this.set(IDENTITY);
     }
 
@@ -89,7 +89,7 @@ public class FQuaternion implements FQuaternionReadable {
     }
 
     @Override
-    public FQuaternion storeInside(FloatBuffer buf) {
+    public Quaternion storeInside(FloatBuffer buf) {
         buf.put(w);
         buf.put(x);
         buf.put(y);
@@ -102,7 +102,7 @@ public class FQuaternion implements FQuaternionReadable {
         return w == r || x == r || y == r || z == r;
     }
 
-    public FQuaternion set(int i, float r) {
+    public Quaternion set(int i, float r) {
         if (i == 0)
             this.w = r;
         else if (i == 1)
@@ -114,27 +114,27 @@ public class FQuaternion implements FQuaternionReadable {
         return this;
     }
 
-    public FQuaternion setW(float r) {
+    public Quaternion setW(float r) {
         this.w = r;
         return this;
     }
 
-    public FQuaternion setX(float r) {
+    public Quaternion setX(float r) {
         this.x = r;
         return this;
     }
 
-    public FQuaternion setY(float r) {
+    public Quaternion setY(float r) {
         this.y = r;
         return this;
     }
 
-    public FQuaternion setZ(float r) {
+    public Quaternion setZ(float r) {
         this.z = r;
         return this;
     }
 
-    public FQuaternion set(FQuaternionReadable q) {
+    public Quaternion set(QuaternionReadable q) {
         this.w = q.getW();
         this.x = q.getX();
         this.y = q.getY();
@@ -142,7 +142,7 @@ public class FQuaternion implements FQuaternionReadable {
         return this;
     }
 
-    public FQuaternion set(float w, float x, float y, float z) {
+    public Quaternion set(float w, float x, float y, float z) {
         this.w = w;
         this.x = x;
         this.y = y;
@@ -150,11 +150,11 @@ public class FQuaternion implements FQuaternionReadable {
         return this;
     }
 
-    public FQuaternion initRotation(float angle, FVec3Readable axis) {
+    public Quaternion initRotation(float angle, Vec3Readable axis) {
         return this.initRotation(angle, axis.getX(), axis.getY(), axis.getZ());
     }
 
-    public FQuaternion initRotation(float angle, float axisX, float axisY, float axisZ) {
+    public Quaternion initRotation(float angle, float axisX, float axisY, float axisZ) {
         float len = (float) Math.sqrt(axisX * axisX + axisY * axisY + axisZ * axisZ);
         axisX = axisX / len;
         axisY = axisY / len;
@@ -188,7 +188,7 @@ public class FQuaternion implements FQuaternionReadable {
         return this.z / sinHalfAngle;
     }
 
-    public FQuaternion normalize() {
+    public Quaternion normalize() {
         float len = this.len();
         this.w /= len;
         this.x /= len;
@@ -197,14 +197,14 @@ public class FQuaternion implements FQuaternionReadable {
         return this;
     }
 
-    public FQuaternion conjugate() {
+    public Quaternion conjugate() {
         this.x = -this.x;
         this.y = -this.y;
         this.z = -this.z;
         return this;
     }
 
-    public FQuaternion mul(FQuaternionReadable q) {
+    public Quaternion mul(QuaternionReadable q) {
         final float thisW = this.getW();
         final float thisX = this.getX();
         final float thisY = this.getY();
@@ -216,7 +216,7 @@ public class FQuaternion implements FQuaternionReadable {
         return this;
     }
 
-    public FQuaternion mul(float w, float x, float y, float z) {
+    public Quaternion mul(float w, float x, float y, float z) {
         final float thisW = this.w;
         final float thisX = this.x;
         final float thisY = this.y;
@@ -228,7 +228,7 @@ public class FQuaternion implements FQuaternionReadable {
         return this;
     }
 
-    public FQuaternion premul(FQuaternionReadable q) {
+    public Quaternion premul(QuaternionReadable q) {
         final float thisW = this.getW();
         final float thisX = this.getX();
         final float thisY = this.getY();
@@ -240,7 +240,7 @@ public class FQuaternion implements FQuaternionReadable {
         return this;
     }
 
-    public FQuaternion premul(float w, float x, float y, float z) {
+    public Quaternion premul(float w, float x, float y, float z) {
          final float thisW = this.getW();
          final float thisX = this.getX();
          final float thisY = this.getY();
@@ -252,7 +252,7 @@ public class FQuaternion implements FQuaternionReadable {
          return this;
     }
 
-    public FQuaternion mulThisVecConjugate(FVec3Readable v) {
+    public Quaternion mulThisVecConjugate(Vec3Readable v) {
         float thisW = this.w;
         float thisX = this.x;
         float thisY = this.y;
@@ -264,7 +264,7 @@ public class FQuaternion implements FQuaternionReadable {
         return this;
     }
 
-    public FQuaternion mulThisVecConjugate(float x, float y, float z) {
+    public Quaternion mulThisVecConjugate(float x, float y, float z) {
         float thisW = this.w;
         float thisX = this.x;
         float thisY = this.y;
@@ -273,31 +273,31 @@ public class FQuaternion implements FQuaternionReadable {
         return this.mul(thisW, -thisX, -thisY, -thisZ);
     }
 
-    public FQuaternion mulWithRotation(float angle, FVec3Readable axis) {
+    public Quaternion mulWithRotation(float angle, Vec3Readable axis) {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(angle) / 2);
         float cosHalfAngle = (float) Math.cos(Math.toRadians(angle) / 2);
         return this.mul(cosHalfAngle, axis.getX() * sinHalfAngle, axis.getY() * sinHalfAngle, axis.getZ() * sinHalfAngle);
     }
 
-    public FQuaternion mulWithRotation(float angle, float axisX, float axisY, float axisZ) {
+    public Quaternion mulWithRotation(float angle, float axisX, float axisY, float axisZ) {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(angle) / 2);
         float cosHalfAngle = (float) Math.cos(Math.toRadians(angle) / 2);
         return this.mul(cosHalfAngle, axisX * sinHalfAngle, axisY * sinHalfAngle, axisZ * sinHalfAngle);
     }
 
-    public FQuaternion premulWithRotation(float angle, FVec3Readable axis) {
+    public Quaternion premulWithRotation(float angle, Vec3Readable axis) {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(angle) / 2);
         float cosHalfAngle = (float) Math.cos(Math.toRadians(angle) / 2);
         return this.premul(cosHalfAngle, axis.getX() * sinHalfAngle, axis.getY() * sinHalfAngle, axis.getZ() * sinHalfAngle);
     }
 
-    public FQuaternion premulWithRotation(float angle, float axisX, float axisY, float axisZ) {
+    public Quaternion premulWithRotation(float angle, float axisX, float axisY, float axisZ) {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(angle) / 2);
         float cosHalfAngle = (float) Math.cos(Math.toRadians(angle) / 2);
         return this.premul(cosHalfAngle, axisX * sinHalfAngle, axisY * sinHalfAngle, axisZ * sinHalfAngle);
     }
 
-    public FQuaternion mul(FVec3Readable v) {
+    public Quaternion mul(Vec3Readable v) {
         float thisW = this.w;
         float thisX = this.x;
         float thisY = this.y;
@@ -309,7 +309,7 @@ public class FQuaternion implements FQuaternionReadable {
         return this;
     }
 
-    public FQuaternion mul(float x, float y, float z) {
+    public Quaternion mul(float x, float y, float z) {
         float thisW = this.w;
         float thisX = this.x;
         float thisY = this.y;

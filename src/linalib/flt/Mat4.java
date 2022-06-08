@@ -2,30 +2,30 @@ package linalib.flt;
 
 import java.nio.FloatBuffer;
 
-public class FMat4 implements FMat4Readable, FMatWritable {
+public class Mat4 implements Mat4Readable, MatWritable {
 
-    public static final FMat4Readable IDENTITY = new FMat4(
+    public static final Mat4Readable IDENTITY = new Mat4(
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
     );
 
-    public static final FMat4Readable FLIP = new FMat4(
+    public static final Mat4Readable FLIP = new Mat4(
         0, 0, 0, 1,
         0, 0, 1, 0,
         0, 1, 0, 0,
         1, 0, 0, 0
     );
 
-    public static final FMat4Readable ZEROS = new FMat4(
+    public static final Mat4Readable ZEROS = new Mat4(
         0, 0, 0, 0,
         0, 0, 0, 0,
         0, 0, 0, 0,
         0, 0, 0, 0
     );
 
-    public static final FMat4Readable ONES = new FMat4(
+    public static final Mat4Readable ONES = new Mat4(
         1, 1, 1, 1,
         1, 1, 1, 1,
         1, 1, 1, 1,
@@ -40,11 +40,11 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     private final int rowCount = 4;
     private final int colCount = 4;
 
-    public FMat4() {
+    public Mat4() {
         this.set(IDENTITY);
     }
 
-    public FMat4(float m00, float m01, float m02, float m03,
+    public Mat4(float m00, float m01, float m02, float m03,
                   float m10, float m11, float m12, float m13,
                   float m20, float m21, float m22, float m23,
                   float m30, float m31, float m32, float m33) {
@@ -66,7 +66,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         this.m33 = m33;
     }
 
-    public FMat4(FMat4Readable other) {
+    public Mat4(Mat4Readable other) {
         this.m00 = other.get00();
         this.m01 = other.get01();
         this.m02 = other.get02();
@@ -218,7 +218,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 storeInside(FloatBuffer buf) {
+    public Mat4 storeInside(FloatBuffer buf) {
         buf.put(m00);
         buf.put(m01);
         buf.put(m02);
@@ -239,13 +239,13 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 to(FMatWritable mat) {
+    public Mat4 to(MatWritable mat) {
         this.extractTo(mat);
         return this;
     }
 
     @Override
-    public FMat4 transpose() {
+    public Mat4 transpose() {
         float tm01 = m01;
         m01 = m10;
         float tm02 = m02;
@@ -268,17 +268,17 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 flipHor() {
-        return this.mul(FMat4.FLIP);
+    public Mat4 flipHor() {
+        return this.mul(Mat4.FLIP);
     }
 
     @Override
-    public FMat4 flipVer() {
-        return this.premul(FMat4.FLIP);
+    public Mat4 flipVer() {
+        return this.premul(Mat4.FLIP);
     }
 
     @Override
-    public FMat4 set(int r, int c, float val) {
+    public Mat4 set(int r, int c, float val) {
         if (r == 0 && c == 0) this.m00 = val;
         else if (r == 0 && c == 1) this.m01 = val;
         else if (r == 0 && c == 2) this.m02 = val;
@@ -300,7 +300,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     } 
 
     @Override
-    public FMat4 roundElWise() {
+    public Mat4 roundElWise() {
         this.m00 = Math.round(this.m00);
         this.m01 = Math.round(this.m01);
         this.m02 = Math.round(this.m02);
@@ -321,7 +321,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 floorElWise(float r) {       
+    public Mat4 floorElWise(float r) {       
         this.m00 = (this.m00 - (this.m00 % r));
         this.m01 = (this.m01 - (this.m00 % r));
         this.m02 = (this.m02 - (this.m00 % r));
@@ -342,7 +342,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 negateElWise() {
+    public Mat4 negateElWise() {
         this.m00 = -this.m00;
         this.m01 = -this.m01;
         this.m02 = -this.m02;
@@ -363,7 +363,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 toInt() {
+    public Mat4 toInt() {
         this.m00 = (int) m00;
         this.m01 = (int) m01;
         this.m02 = (int) m02;
@@ -384,7 +384,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 absElWise() {
+    public Mat4 absElWise() {
         this.m00 = Math.abs(m00);
         this.m01 = Math.abs(m01);
         this.m02 = Math.abs(m02);
@@ -405,7 +405,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 addElWise(float r) {
+    public Mat4 addElWise(float r) {
         this.m00 = this.m00 + r;
         this.m01 = this.m01 + r;
         this.m02 = this.m02 + r;
@@ -426,7 +426,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 subElWise(float r) {
+    public Mat4 subElWise(float r) {
         this.m00 = this.m00 - r;
         this.m01 = this.m01 - r;
         this.m02 = this.m02 - r;
@@ -447,7 +447,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 presubElWise(float r) {
+    public Mat4 presubElWise(float r) {
         this.m00 = r - this.m00;
         this.m01 = r - this.m01;
         this.m02 = r - this.m02;
@@ -468,7 +468,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 mulElWise(float r) {
+    public Mat4 mulElWise(float r) {
         this.m00 = this.m00 * r;
         this.m01 = this.m01 * r;
         this.m02 = this.m02 * r;
@@ -489,7 +489,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 divElWise(float r) {
+    public Mat4 divElWise(float r) {
         this.m00 = this.m00 / r;
         this.m01 = this.m01 / r;
         this.m02 = this.m02 / r;
@@ -510,7 +510,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 predivElWise(float r) {
+    public Mat4 predivElWise(float r) {
         this.m00 = r - this.m00;
         this.m01 = r - this.m01;
         this.m02 = r - this.m02;
@@ -531,92 +531,92 @@ public class FMat4 implements FMat4Readable, FMatWritable {
     }
 
     @Override
-    public FMat4 from(FMatReadable mat) {
+    public Mat4 from(MatReadable mat) {
         this.extractFrom(mat);
         return this;
     }
 
-    public FMat4 set00(float val) {
+    public Mat4 set00(float val) {
         this.m00 = val;
         return this;
     }
 
-    public FMat4 set01(float val) {
+    public Mat4 set01(float val) {
         this.m01 = val;
         return this;
     }
 
-    public FMat4 set02(float val) {
+    public Mat4 set02(float val) {
         this.m02 = val;
         return this;
     }
 
-    public FMat4 set03(float val) {
+    public Mat4 set03(float val) {
         this.m03 = val;
         return this;
     }
 
-    public FMat4 set10(float val) {
+    public Mat4 set10(float val) {
         this.m10 = val;
         return this;
     }
 
-    public FMat4 set11(float val) {
+    public Mat4 set11(float val) {
         this.m11 = val;
         return this;
     }
 
-    public FMat4 set12(float val) {
+    public Mat4 set12(float val) {
         this.m12 = val;
         return this;
     }
 
-    public FMat4 set13(float val) {
+    public Mat4 set13(float val) {
         this.m13 = val;
         return this;
     }
 
-    public FMat4 set20(float val) {
+    public Mat4 set20(float val) {
         this.m20 = val;
         return this;
     }
 
-    public FMat4 set21(float val) {
+    public Mat4 set21(float val) {
         this.m21 = val;
         return this;
     }
 
-    public FMat4 set22(float val) {
+    public Mat4 set22(float val) {
         this.m22 = val;
         return this;
     }
 
-    public FMat4 set23(float val) {
+    public Mat4 set23(float val) {
         this.m23 = val;
         return this;
     }
 
-    public FMat4 set30(float val) {
+    public Mat4 set30(float val) {
         this.m30 = val;
         return this;
     }
 
-    public FMat4 set31(float val) {
+    public Mat4 set31(float val) {
         this.m31 = val;
         return this;
     }
 
-    public FMat4 set32(float val) {
+    public Mat4 set32(float val) {
         this.m32 = val;
         return this;
     }
 
-    public FMat4 set33(float val) {
+    public Mat4 set33(float val) {
         this.m33 = val;
         return this;
     }
 
-    public FMat4 set(FMat4Readable mat) {
+    public Mat4 set(Mat4Readable mat) {
         this.m00 = mat.get00();
         this.m01 = mat.get01();
         this.m02 = mat.get02();
@@ -636,7 +636,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 set(float mat00, float mat01, float mat02, float mat03,
+    public Mat4 set(float mat00, float mat01, float mat02, float mat03,
     float mat10, float mat11, float mat12, float mat13,
     float mat20, float mat21, float mat22, float mat23,
     float mat30, float mat31, float mat32, float mat33) {
@@ -659,7 +659,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 addElWise(FMat4Readable mat) {
+    public Mat4 addElWise(Mat4Readable mat) {
         this.m00 = this.m00 + mat.get00();
         this.m01 = this.m01 + mat.get01();
         this.m02 = this.m02 + mat.get02();
@@ -679,7 +679,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 addElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    public Mat4 addElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
         this.m00 = this.m00 + mat00;
@@ -701,7 +701,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 subElWise(FMat4Readable mat) {
+    public Mat4 subElWise(Mat4Readable mat) {
         this.m00 = this.m00 - mat.get00();
         this.m01 = this.m01 - mat.get01();
         this.m02 = this.m02 - mat.get02();
@@ -721,7 +721,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 subElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    public Mat4 subElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
         this.m00 = this.m00 - mat00;
@@ -743,7 +743,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 presubElWise(FMat4Readable mat) {
+    public Mat4 presubElWise(Mat4Readable mat) {
         this.m00 = mat.get00() - this.m00;
         this.m01 = mat.get01() - this.m01;
         this.m02 = mat.get02() - this.m02;
@@ -763,7 +763,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 presubElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    public Mat4 presubElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
         this.m00 = mat00 - this.m00;
@@ -785,7 +785,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 mulElWise(FMat4Readable mat) {
+    public Mat4 mulElWise(Mat4Readable mat) {
         this.m00 = this.m00 * mat.get00();
         this.m01 = this.m01 * mat.get01();
         this.m02 = this.m02 * mat.get02();
@@ -805,7 +805,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 mulElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    public Mat4 mulElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
         this.m00 = this.m00 * mat00;
@@ -827,7 +827,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 divElWise(FMat4Readable mat) {
+    public Mat4 divElWise(Mat4Readable mat) {
         this.m00 = this.m00 / mat.get00();
         this.m01 = this.m01 / mat.get01();
         this.m02 = this.m02 / mat.get02();
@@ -847,7 +847,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 divElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    public Mat4 divElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
         this.m00 = this.m00 / mat00;
@@ -869,7 +869,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 predivElWise(FMat4Readable mat) {
+    public Mat4 predivElWise(Mat4Readable mat) {
         this.m00 = mat.get00() / this.m00;
         this.m01 = mat.get01() / this.m01;
         this.m02 = mat.get02() / this.m02;
@@ -889,7 +889,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 predivElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    public Mat4 predivElWise(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
         this.m00 = mat00 / this.m00;
@@ -911,7 +911,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 mul(FMat4Readable mat) {
+    public Mat4 mul(Mat4Readable mat) {
         // row 1
         float m00 = this.m00 * mat.get00() + this.m01 * mat.get10() + this.m02 * mat.get20() + this.m03 * mat.get30();
         float m01 = this.m00 * mat.get01() + this.m01 * mat.get11() + this.m02 * mat.get21() + this.m03 * mat.get31();
@@ -952,7 +952,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 mul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
+    public Mat4 mul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11, float mat12,
             float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31, float mat32,
             float mat33) {
         // row 1
@@ -995,7 +995,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 premul(FMat4Readable mat) {
+    public Mat4 premul(Mat4Readable mat) {
          // row 1
          float m00 = mat.get00() * this.m00 + mat.get01() * this.m10 + mat.get02() * this.m20 + mat.get03() * this.m30;
          float m01 = mat.get00() * this.m01 + mat.get01() * this.m11 + mat.get02() * this.m21 + mat.get03() * this.m31;
@@ -1036,7 +1036,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
          return this;
     }
 
-    public FMat4 premul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
+    public Mat4 premul(float mat00, float mat01, float mat02, float mat03, float mat10, float mat11,
             float mat12, float mat13, float mat20, float mat21, float mat22, float mat23, float mat30, float mat31,
             float mat32, float mat33) {
          // row 1
@@ -1079,7 +1079,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
          return this;
     }
 
-    public FMat4 mulRotation2(float angle) {
+    public Mat4 mulRotation2(float angle) {
         float cosA = (float) Math.cos(Math.toRadians(-angle));
         float sinA = (float) Math.sin(Math.toRadians(-angle));
         return this.mul(
@@ -1090,11 +1090,11 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         );
     }
 
-    public FMat4 mulRot3AroundAxis(FVec3Readable axis, float angle) {
+    public Mat4 mulRot3AroundAxis(Vec3Readable axis, float angle) {
         return mulRot3AroundAxis(axis.getX(), axis.getY(), axis.getZ(), angle);
     }
 
-    public FMat4 mulRot3AroundAxis(float axisX, float axisY, float axisZ, float angle) {
+    public Mat4 mulRot3AroundAxis(float axisX, float axisY, float axisZ, float angle) {
         float a = (float) Math.toRadians(angle);
         float sinA = (float) Math.sin(a);
         float cosA = (float) Math.cos(a);
@@ -1106,7 +1106,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         );
     }
 
-    public FMat4 mulRot3AroundXAxis(float angle) {
+    public Mat4 mulRot3AroundXAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
         return this.mul(
@@ -1117,7 +1117,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         );
     }
 
-    public FMat4 mulRot3AroundYAxis(float angle) {
+    public Mat4 mulRot3AroundYAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
         return this.mul(
@@ -1128,7 +1128,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         );
     }
 
-    public FMat4 mulRot3AroundZAxis(float angle) {
+    public Mat4 mulRot3AroundZAxis(float angle) {
         float cos = (float) Math.cos(Math.toRadians(angle));
         float sin = (float) Math.sin(Math.toRadians(angle));
         // rotation around z axis
@@ -1140,11 +1140,11 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         );
     }
 
-    public FMat4 mulRotation3(FVec3Readable forward, FVec3Readable up, FVec3Readable right) {
+    public Mat4 mulRotation3(Vec3Readable forward, Vec3Readable up, Vec3Readable right) {
         return mulRotation3(forward.getX(), forward.getY(), forward.getZ(), up.getX(), up.getY(), up.getZ(), right.getX(), right.getY(), right.getZ());
     }
 
-    public FMat4 mulRotation3(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
+    public Mat4 mulRotation3(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
         return this.mul(
             rX, rY, rZ, 0,
             uX, uY, uZ, 0,
@@ -1153,11 +1153,11 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         );
     }
 
-    public FMat4 mulRot3FromQuaternion(FQuaternionReadable q) {
+    public Mat4 mulRot3FromQuaternion(QuaternionReadable q) {
         return mulRot3FromQuaternion(q.getW(), q.getX(), q.getY(), q.getZ());
     }
 
-    public FMat4 mulRot3FromQuaternion(float qw, float qx, float qy, float qz) {
+    public Mat4 mulRot3FromQuaternion(float qw, float qx, float qy, float qz) {
         // normalize the quaternion
         float len = (float) Math.sqrt(qw * qw + qx * qx + qy * qy + qz * qz);
         float w = qw / len;
@@ -1179,11 +1179,11 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         ); 
     }
 
-    public FMat4 mulTranslation2(FVec2Readable v) {
+    public Mat4 mulTranslation2(Vec2Readable v) {
         return mulTranslation2(v.getX(), v.getY());
     }
 
-    public FMat4 mulTranslation2(float dX, float dY) {
+    public Mat4 mulTranslation2(float dX, float dY) {
         return this.mul(
             1, 0, 0, dX,
             0, 1, 0, dY,
@@ -1192,11 +1192,11 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         );
     }
 
-    public FMat4 mulTranslation3(FVec3Readable v) {
+    public Mat4 mulTranslation3(Vec3Readable v) {
         return mulTranslation3(v.getX(), v.getY(), v.getZ());
     }
 
-    public FMat4 mulTranslation3(float dX, float dY, float dZ) {
+    public Mat4 mulTranslation3(float dX, float dY, float dZ) {
         return this.mul(
             1, 0, 0, dX,
             0, 1, 0, dY,
@@ -1205,11 +1205,11 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         );
     }
 
-    public FMat4 mulScale2(FVec2Readable v) {
+    public Mat4 mulScale2(Vec2Readable v) {
         return mulScale2(v.getX(), v.getY());
     }
 
-    public FMat4 mulScale2(float scaleX, float scaleY) {
+    public Mat4 mulScale2(float scaleX, float scaleY) {
         return this.mul(
             scaleX, 0, 0, 0,
             0, scaleY, 0, 0,
@@ -1218,11 +1218,11 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         );
     }
 
-    public FMat4 mulScale3(FVec3Readable v) {
+    public Mat4 mulScale3(Vec3Readable v) {
         return mulScale3(v.getX(), v.getY(), v.getZ());
     }
 
-    public FMat4 mulScale3(float scaleX, float scaleY, float scaleZ) {
+    public Mat4 mulScale3(float scaleX, float scaleY, float scaleZ) {
         return this.mul(
             scaleX, 0, 0, 0,
             0, scaleY, 0, 0,
@@ -1231,11 +1231,11 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         );
     }
 
-    public FMat4 mulScale4(FVec4Readable v) {
+    public Mat4 mulScale4(Vec4Readable v) {
         return mulScale4(v.getX(), v.getY(), v.getZ(), v.getW());
     }
 
-    public FMat4 mulScale4(float scaleX, float scaleY, float scaleZ, float scaleW) {
+    public Mat4 mulScale4(float scaleX, float scaleY, float scaleZ, float scaleW) {
         return this.mul(
             scaleX, 0, 0, 0,
             0, scaleY, 0, 0,
@@ -1244,14 +1244,14 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         );
     }
 
-    public FMat4 mulLookAt3(FVec3Readable pos, FVec3Readable tgt, FVec3Readable up) {
+    public Mat4 mulLookAt3(Vec3Readable pos, Vec3Readable tgt, Vec3Readable up) {
         return mulLookAt3(pos.getX(), pos.getY(), pos.getZ(), tgt.getX(), tgt.getY(), tgt.getZ(), up.getX(), up.getY(), up.getZ());
     }
 
-    public FMat4 mulLookAt3(float posX, float posY, float posZ, float tgtX, float tgtY, float tgtZ, float upX, float upY, float upZ) {
-        FVec3 zAxis = new FVec3(tgtX, tgtY, tgtZ).sub(posX, posY, posZ).normalize();
-        FVec3 xAxis = new FVec3(upX, upY, upZ).cross(zAxis).normalize();
-        FVec3 yAxis = new FVec3(zAxis).cross(xAxis);
+    public Mat4 mulLookAt3(float posX, float posY, float posZ, float tgtX, float tgtY, float tgtZ, float upX, float upY, float upZ) {
+        Vec3 zAxis = new Vec3(tgtX, tgtY, tgtZ).sub(posX, posY, posZ).normalize();
+        Vec3 xAxis = new Vec3(upX, upY, upZ).cross(zAxis).normalize();
+        Vec3 yAxis = new Vec3(zAxis).cross(xAxis);
 
         this.mul(
             xAxis.x, yAxis.x, zAxis.x, -posX,
@@ -1262,11 +1262,11 @@ public class FMat4 implements FMat4Readable, FMatWritable {
         return this;
     }
 
-    public FMat4 mulView3FromQuaternion(FVec3Readable p, FQuaternionReadable q) {
+    public Mat4 mulView3FromQuaternion(Vec3Readable p, QuaternionReadable q) {
         return this.mulView3FromQuaternion(p.getX(), p.getY(), p.getZ(), q.getW(), q.getX(), q.getY(), q.getZ());
     }
 
-    public FMat4 mulView3FromQuaternion(float pX, float pY, float pZ, float qw, float qx, float qy, float qz) {
+    public Mat4 mulView3FromQuaternion(float pX, float pY, float pZ, float qw, float qx, float qy, float qz) {
         this.mulRot3FromQuaternion(qw, qx, qy, qz);
         float t03 = -(pX * this.m00 + pY * this.m10 + pZ * this.m20);
         float t13 = -(pX * this.m01 + pY * this.m11 + pZ * this.m21);
@@ -1291,7 +1291,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
      * @param far       far clipping plane
      * @return          this matrix
      */ 
-    public FMat4 mulPerspective3(float left, float right, float bottom, float top, float near, float far) {
+    public Mat4 mulPerspective3(float left, float right, float bottom, float top, float near, float far) {
         float l = left;
         float r = right;
         float b = bottom;
@@ -1323,7 +1323,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
      * @param fovY      field of view y axis (in degrees)
      * @return          this matrix
      */
-    public FMat4 mulPerspective3Fov(float aspect, float near, float far, float fovY) {
+    public Mat4 mulPerspective3Fov(float aspect, float near, float far, float fovY) {
         float tanHalfFov = (float) Math.tan(Math.toRadians(fovY / 2.0));
         float pWidth = (2 * near) / (1 / tanHalfFov);
         float pHeight = (2 * near) / (1 / tanHalfFov * aspect);
@@ -1345,7 +1345,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
      * @param far       far clipping plane
      * @return          this matrix
      */
-    public FMat4 mulOrthographic3(float left, float right, float bottom, float top, float near, float far) {
+    public Mat4 mulOrthographic3(float left, float right, float bottom, float top, float near, float far) {
         float l = left;
         float r = right;
         float b = bottom;
@@ -1373,7 +1373,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
      * @param beta      angle (in degrees) for the ratio between the actual length in z and the projected length in z 
      * @return          this matrix
      */
-    public FMat4 mulOblique3(float left, float right, float bottom, float top, float near, float far, float alpha, float beta) {
+    public Mat4 mulOblique3(float left, float right, float bottom, float top, float near, float far, float alpha, float beta) {
         float cosA = (float) Math.cos(Math.toRadians(alpha));
         float sinA = (float) Math.sin(Math.toRadians(alpha));
         float tanB = (float) Math.tan(Math.toRadians(beta));
@@ -1398,7 +1398,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
      * @param angle     angle (int degrees) between x axis and z axis in projection
      * @return          this matrix
      */
-    public FMat4 mulCabinet3(float left, float right, float bottom, float top, float near, float far, float angle) {
+    public Mat4 mulCabinet3(float left, float right, float bottom, float top, float near, float far, float angle) {
         return this.mulOblique3(left, right, bottom, top, near, far, angle, (float) Math.toDegrees(Math.atan(2)));
     }
 
@@ -1415,7 +1415,7 @@ public class FMat4 implements FMat4Readable, FMatWritable {
      * @param angle     angle (int degrees) between x axis and z axis in projection
      * @return          this matrix
      */
-    public FMat4 mulCavalier3(float left, float right, float bottom, float top, float near, float far, float angle) {
+    public Mat4 mulCavalier3(float left, float right, float bottom, float top, float near, float far, float angle) {
         return this.mulOblique3(left, right, bottom, top, near, far, angle, (float) Math.toDegrees(Math.atan(1)));
     }
 
@@ -1427,124 +1427,124 @@ public class FMat4 implements FMat4Readable, FMatWritable {
 
     // STATIC METHODS TO CONSTRUCT A MATRIX
 
-    public static FMat4 newRotation2(float angle) {
-        return new FMat4(IDENTITY).mulRotation2(angle);
+    public static Mat4 newRotation2(float angle) {
+        return new Mat4(IDENTITY).mulRotation2(angle);
     }
 
-    public static FMat4 newRot3AroundAxis(FVec3Readable axis, float angle) {
-        return new FMat4(IDENTITY).mulRot3AroundAxis(axis, angle);
+    public static Mat4 newRot3AroundAxis(Vec3Readable axis, float angle) {
+        return new Mat4(IDENTITY).mulRot3AroundAxis(axis, angle);
     }
 
-    public static FMat4 newRot3AroundAxis(float axisX, float axisY, float axisZ, float angle) {
-        return new FMat4(IDENTITY).mulRot3AroundAxis(axisX, axisY, axisZ, angle);
+    public static Mat4 newRot3AroundAxis(float axisX, float axisY, float axisZ, float angle) {
+        return new Mat4(IDENTITY).mulRot3AroundAxis(axisX, axisY, axisZ, angle);
     }
 
-    public static FMat4 newRot3AroundXAxis(float angle) {
-        return new FMat4(IDENTITY).mulRot3AroundXAxis(angle);
+    public static Mat4 newRot3AroundXAxis(float angle) {
+        return new Mat4(IDENTITY).mulRot3AroundXAxis(angle);
     }
 
-    public static FMat4 newRot3AroundYAxis(float angle) {
-        return new FMat4(IDENTITY).mulRot3AroundYAxis(angle);
+    public static Mat4 newRot3AroundYAxis(float angle) {
+        return new Mat4(IDENTITY).mulRot3AroundYAxis(angle);
     }
 
-    public static FMat4 newRot3AroundZAxis(float angle) {
-        return new FMat4(IDENTITY).mulRot3AroundZAxis(angle);
+    public static Mat4 newRot3AroundZAxis(float angle) {
+        return new Mat4(IDENTITY).mulRot3AroundZAxis(angle);
     }
 
-    public static FMat4 newRotation3(FVec3Readable forward, FVec3Readable up, FVec3Readable right) {
-        return new FMat4(IDENTITY).mulRotation3(forward, up, right);
+    public static Mat4 newRotation3(Vec3Readable forward, Vec3Readable up, Vec3Readable right) {
+        return new Mat4(IDENTITY).mulRotation3(forward, up, right);
     }
     
-    public static FMat4 newRotation3(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
-        return new FMat4(IDENTITY).mulRotation3(fX, fY, fZ, uX, uY, uZ, rX, rY, rZ);
+    public static Mat4 newRotation3(float fX, float fY, float fZ, float uX, float uY, float uZ, float rX, float rY, float rZ) {
+        return new Mat4(IDENTITY).mulRotation3(fX, fY, fZ, uX, uY, uZ, rX, rY, rZ);
     }
 
-    public static FMat4 newRot3FromQuaternion(FQuaternionReadable q) {
-        return new FMat4(IDENTITY).mulRot3FromQuaternion(q);
+    public static Mat4 newRot3FromQuaternion(QuaternionReadable q) {
+        return new Mat4(IDENTITY).mulRot3FromQuaternion(q);
     }
 
-    public static FMat4 newRot3FromQuaternion(float qw, float qx, float qy, float qz) {
-        return new FMat4(IDENTITY).mulRot3FromQuaternion(qw, qx, qy, qz);
+    public static Mat4 newRot3FromQuaternion(float qw, float qx, float qy, float qz) {
+        return new Mat4(IDENTITY).mulRot3FromQuaternion(qw, qx, qy, qz);
     }
 
-    public static FMat4 newTranslation2(FVec2Readable translation) {
-        return new FMat4(IDENTITY).mulTranslation2(translation);
+    public static Mat4 newTranslation2(Vec2Readable translation) {
+        return new Mat4(IDENTITY).mulTranslation2(translation);
     }
 
-    public static FMat4 newTranslation2(float dX, float dY) {
-        return new FMat4(IDENTITY).mulTranslation2(dX, dY);
+    public static Mat4 newTranslation2(float dX, float dY) {
+        return new Mat4(IDENTITY).mulTranslation2(dX, dY);
     }
 
-    public static FMat4 newTranslation3(FVec3Readable translation) {
-        return new FMat4(IDENTITY).mulTranslation3(translation);
+    public static Mat4 newTranslation3(Vec3Readable translation) {
+        return new Mat4(IDENTITY).mulTranslation3(translation);
     }
 
-    public static FMat4 newTranslation3(float dX, float dY, float dZ) {
-        return new FMat4(IDENTITY).mulTranslation3(dX, dY, dZ);
+    public static Mat4 newTranslation3(float dX, float dY, float dZ) {
+        return new Mat4(IDENTITY).mulTranslation3(dX, dY, dZ);
     }
 
-    public static FMat4 newScale2(FVec2Readable scale) {
-        return new FMat4(IDENTITY).mulScale2(scale);
+    public static Mat4 newScale2(Vec2Readable scale) {
+        return new Mat4(IDENTITY).mulScale2(scale);
     }
 
-    public static FMat4 newScale2(float scaleX, float scaleY) {
-        return new FMat4(IDENTITY).mulScale2(scaleX, scaleY);
+    public static Mat4 newScale2(float scaleX, float scaleY) {
+        return new Mat4(IDENTITY).mulScale2(scaleX, scaleY);
     }
 
-    public static FMat4 newScale3(FVec3Readable scale) {
-        return new FMat4(IDENTITY).mulScale3(scale);
+    public static Mat4 newScale3(Vec3Readable scale) {
+        return new Mat4(IDENTITY).mulScale3(scale);
     }
 
-    public static FMat4 newScale3(float scaleX, float scaleY, float scaleZ) {
-        return new FMat4(IDENTITY).mulScale3(scaleX, scaleY, scaleZ);
+    public static Mat4 newScale3(float scaleX, float scaleY, float scaleZ) {
+        return new Mat4(IDENTITY).mulScale3(scaleX, scaleY, scaleZ);
     }
 
-    public static FMat4 newScale4(FVec4Readable scale) {
-        return new FMat4(IDENTITY).mulScale4(scale);
+    public static Mat4 newScale4(Vec4Readable scale) {
+        return new Mat4(IDENTITY).mulScale4(scale);
     }
 
-    public static FMat4 newScale4(float scaleX, float scaleY, float scaleZ, float scaleW) {
-        return new FMat4(IDENTITY).mulScale4(scaleX, scaleY, scaleZ, scaleW);
+    public static Mat4 newScale4(float scaleX, float scaleY, float scaleZ, float scaleW) {
+        return new Mat4(IDENTITY).mulScale4(scaleX, scaleY, scaleZ, scaleW);
     }
 
-    public static FMat4 newLookAt3(FVec3Readable pos, FVec3Readable tgt, FVec3Readable up) {
-        return new FMat4(IDENTITY).mulLookAt3(pos, tgt, up);
+    public static Mat4 newLookAt3(Vec3Readable pos, Vec3Readable tgt, Vec3Readable up) {
+        return new Mat4(IDENTITY).mulLookAt3(pos, tgt, up);
     }
 
-    public static FMat4 newLookAt3(float posX, float posY, float posZ, float tgtX, float tgtY, float tgtZ, float upX, float upY, float upZ) {
-        return new FMat4(IDENTITY).mulLookAt3(posX, posY, posZ, tgtX, tgtY, tgtZ, upX, upY, upZ);
+    public static Mat4 newLookAt3(float posX, float posY, float posZ, float tgtX, float tgtY, float tgtZ, float upX, float upY, float upZ) {
+        return new Mat4(IDENTITY).mulLookAt3(posX, posY, posZ, tgtX, tgtY, tgtZ, upX, upY, upZ);
     }
 
-    public static FMat4 newView3FromQuaternion(FVec3Readable p, FQuaternionReadable q) {
-        return new FMat4(IDENTITY).mulView3FromQuaternion(p, q);
+    public static Mat4 newView3FromQuaternion(Vec3Readable p, QuaternionReadable q) {
+        return new Mat4(IDENTITY).mulView3FromQuaternion(p, q);
     }
 
-    public static FMat4 newView3FromQuaternion(float pX, float pY, float pZ, float qw, float qx, float qy, float qz) {
-        return new FMat4(IDENTITY).mulView3FromQuaternion(pX, pY, pZ, qw, qx, qy, qz);
+    public static Mat4 newView3FromQuaternion(float pX, float pY, float pZ, float qw, float qx, float qy, float qz) {
+        return new Mat4(IDENTITY).mulView3FromQuaternion(pX, pY, pZ, qw, qx, qy, qz);
     }
 
-    public static FMat4 newPerspective3(float l, float r, float b, float t, float n, float f) {
-        return new FMat4(IDENTITY).mulPerspective3(l, r, b, t, n, f);
+    public static Mat4 newPerspective3(float l, float r, float b, float t, float n, float f) {
+        return new Mat4(IDENTITY).mulPerspective3(l, r, b, t, n, f);
     }
 
-    public static FMat4 newPerspective3Fov(float aspect, float near, float far, float fovY) {
-        return new FMat4(IDENTITY).mulPerspective3Fov(aspect, near, far, fovY);
+    public static Mat4 newPerspective3Fov(float aspect, float near, float far, float fovY) {
+        return new Mat4(IDENTITY).mulPerspective3Fov(aspect, near, far, fovY);
     }
 
-    public static FMat4 newOrthographic3(float l, float r, float b, float t, float n, float f) {
-        return new FMat4(IDENTITY).mulOrthographic3(l, r, b, t, n, f);
+    public static Mat4 newOrthographic3(float l, float r, float b, float t, float n, float f) {
+        return new Mat4(IDENTITY).mulOrthographic3(l, r, b, t, n, f);
     }
 
-    public static FMat4 newOblique3(float l, float r, float b, float t, float n, float f, float alpha, float beta) {
-        return new FMat4(IDENTITY).mulOblique3(l, r, b, t, n, f, alpha, beta);
+    public static Mat4 newOblique3(float l, float r, float b, float t, float n, float f, float alpha, float beta) {
+        return new Mat4(IDENTITY).mulOblique3(l, r, b, t, n, f, alpha, beta);
     }
 
-    public static FMat4 newCabinet3(float l, float r, float b, float t, float n, float f, float angle) {
-        return new FMat4(IDENTITY).mulCabinet3(l, r, b, t, n, f, angle);
+    public static Mat4 newCabinet3(float l, float r, float b, float t, float n, float f, float angle) {
+        return new Mat4(IDENTITY).mulCabinet3(l, r, b, t, n, f, angle);
     }
 
-    public static FMat4 newCavalier3(float l, float r, float b, float t, float n, float f, float angle) {
-        return new FMat4(IDENTITY).mulCavalier3(l, r, b, t, n, f, angle);
+    public static Mat4 newCavalier3(float l, float r, float b, float t, float n, float f, float angle) {
+        return new Mat4(IDENTITY).mulCavalier3(l, r, b, t, n, f, angle);
     }
     
 }

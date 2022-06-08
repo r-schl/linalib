@@ -2,7 +2,7 @@ package linalib.flt;
 
 import java.nio.FloatBuffer;
 
-public interface FVecReadable {
+public interface VecReadable {
 
     float len();
 
@@ -24,7 +24,7 @@ public interface FVecReadable {
 
     float max();
 
-    FVecReadable storeInside(FloatBuffer buf);
+    VecReadable storeInside(FloatBuffer buf);
 
     float[][] newArr2();
 
@@ -36,7 +36,7 @@ public interface FVecReadable {
         System.out.println(this);
     }
 
-    default void extractTo(FVecWritable v) {
+    default void extractTo(VecWritable v) {
         for (int i = 0; i < this.size(); i++) {
             if (i >= v.size())
                 break;
@@ -44,6 +44,6 @@ public interface FVecReadable {
         }
     }
 
-    FVecReadable to(FVecWritable v);
+    VecReadable to(VecWritable v);
 
 }

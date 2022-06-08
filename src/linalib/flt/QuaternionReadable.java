@@ -3,7 +3,7 @@ package linalib.flt;
 import java.nio.FloatBuffer;
 
 
-public interface FQuaternionReadable {
+public interface QuaternionReadable {
 
     float get(int i);
 
@@ -25,7 +25,7 @@ public interface FQuaternionReadable {
 
     float[] newArr();
 
-    FQuaternionReadable storeInside(FloatBuffer buf);
+    QuaternionReadable storeInside(FloatBuffer buf);
 
     boolean contains(float r);
 

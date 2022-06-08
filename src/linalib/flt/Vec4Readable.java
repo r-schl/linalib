@@ -1,6 +1,6 @@
 package linalib.flt;
 
-public interface FVec4Readable extends FVecReadable {
+public interface Vec4Readable extends VecReadable {
 
     float getX();
     
@@ -10,7 +10,7 @@ public interface FVec4Readable extends FVecReadable {
 
     float getW();
 
-    float dot(FVec4Readable v);
+    float dot(Vec4Readable v);
 
     float dot(float vX, float vY, float vZ, float vW);
 }

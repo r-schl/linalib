@@ -1,15 +1,14 @@
-package linalib.flt.utils;
+package linalib.utils;
 
-import linalib.flt.FMat3;
-import linalib.flt.FMat3Readable;
-import linalib.flt.FVec3;
-import linalib.utils.Axis;
+import linalib.flt.Mat3;
+import linalib.flt.Mat3Readable;
+import linalib.flt.Vec3;
 
-public class FRotTaitBryan implements FMat3Container {
+public class FRotTaitBryan implements Mat3Container {
 
-    private FMat3 matrix = new FMat3();
-    private FVec3 angle = new FVec3(0);
-    private FVec3 lastAngle = new FVec3(0);
+    private Mat3 matrix = new Mat3();
+    private Vec3 angle = new Vec3(0);
+    private Vec3 lastAngle = new Vec3(0);
 
     private Axis[] orderOfApplying;
 
@@ -21,7 +20,7 @@ public class FRotTaitBryan implements FMat3Container {
     public void update() {
         if (!this.angle.equals(this.lastAngle)) {
             // recalculate the rotation matrix
-            matrix.set(FMat3.IDENTITY);
+            matrix.set(Mat3.IDENTITY);
             for (Axis a : orderOfApplying) {
                 if (a == Axis.X)
                     matrix.mulRot3AroundXAxis(angle.x); // around x axis
@@ -34,7 +33,7 @@ public class FRotTaitBryan implements FMat3Container {
         }
     }
 
-    public FVec3 apply(FVec3 v) {
+    public Vec3 apply(Vec3 v) {
         this.update();
         if (v.isHor())
             return v.transpose().premul(matrix).transpose();
@@ -52,7 +51,7 @@ public class FRotTaitBryan implements FMat3Container {
         return this;
     }
 
-    public FVec3 getAngles() {
+    public Vec3 getAngles() {
         return angle;
     }
 
@@ -66,7 +65,7 @@ public class FRotTaitBryan implements FMat3Container {
     }
 
     @Override
-    public FMat3Readable matrix3() {
+    public Mat3Readable matrix3() {
         this.update();
         return matrix;
     }
