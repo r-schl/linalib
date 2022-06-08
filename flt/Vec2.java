@@ -390,4 +390,8 @@ public class Vec2 implements Vec2Readable, VecWritable {
         return false;
     }
 
+
+    public static Vec2 add(Vec2Readable a, Vec2Readable b) {
+        return new Vec2(a).add(b);
+    }
 }

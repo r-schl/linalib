@@ -507,7 +507,7 @@ public class Vec3 implements Vec3Readable, VecWritable {
         // Rodrigues' rotation formula
         Vec3 p2 = new Vec3(aX, aY, aZ).cross(this).mul((float) Math.sin(angle));
         Vec3 k = new Vec3(aX, aY, aZ);
-        Vec3 p3 = k.mul(k.dot(this)).mul((float) (1 - Math.cos(angle)));
+        Vec3 p3 = k.mul(dot(k, this)).mul((float) (1 - Math.cos(angle)));
         this.mul((float) Math.cos(angle));
         return this.add(p2).add(p3);
     }
@@ -549,9 +549,21 @@ public class Vec3 implements Vec3Readable, VecWritable {
    }
 
 
+   public static float len(Vec3Readable a) {
+       return a.len();
+   }
+
    public static float dot(Vec3Readable a, Vec3Readable b) {
        return a.getX() * b.getX() + a.getY() * b.getY() + a.getZ() * b.getZ();
    }
+
+   public static Vec3 add(Vec3Readable a, Vec3Readable b) {
+       return new Vec3(a).add(b);
+   }
+
+
+
+
 
 
 
