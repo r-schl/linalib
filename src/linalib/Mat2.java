@@ -214,6 +214,14 @@ public class Mat2 implements Mat2Readable {
         return this;
     }
 
+    public Mat2 set(float m00, float m01, float m10, float m11) {
+        this.m00 = m00;
+        this.m01 = m01;
+        this.m10 = m10;
+        this.m11 = m11;
+        return this;
+    }
+
     public Mat2 addElementWise(Mat2Readable mat) {
         this.m00 = this.m00 + mat.get00();
         this.m01 = this.m01 + mat.get01();

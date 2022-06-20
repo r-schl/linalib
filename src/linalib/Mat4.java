@@ -546,6 +546,29 @@ public class Mat4 implements Mat4Readable {
         return this;
     }
 
+    public Mat4 set(float m00, float m01, float m02, float m03,
+            float m10, float m11, float m12, float m13,
+            float m20, float m21, float m22, float m23,
+            float m30, float m31, float m32, float m33) {
+        this.m00 = m00;
+        this.m01 = m01;
+        this.m02 = m02;
+        this.m03 = m03;
+        this.m10 = m10;
+        this.m11 = m11;
+        this.m12 = m12;
+        this.m13 = m13;
+        this.m20 = m20;
+        this.m21 = m21;
+        this.m22 = m22;
+        this.m23 = m23;
+        this.m30 = m30;
+        this.m31 = m31;
+        this.m32 = m32;
+        this.m33 = m33;
+        return this;
+    }
+
     public Mat4 addElementWise(Mat4Readable mat) {
         this.m00 = this.m00 + mat.get00();
         this.m01 = this.m01 + mat.get01();
@@ -967,11 +990,7 @@ public class Mat4 implements Mat4Readable {
     }
 
     public static Mat4 initView3FromQuaternion(Vec3Readable position, QuaternionReadable q) {
-        Mat4 res = Mat4.initRot3FromQuaternion(q);
-        float t03 = -(position.getX() * res.m00 + position.getY() * res.m10 + position.getZ() * res.m20);
-        float t13 = -(position.getX() * res.m01 + position.getY() * res.m11 + position.getZ() * res.m21);
-        float t23 = -(position.getX() * res.m02 + position.getY() * res.m12 + position.getZ() * res.m22);
-        return res.mul(new Mat4(
+        return Mat4.initRot3FromQuaternion(q).mul(new Mat4(
                 1, 0, 0, -position.getX(),
                 0, 1, 0, -position.getY(),
                 0, 0, 1, -position.getZ(),
@@ -979,8 +998,8 @@ public class Mat4 implements Mat4Readable {
     }
 
     /**
-     * Multiplies this matrix with a perspective projection matrix given by six
-     * clipping planes.
+     * This method created a perspective projection matrix given by 6 clipping
+     * planes.
      * 
      * @param left   left clipping plane
      * @param right  right clipping plane
@@ -988,7 +1007,7 @@ public class Mat4 implements Mat4Readable {
      * @param top    top clipping plane
      * @param near   near clipping plane
      * @param far    far clipping plane
-     * @return this matrix
+     * @return perspective projection matrix
      */
     public static Mat4 initPerspective3(float left, float right, float bottom, float top, float near, float far) {
         float l = left;

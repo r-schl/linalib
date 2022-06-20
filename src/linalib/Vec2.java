@@ -101,6 +101,12 @@ public class Vec2 implements Vec2Readable {
         return this;
     }
 
+    public Vec2 set(Vec2Readable other) {
+        this.x = other.getX();
+        this.y = other.getY();
+        return this;
+    }
+
     public Vec2 add(float r) {
         this.x = this.x + r;
         this.y = this.y + r;

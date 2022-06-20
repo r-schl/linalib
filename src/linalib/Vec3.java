@@ -125,6 +125,13 @@ public class Vec3 implements Vec3Readable {
         return this;
     }
 
+    public Vec3 set(Vec3Readable other) {
+        this.x = other.getX();
+        this.y = other.getY();
+        this.z = other.getZ();
+        return this;
+    }
+
     public Vec3 add(float r) {
         this.x = this.x + r;
         this.y = this.y + r;

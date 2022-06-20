@@ -348,6 +348,19 @@ public class Mat3 implements Mat3Readable {
         return this;
     }
 
+    public Mat3 set(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22) {
+        this.m00 = m00;
+        this.m01 = m01;
+        this.m02 = m02;
+        this.m10 = m10;
+        this.m11 = m11;
+        this.m12 = m12;
+        this.m20 = m20;
+        this.m21 = m21;
+        this.m22 = m22;
+        return this;
+    }
+
     public Mat3 addElementWise(Mat3Readable mat) {
         this.m00 = this.m00 + mat.get00();
         this.m01 = this.m01 + mat.get01();

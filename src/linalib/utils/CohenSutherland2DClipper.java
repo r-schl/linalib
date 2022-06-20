@@ -1,19 +1,17 @@
 package linalib.utils;
 
-import linalib.flt.Vec2;
+import linalib.Vec2;
 
+public class CohenSutherland2DClipper {
 
-public class FClipper {
-
-
-    // Area codes
+	// Area codes
 	public static final byte INSIDE = 0; // 0000
 	public static final byte LEFT = 1; // 0001
 	public static final byte RIGHT = 2; // 0010
 	public static final byte BOTTOM = 4; // 0100
 	public static final byte TOP = 8; // 1000
 
-    private static byte computeRegionCode(float xmin, float xmax, float ymin, float ymax, float x, float y) {
+	private static byte computeRegionCode(float xmin, float xmax, float ymin, float ymax, float x, float y) {
 		byte code = INSIDE;
 		if (x < xmin) {
 			code |= LEFT;
@@ -28,21 +26,22 @@ public class FClipper {
 		return code;
 	}
 
-
-    /**
-     * This method uses the Cohen Sutherland algorithm clip a line given by 2 points in 2D.
-     * 
-     * @param xmin 
-     * @param xmax
-     * @param ymin
-     * @param ymax
-     * @param p0
-     * @param p1
-     * @param res0
-     * @param res1
-     * @return
-     */
-	public static boolean clip2d(float xmin, float xmax, float ymin, float ymax, Vec2 p0, Vec2 p1, Vec2 res0, Vec2 res1) {
+	/**
+	 * This method uses the Cohen Sutherland algorithm clip a line given by 2 points
+	 * in 2D.
+	 * 
+	 * @param xmin
+	 * @param xmax
+	 * @param ymin
+	 * @param ymax
+	 * @param p0
+	 * @param p1
+	 * @param res0
+	 * @param res1
+	 * @return
+	 */
+	public static boolean clip2d(float xmin, float xmax, float ymin, float ymax, Vec2 p0, Vec2 p1, Vec2 res0,
+			Vec2 res1) {
 
 		float x0 = p0.x;
 		float y0 = p0.y;
@@ -51,7 +50,7 @@ public class FClipper {
 
 		// compute area codes for both points
 		byte code0 = computeRegionCode(xmin, xmax, ymin, ymax, p0.x, p0.y);
-		byte code1 = computeRegionCode(xmin, xmax, ymin, ymax, p1.x, p1.y); 
+		byte code1 = computeRegionCode(xmin, xmax, ymin, ymax, p1.x, p1.y);
 
 		boolean accept = false;
 
@@ -61,12 +60,12 @@ public class FClipper {
 				accept = true;
 				System.out.println("inside");
 				break;
-			} else if ((code0 & code1) != INSIDE) { 
+			} else if ((code0 & code1) != INSIDE) {
 				// If both endpoints are outside rectangle, in same region
 				System.out.println("outside");
 				break;
 			} else {
-				// Some segment of line lies within the rectangle 
+				// Some segment of line lies within the rectangle
 				// At least one end-point is outside the clip rectangle; pick it.
 				final byte outCode = (code0 != INSIDE) ? code0 : code1;
 				// Find the intersection point clip x/y;
@@ -94,7 +93,8 @@ public class FClipper {
 					clipY = Float.NaN;
 				}
 
-				// replace point outside the rectangle with the intersection point (clipX, clipY)
+				// replace point outside the rectangle with the intersection point (clipX,
+				// clipY)
 				if (outCode == code0) {
 					x0 = clipX;
 					y0 = clipY;
@@ -115,6 +115,5 @@ public class FClipper {
 
 		return accept;
 	}
-    
-    
+
 }

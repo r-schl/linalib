@@ -137,6 +137,14 @@ public class Vec4 implements Vec4Readable {
         return this;
     }
 
+    public Vec4 set(Vec4Readable other) {
+        this.x = other.getX();
+        this.y = other.getY();
+        this.z = other.getZ();
+        this.w = other.getW();
+        return this;
+    }
+
     public Vec4 add(float r) {
         this.x = this.x + r;
         this.y = this.y + r;

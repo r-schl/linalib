@@ -1,10 +1,11 @@
 package linalib.utils;
 
-import linalib.flt.Mat3;
-import linalib.flt.Mat3Readable;
-import linalib.flt.Vec3;
+import linalib.Mat3;
+import linalib.Mat3Readable;
+import linalib.Mat4Readable;
+import linalib.Vec3;
 
-public class FRotTaitBryan implements Mat3Container {
+public class RotationTaitBryan {
 
     private Mat3 matrix = new Mat3();
     private Vec3 angle = new Vec3(0);
@@ -12,24 +13,23 @@ public class FRotTaitBryan implements Mat3Container {
 
     private Axis[] orderOfApplying;
 
-    public FRotTaitBryan(Axis... axes) {
+    public RotationTaitBryan(Axis... axes) {
         this.setOrder(axes);
     }
 
-    @Override
     public void update() {
         if (!this.angle.equals(this.lastAngle)) {
             // recalculate the rotation matrix
             matrix.set(Mat3.IDENTITY);
             for (Axis a : orderOfApplying) {
                 if (a == Axis.X)
-                    matrix.mulRot3AroundXAxis(angle.x); // around x axis
+                    matrix.mul(Mat3.initRot3AroundAxis(Vec3.XAXIS, angle.x)); // around x axis
                 if (a == Axis.Y)
-                    matrix.mulRot3AroundYAxis(angle.y); // around y axis
+                    matrix.mul(Mat3.initRot3AroundAxis(Vec3.YAXIS, angle.y)); // around y axis
                 if (a == Axis.Z)
-                    matrix.mulRot3AroundZAxis(angle.z); // around z axis
+                    matrix.mul(Mat3.initRot3AroundAxis(Vec3.ZAXIS, angle.z)); // around z axis
             }
-            this.lastAngle.from(this.angle);
+            this.lastAngle.set(this.angle);
         }
     }
 
@@ -41,13 +41,13 @@ public class FRotTaitBryan implements Mat3Container {
             return v.premul(matrix);
     }
 
-    public FRotTaitBryan set(float angleX, float angleY, float angleZ) {
+    public RotationTaitBryan set(float angleX, float angleY, float angleZ) {
         this.angle.set(angleX, angleY, angleZ);
         return this;
     }
 
-    public FRotTaitBryan increase(float dAngleX, float dAngleY, float dAngleZ) {
-        this.angle.add(dAngleX, dAngleY, dAngleZ);
+    public RotationTaitBryan increase(float dAngleX, float dAngleY, float dAngleZ) {
+        this.angle.add(new Vec3(dAngleX, dAngleY, dAngleZ));
         return this;
     }
 
@@ -55,7 +55,7 @@ public class FRotTaitBryan implements Mat3Container {
         return angle;
     }
 
-    public FRotTaitBryan reset() {
+    public RotationTaitBryan reset() {
         this.angle.set(0, 0, 0);
         return this;
     }
@@ -64,7 +64,6 @@ public class FRotTaitBryan implements Mat3Container {
         this.orderOfApplying = axes;
     }
 
-    @Override
     public Mat3Readable matrix3() {
         this.update();
         return matrix;
