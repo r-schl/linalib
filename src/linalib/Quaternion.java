@@ -93,7 +93,7 @@ public class Quaternion implements QuaternionReadable {
     }
 
     @Override
-    public Vec3Readable getRotAxis() {
+    public Vec3 getRotAxis() {
         float sinHalfAngle = (float) Math.sin(Math.toRadians(this.getRotAngle()) / 2);
         return new Vec3(this.x / sinHalfAngle, this.y / sinHalfAngle, this.z / sinHalfAngle);
     }

@@ -193,7 +193,7 @@ public class Mat4 implements Mat4Readable {
         else if (r == 3 && c == 3)
             return m33;
         else
-            throw new IllegalArgumentException("Row and/or column out of range 4x4: " + r + " " + c);
+            throw new IllegalArgumentException("Row and/or column out of range of a 4x4 matrix.");
     }
 
     @Override
@@ -302,7 +302,7 @@ public class Mat4 implements Mat4Readable {
         else if (r == 3 && c == 3)
             this.m33 = val;
         else
-            throw new IllegalArgumentException("Row and/or column out of range 4x4" + ". " + r + " " + c);
+            throw new IllegalArgumentException("Row and/or column out of range of a 4x4 matrix.");
         return this;
     }
 
@@ -966,7 +966,17 @@ public class Mat4 implements Mat4Readable {
                 0, 0, 0, 1);
     }
 
-    // public static Mat4 initView3FromQuaternion()
+    public static Mat4 initView3FromQuaternion(Vec3Readable position, QuaternionReadable q) {
+        Mat4 res = Mat4.initRot3FromQuaternion(q);
+        float t03 = -(position.getX() * res.m00 + position.getY() * res.m10 + position.getZ() * res.m20);
+        float t13 = -(position.getX() * res.m01 + position.getY() * res.m11 + position.getZ() * res.m21);
+        float t23 = -(position.getX() * res.m02 + position.getY() * res.m12 + position.getZ() * res.m22);
+        return res.mul(new Mat4(
+                1, 0, 0, -position.getX(),
+                0, 1, 0, -position.getY(),
+                0, 0, 1, -position.getZ(),
+                0, 0, 0, 1));
+    }
 
     /**
      * Multiplies this matrix with a perspective projection matrix given by six
@@ -1005,7 +1015,7 @@ public class Mat4 implements Mat4Readable {
      * @param fovY   field of view y axis (in degrees)
      * @return this matrix
      */
-    public Mat4 initPerspective3FoV(float aspect, float near, float far, float fovY) {
+    public static Mat4 initPerspective3FoV(float aspect, float near, float far, float fovY) {
         float tanHalfFov = (float) Math.tan(Math.toRadians(fovY / 2.0));
         float pWidth = (2 * near) / (1 / tanHalfFov);
         float pHeight = (2 * near) / (1 / tanHalfFov * aspect);
@@ -1049,7 +1059,8 @@ public class Mat4 implements Mat4Readable {
         return initOblique3(left, right, bottom, top, near, far, angle, (float) Math.toDegrees(Math.atan(2)));
     }
 
-    public Mat4 initCavalier3(float left, float right, float bottom, float top, float near, float far, float angle) {
+    public static Mat4 initCavalier3(float left, float right, float bottom, float top, float near, float far,
+            float angle) {
         return initOblique3(left, right, bottom, top, near, far, angle, (float) Math.toDegrees(Math.atan(1)));
     }
 

@@ -28,6 +28,6 @@ public interface QuaternionReadable {
 
     float getRotAngle();
 
-    Vec3Readable getRotAxis();
+    Vec3 getRotAxis();
     
 }

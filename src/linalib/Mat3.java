@@ -106,7 +106,7 @@ public class Mat3 implements Mat3Readable {
         else if (r == 2 && c == 2)
             return m22;
         else
-            throw new IllegalArgumentException("Row and/or column out of range 3x3. " + r + " " + c);
+            throw new IllegalArgumentException("Row and/or column out of range of a 3x3 matrix.");
     }
 
     @Override
@@ -183,7 +183,7 @@ public class Mat3 implements Mat3Readable {
         else if (r == 2 && c == 2)
             this.m22 = val;
         else
-            throw new IllegalArgumentException("Row and/or column out of range 3x3. " + r + " " + c);
+            throw new IllegalArgumentException("Row and/or column out of range of a 3x3 matrix.");
         return this;
     }
 

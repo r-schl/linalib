@@ -313,7 +313,7 @@ public class Vec3 implements Vec3Readable {
      * }
      */
 
-    public Vec3 rotateByAxisAngle(float angle, Vec3Readable axis) {
+    public Vec3 rotateByAxisAngle(Vec3Readable axis, float angle) {
         float axisX = axis.getX();
         float axisY = axis.getY();
         float axisZ = axis.getZ();
@@ -421,8 +421,8 @@ public class Vec3 implements Vec3Readable {
         return new Vec3(a).sub(b);
     }
 
-    public static Vec3 rotateAxisAngle(Vec3Readable a, float angle, Vec3Readable axis) {
-        return new Vec3(a).rotateByAxisAngle(angle, axis);
+    public static Vec3 rotateAxisAngle(Vec3Readable a, Vec3Readable axis, float angle) {
+        return new Vec3(a).rotateByAxisAngle(axis, angle);
     }
 
     public static Vec3 rotateByQuaternion(Vec3Readable v, QuaternionReadable q) {

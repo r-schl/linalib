@@ -60,7 +60,7 @@ public class Mat2 implements Mat2Readable {
         else if (r == 1 && c == 1)
             return m11;
         else
-            throw new IllegalArgumentException("Row and/or column out of range 2x2. " + r + " " + c);
+            throw new IllegalArgumentException("Row and/or column out of range of a 2x2 matrix.");
     }
 
     @Override
@@ -114,7 +114,7 @@ public class Mat2 implements Mat2Readable {
         else if (r == 1 && c == 1)
             this.m11 = val;
         else
-            throw new IllegalArgumentException("Row and/or column out of range 2x2. " + r + " " + c);
+            throw new IllegalArgumentException("Row and/or column out of range of a 2x2 matrix.");
         return this;
     }
 
