@@ -28,6 +28,7 @@ public class Main {
         Vec3 lol = new Vec3(0, 0, 1);
         System.out.println(lol.getLength());
 
+
     }
 
 }

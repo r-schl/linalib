@@ -7,6 +7,12 @@ public class Vec3 implements Vec3Readable {
     public static final Vec3Readable XAXIS = new Vec3(1, 0, 0);
     public static final Vec3Readable YAXIS = new Vec3(0, 1, 0);
     public static final Vec3Readable ZAXIS = new Vec3(0, 0, 1);
+
+    /*
+     * LinALib uses a right-handed coordinate system. The y-axis is directed
+     * upwards, the x-axis to the right and the z-axis to the front.
+     */
+
     public static final Vec3Readable UP = new Vec3(YAXIS);
     public static final Vec3Readable DOWN = new Vec3(YAXIS).negate();
     public static final Vec3Readable RIGHT = new Vec3(XAXIS);

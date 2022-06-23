@@ -4,9 +4,13 @@ import java.nio.FloatBuffer;
 
 public class Mat3 implements Mat3Readable {
 
-    public static final Mat3 IDENTITY = new Mat3(1, 0, 0, 0, 1, 0, 0, 0, 1);
+    public static final Mat3Readable IDENTITY = new Mat3(1, 0, 0, 0, 1, 0, 0, 0, 1);
 
-    public static final Mat3 FLIP = new Mat3(0, 0, 1, 0, 1, 0, 1, 0, 0);
+    public static final Mat3Readable FLIP = new Mat3(0, 0, 1, 0, 1, 0, 1, 0, 0);
+
+    public static final Mat3Readable ZEROS = new Mat3(0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    public static final Mat3Readable ONES = new Mat3(1, 1, 1, 1, 1, 1, 1, 1, 1);
 
     public float m00, m01, m02;
     public float m10, m11, m12;

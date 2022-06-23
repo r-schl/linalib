@@ -4,9 +4,10 @@ import java.nio.FloatBuffer;
 
 public class Mat2 implements Mat2Readable {
 
-    public static final Mat2 IDENTITY = new Mat2(1, 0, 0, 1);
-
-    public static final Mat2 FLIP = new Mat2(0, 1, 1, 0);
+    public static final Mat2Readable IDENTITY = new Mat2(1, 0, 0, 1);
+    public static final Mat2Readable FLIP = new Mat2(0, 1, 1, 0);
+    public static final Mat2Readable ZEROS = new Mat2(0, 0, 0, 0);
+    public static final Mat2Readable ONES = new Mat2(1, 1, 1, 1);
 
     public float m00, m01;
     public float m10, m11;
