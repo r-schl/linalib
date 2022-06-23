@@ -236,6 +236,47 @@ public class Mat4 implements Mat4Readable {
         buf.put(m33);
     }
 
+    public float getTrueDet() {
+        Mat3 mat1 = new Mat3(m11, m12, m13,
+                m21, m22, m23,
+                m31, m32, m33);
+
+        Mat3 mat2 = new Mat3(m01, m02, m03,
+                m21, m22, m23,
+                m31, m32, m33);
+
+        Mat3 mat3 = new Mat3(m01, m02, m03,
+                m11, m12, m13,
+                m31, m32, m33);
+
+        Mat3 mat4 = new Mat3(m01, m02, m03,
+                m11, m12, m13,
+                m21, m22, m23);
+
+        return m00 * mat1.getDeterminant() - m10 * mat2.getDeterminant() + m20 * mat3.getDeterminant() - m30 * mat4.getDeterminant();
+    }
+
+    @Override
+    public float getDeterminant() {
+        float value1 = m00 *
+                ((m11 * m22 * m33) + (m12 * m23 * m31) + (m13 * m21 * m32) - (m13 * m22 *
+                        m31) - (m12 * m21 * m33)
+                        - (m11 * m23 * m32));
+        float value2 = m10 *
+                ((m01 * m22 * m33) + (m02 * m23 * m31) + (m03 * m21 * m32) - (m03 * m22 *
+                        m31) - (m02 * m21 * m33)
+                        - (m01 * m23 * m32));
+        float value3 = m20 *
+                ((m01 * m12 * m33) + (m02 * m13 * m31) + (m03 * m11 * m32) - (m03 * m12 *
+                        m31) - (m02 * m11 * m33)
+                        - (m01 * m13 * m32));
+        float value4 = m30 *
+                ((m01 * m12 * m23) + (m02 * m13 * m21) + (m03 * m11 * m22) - (m03 * m12 *
+                        m21) - (m02 * m11 * m23)
+                        - (m01 * m13 * m22));
+        return value1 - value2 + value3 - value4;
+    }
+
     // SETTERS
 
     public Mat4 transpose() {
@@ -771,26 +812,49 @@ public class Mat4 implements Mat4Readable {
         return this;
     }
 
+    public Mat4 rref() {
+        for (int p = 0; p < 4; ++p) {
+            /* Make this pivot 1 */
+            float pv = this.get(p, p);
+            if (pv != 0) {
+                float pvInv = 1.0f / pv;
+                for (int i = 0; i < 4; ++i) {
+                    this.set(p, i, this.get(p, i) * pvInv);
+                }
+            }
+            /* Make other rows zero */
+            for (int r = 0; r < 4; ++r) {
+                if (r != p) {
+                    float f = this.get(r, p);
+                    for (int i = 0; i < 4; ++i) {
+                        this.set(r, i, this.get(r, i) - f * this.get(p, i));
+                        // rref[r][i] -= f * rref[p][i];
+                    }
+                }
+            }
+        }
+        return this;
+    }
+
     @Override
     public String toString() {
         float[] arr = this.getNewArr();
 
-        float max = arr[0];
+        int highestNumberOfDigits = 0;
         for (int i = 0; i < 16; i++) {
-            if (arr[i] > max) {
-                max = arr[i];
-            }
+            int numOfDigits = String.valueOf(arr[i]).length();
+            if (numOfDigits > highestNumberOfDigits)
+                highestNumberOfDigits = numOfDigits;
         }
-        int maxNumDigits = String.valueOf(max).length();
 
         StringBuilder stringBuilder = new StringBuilder();
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 4; col++) {
-                int numLength = String.valueOf(arr[row * 4 + col]).length();
-                for (int i = 0; i < maxNumDigits - numLength; i++) {
+                int numOfDigits = String.valueOf(arr[row * 4 + col]).length();
+                for (int i = 0; i < highestNumberOfDigits - numOfDigits; i++) {
                     stringBuilder.append(" ");
                 }
-                stringBuilder.append(arr[row * 4 + col] + " ");
+                stringBuilder.append(" " + arr[row * 4 + col] + " ");
             }
             stringBuilder.append("\n");
         }
@@ -798,6 +862,10 @@ public class Mat4 implements Mat4Readable {
     }
 
     // STATIC METHODS
+
+    public static float getDeterminant(Mat4Readable m) {
+        return m.getDeterminant();
+    }
 
     public static Mat4 transpose(Mat4Readable a) {
         return new Mat4(a).transpose();
@@ -874,6 +942,12 @@ public class Mat4 implements Mat4Readable {
     public static Mat4 mul(Mat4Readable a, Mat4Readable b) {
         return new Mat4(a).mul(b);
     }
+
+    public static Mat4 rref(Mat4Readable m) {
+        return new Mat4(m).rref();
+    }
+
+    // INIT METHODS
 
     public static Mat4 initRot3AroundAxis(Vec3Readable axis, float angle) {
         float a = (float) Math.toRadians(angle);
@@ -1001,11 +1075,13 @@ public class Mat4 implements Mat4Readable {
      * This method created a perspective projection matrix given by 6 clipping
      * planes.
      * 
+     * https://www.scratchapixel.com/lessons/3d-basic-rendering/3d-viewing-pinhole-camera/implementing-virtual-pinhole-camera
+     * 
      * @param left   left clipping plane
      * @param right  right clipping plane
      * @param bottom bottom clipping plane
      * @param top    top clipping plane
-     * @param near   near clipping plane
+     * @param near   near clipping plane / canvas plane
      * @param far    far clipping plane
      * @return perspective projection matrix
      */
@@ -1028,20 +1104,18 @@ public class Mat4 implements Mat4Readable {
      * aspect ratio,
      * near and far clipping plane and the field of view.
      * 
-     * @param aspect aspect ratio of the window
-     * @param near   near clipping plane
-     * @param far    far clipping plane
-     * @param fovY   field of view y axis (in degrees)
+     * @param aspectRatio aspect ratio of the window (width / height)
+     * @param near        near clipping plane / canvas plane
+     * @param far         far clipping plane
+     * @param fovY        field of view y axis (in degrees)
      * @return this matrix
      */
-    public static Mat4 initPerspective3FoV(float aspect, float near, float far, float fovY) {
+    public static Mat4 initPerspective3FoV(float aspectRatio, float near, float far, float fovY) {
         float tanHalfFov = (float) Math.tan(Math.toRadians(fovY / 2.0));
-        float pWidth = (2 * near) / (1 / tanHalfFov);
-        float pHeight = (2 * near) / (1 / tanHalfFov * aspect);
-        float right = pWidth / 2;
-        float left = -pWidth / 2;
-        float top = pHeight / 2;
-        float bottom = -pHeight / 2;
+        float top = tanHalfFov * near;
+        float bottom = -top;
+        float right = top * aspectRatio;
+        float left = -right;
         return initPerspective3(left, right, bottom, top, near, far);
     }
 

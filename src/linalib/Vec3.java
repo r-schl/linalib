@@ -36,17 +36,21 @@ public class Vec3 implements Vec3Readable {
         this(xyz, xyz, xyz);
     }
 
+    public Vec3(Vec4Readable v) {
+        this(v.getX(), v.getY(), v.getZ());
+    }
+
     public Vec3(Vec3Readable other) {
         this(other.getX(), other.getY(), other.getZ());
         if (other.isTransposed())
             this.transpose();
     }
 
-    public float getLen() {
-        return (float) Math.sqrt(this.getLen2());
+    public float getLength() {
+        return (float) Math.sqrt(this.getLength2());
     }
 
-    public float getLen2() {
+    public float getLength2() {
         return x * x + y * y + z * z;
     }
 
@@ -214,7 +218,7 @@ public class Vec3 implements Vec3Readable {
     }
 
     public Vec3 normalize() {
-        return this.div(this.getLen());
+        return this.div(this.getLength());
     }
 
     public Vec3 cross(Vec3Readable v) {
@@ -269,6 +273,13 @@ public class Vec3 implements Vec3Readable {
         this.x = x;
         this.y = y;
         this.z = z;
+        return this;
+    }
+
+    public Vec3 normalizeHomogeneousCoordinates() {
+        this.x = x / this.z;
+        this.y = y / this.z;
+        this.z = z / this.z;
         return this;
     }
 
@@ -365,7 +376,7 @@ public class Vec3 implements Vec3Readable {
     }
 
     public static float angle(Vec3Readable a, Vec3Readable b) {
-        return (float) Math.toDegrees(Math.acos(dot(a, b) / (a.getLen() * b.getLen())));
+        return (float) Math.toDegrees(Math.acos(dot(a, b) / (a.getLength() * b.getLength())));
     }
 
     public static Vec3 add(Vec3Readable a, float r) {
@@ -442,6 +453,10 @@ public class Vec3 implements Vec3Readable {
 
     public static Vec3 mul(Mat3Readable m, Vec3Readable v) {
         return new Vec3(v).premul(m);
+    }
+
+    public static Vec3 normalizeHomogeneousCoordinates(Vec3Readable a) {
+        return new Vec3(a).normalizeHomogeneousCoordinates();
     }
 
 }

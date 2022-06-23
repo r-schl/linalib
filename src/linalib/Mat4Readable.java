@@ -44,4 +44,6 @@ public interface Mat4Readable {
 
     void storeInBuffer(FloatBuffer buf);
 
+    float getDeterminant();
+
 }

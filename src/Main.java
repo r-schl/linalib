@@ -17,18 +17,17 @@ public class Main {
 
     public static void main(String... args) {
 
-        Vec3 v = new Vec3(1, 0, 0);
-        Quaternion q = Quaternion.initRotation(new Vec3(0, 1, 0), 90);
-        q.premul(Quaternion.initRotation(new Vec3(0, 1, 0), 90));
+        Mat4 mat = new Mat4(
+                5, 3, 2, 10,
+                4, 5, 2, 8,
+                64, 7, 2, 7,
+                4, 9, 2, 5);
 
-        Mat4 mat = Mat4.initRot3FromQuaternion(q);
+        System.out.println(Mat4.getDeterminant(mat));
 
-        System.out.println(mul(mat, new Vec4(v, 1)));
-        
+        Vec3 lol = new Vec3(0, 0, 1);
+        System.out.println(lol.getLength());
 
-
-        
-        
     }
 
 }

@@ -43,12 +43,12 @@ public class Vec4 implements Vec4Readable {
     }
 
     @Override
-    public float getLen() {
-        return (float) Math.sqrt(this.getLen2());
+    public float getLength() {
+        return (float) Math.sqrt(this.getLength2());
     }
 
     @Override
-    public float getLen2() {
+    public float getLength2() {
         return x * x + y * y + z * z + w * w;
     }
 
@@ -238,7 +238,7 @@ public class Vec4 implements Vec4Readable {
     }
 
     public Vec4 normalize() {
-        return this.div(this.getLen());
+        return this.div(this.getLength());
     }
 
     public Vec4 flip() {
@@ -288,6 +288,14 @@ public class Vec4 implements Vec4Readable {
         this.y = y;
         this.z = z;
         this.w = w;
+        return this;
+    }
+
+    public Vec4 normalizeHomogeneousCoordinates() {
+        this.x = x / this.w;
+        this.y = y / this.w;
+        this.z = z / this.w;
+        this.w = w / this.w;
         return this;
     }
 
@@ -347,7 +355,7 @@ public class Vec4 implements Vec4Readable {
     }
 
     public static float angle(Vec4Readable a, Vec4Readable b) {
-        return (float) Math.toDegrees(Math.acos(dot(a, b) / (a.getLen() * b.getLen())));
+        return (float) Math.toDegrees(Math.acos(dot(a, b) / (a.getLength() * b.getLength())));
     }
 
     public static Vec4 add(Vec4Readable a, float r) {
@@ -412,6 +420,10 @@ public class Vec4 implements Vec4Readable {
 
     public static Vec4 mul(Mat4Readable m, Vec4Readable a) {
         return new Vec4(a).premul(m);
+    }
+
+    public static Vec4 normalizeHomogeneousCoordinates(Vec4Readable a) {
+        return new Vec4(a).normalizeHomogeneousCoordinates();
     }
 
 }

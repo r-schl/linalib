@@ -29,4 +29,6 @@ public interface Mat3Readable {
     float[][] getNewArr2();
 
     void storeInBuffer(FloatBuffer buf);
+
+    float getDeterminant();
 }

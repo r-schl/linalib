@@ -140,6 +140,12 @@ public class Mat3 implements Mat3Readable {
         buf.put(m22);
     }
 
+    @Override
+    public float getDeterminant() {
+        return (m00 * m11 * m22) + (m01 * m12 * m20) + (m02 * m10 * m21) - (m02 * m11 * m20) - (m01 * m10 * m22)
+                - (m00 * m12 * m21);
+    }
+
     // SETTERS
 
     public Mat3 transpose() {
@@ -483,23 +489,46 @@ public class Mat3 implements Mat3Readable {
         return this;
     }
 
+    public Mat3 rref() {
+        for (int p = 0; p < 3; ++p) {
+            /* Make this pivot 1 */
+            float pv = this.get(p, p);
+            if (pv != 0) {
+                float pvInv = 1.0f / pv;
+                for (int i = 0; i < 3; ++i) {
+                    this.set(p, i, this.get(p, i) * pvInv);
+                }
+            }
+            /* Make other rows zero */
+            for (int r = 0; r < 3; ++r) {
+                if (r != p) {
+                    float f = this.get(r, p);
+                    for (int i = 0; i < 3; ++i) {
+                        this.set(r, i, this.get(r, i) - f * this.get(p, i));
+                        // rref[r][i] -= f * rref[p][i];
+                    }
+                }
+            }
+        }
+        return this;
+    }
+
     @Override
     public String toString() {
         float[] arr = this.getNewArr();
 
-        float max = arr[0];
+        int highestNumberOfDigits = 0;
         for (int i = 0; i < 9; i++) {
-            if (arr[i] > max) {
-                max = arr[i];
-            }
+            int numOfDigits = String.valueOf(arr[i]).length();
+            if (numOfDigits > highestNumberOfDigits)
+                highestNumberOfDigits = numOfDigits;
         }
-        int maxNumDigits = String.valueOf(max).length();
 
         StringBuilder stringBuilder = new StringBuilder();
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                int numLength = String.valueOf(arr[row * 3 + col]).length();
-                for (int i = 0; i < maxNumDigits - numLength; i++) {
+                int numOfDigits = String.valueOf(arr[row * 3 + col]).length();
+                for (int i = 0; i < highestNumberOfDigits - numOfDigits; i++) {
                     stringBuilder.append(" ");
                 }
                 stringBuilder.append(arr[row * 3 + col] + " ");
@@ -510,6 +539,10 @@ public class Mat3 implements Mat3Readable {
     }
 
     // STATIC METHODS
+
+    public static float getDeterminant(Mat3Readable m) {
+        return m.getDeterminant();
+    }
 
     public static Mat3 transpose(Mat3Readable a) {
         return new Mat3(a).transpose();
@@ -586,6 +619,12 @@ public class Mat3 implements Mat3Readable {
     public static Mat3 mul(Mat3Readable a, Mat3Readable b) {
         return new Mat3(a).mul(b);
     }
+
+    public static Mat3 rref(Mat3Readable m) {
+        return new Mat3(m).rref();
+    }
+
+    // INIT METHODS
 
     public static Mat3 initRot2(float angle) {
         float cosA = (float) Math.cos(Math.toRadians(-angle));

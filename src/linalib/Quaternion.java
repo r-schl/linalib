@@ -50,18 +50,18 @@ public class Quaternion implements QuaternionReadable {
     }
 
     @Override
-    public float getLen() {
-        return (float) Math.sqrt(this.getLen2());
+    public float getLength() {
+        return (float) Math.sqrt(this.getLength2());
     }
 
     @Override
-    public float getLen2() {
+    public float getLength2() {
         return w * w + x * x + y * y + z * z;
     }
 
     @Override
     public float getNorm() {
-        return this.getLen2();
+        return this.getLength2();
     }
 
     @Override
@@ -134,7 +134,7 @@ public class Quaternion implements QuaternionReadable {
     }
 
     public Quaternion normalize() {
-        float len = this.getLen();
+        float len = this.getLength();
         this.w /= len;
         this.x /= len;
         this.y /= len;

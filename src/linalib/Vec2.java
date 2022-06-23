@@ -18,6 +18,14 @@ public class Vec2 implements Vec2Readable {
         this(xy, xy);
     }
 
+    public Vec2(Vec3Readable v) {
+        this(v.getX(), v.getY());
+    }
+
+    public Vec2(Vec4Readable v) {
+        this(v.getX(), v.getY());
+    }
+
     public Vec2(Vec2Readable other) {
         this(other.getX(), other.getY());
         if (other.isTransposed())
@@ -25,12 +33,12 @@ public class Vec2 implements Vec2Readable {
     }
 
     @Override
-    public float getLen() {
-        return (float) Math.sqrt(this.getLen2());
+    public float getLength() {
+        return (float) Math.sqrt(this.getLength2());
     }
 
     @Override
-    public float getLen2() {
+    public float getLength2() {
         return x * x + y * y;
     }
 
@@ -178,7 +186,7 @@ public class Vec2 implements Vec2Readable {
     }
 
     public Vec2 normalize() {
-        return this.div(this.getLen());
+        return this.div(this.getLength());
     }
 
     /*
@@ -274,7 +282,7 @@ public class Vec2 implements Vec2Readable {
     }
 
     public static float angle(Vec2Readable a, Vec2Readable b) {
-        return (float) Math.toDegrees(Math.acos(dot(a, b) / (a.getLen() * b.getLen())));
+        return (float) Math.toDegrees(Math.acos(dot(a, b) / (a.getLength() * b.getLength())));
     }
 
     public static Vec2 add(Vec2Readable a, float r) {

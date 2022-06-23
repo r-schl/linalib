@@ -12,9 +12,9 @@ public interface QuaternionReadable {
 
     float getZ();
 
-    float getLen();
+    float getLength();
 
-    float getLen2();
+    float getLength2();
 
     float getNorm();
 

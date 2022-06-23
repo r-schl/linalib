@@ -4,9 +4,9 @@ import java.nio.FloatBuffer;
 
 public interface Vec3Readable {
 
-    float getLen();
+    float getLength();
 
-    float getLen2();
+    float getLength2();
 
     float getMax();
 

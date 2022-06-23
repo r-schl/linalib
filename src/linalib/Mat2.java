@@ -87,6 +87,11 @@ public class Mat2 implements Mat2Readable {
         buf.put(m11);
     }
 
+    @Override
+    public float getDeterminant() {
+        return (m00 * m11) - (m10 * m01);
+    }
+
     // SETTERS
 
     public Mat2 transpose() {
@@ -294,23 +299,46 @@ public class Mat2 implements Mat2Readable {
         return this;
     }
 
+    public Mat2 rref() {
+        for (int p = 0; p < 2; ++p) {
+            /* Make this pivot 1 */
+            float pv = this.get(p, p);
+            if (pv != 0) {
+                float pvInv = 1.0f / pv;
+                for (int i = 0; i < 2; ++i) {
+                    this.set(p, i, this.get(p, i) * pvInv);
+                }
+            }
+            /* Make other rows zero */
+            for (int r = 0; r < 2; ++r) {
+                if (r != p) {
+                    float f = this.get(r, p);
+                    for (int i = 0; i < 2; ++i) {
+                        this.set(r, i, this.get(r, i) - f * this.get(p, i));
+                        // rref[r][i] -= f * rref[p][i];
+                    }
+                }
+            }
+        }
+        return this;
+    }
+
     @Override
     public String toString() {
         float[] arr = this.getNewArr();
 
-        float max = arr[0];
+        int highestNumberOfDigits = 0;
         for (int i = 0; i < 4; i++) {
-            if (arr[i] > max) {
-                max = arr[i];
-            }
+            int numOfDigits = String.valueOf(arr[i]).length();
+            if (numOfDigits > highestNumberOfDigits)
+                highestNumberOfDigits = numOfDigits;
         }
-        int maxNumDigits = String.valueOf(max).length();
 
         StringBuilder stringBuilder = new StringBuilder();
         for (int row = 0; row < 2; row++) {
             for (int col = 0; col < 2; col++) {
-                int numLength = String.valueOf(arr[row * 2 + col]).length();
-                for (int i = 0; i < maxNumDigits - numLength; i++) {
+                int numOfDigits = String.valueOf(arr[row * 2 + col]).length();
+                for (int i = 0; i < highestNumberOfDigits - numOfDigits; i++) {
                     stringBuilder.append(" ");
                 }
                 stringBuilder.append(arr[row * 2 + col] + " ");
@@ -321,6 +349,10 @@ public class Mat2 implements Mat2Readable {
     }
 
     // STATIC METHODS
+
+    public static float getDeterminant(Mat2Readable m) {
+        return m.getDeterminant();
+    }
 
     public static Mat2 transpose(Mat2Readable a) {
         return new Mat2(a).transpose();
@@ -397,6 +429,12 @@ public class Mat2 implements Mat2Readable {
     public static Mat2 mul(Mat2Readable a, Mat2Readable b) {
         return new Mat2(a).mul(b);
     }
+
+    public static Mat2 rref(Mat2Readable m) {
+        return new Mat2(m).rref();
+    }
+
+    // INIT METHODS
 
     public static Mat2 initRotation2(float angle) {
         float cosA = (float) Math.cos(Math.toRadians(-angle));
