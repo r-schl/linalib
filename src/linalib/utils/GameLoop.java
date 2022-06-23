@@ -3,7 +3,6 @@ package linalib.utils;
 public class GameLoop {
 
     boolean isRunning = true;
-    
     double ups;
     double fps;
     double timeU;
@@ -19,7 +18,7 @@ public class GameLoop {
 
     public void run(Runnable onUpdate, Runnable onRender) {
         // for information
-        long timer = System.currentTimeMillis();        //for information
+        long timer = System.currentTimeMillis(); // for information
         double lastTime = System.nanoTime();
         ticks = 0;
         frames = 0;
@@ -51,16 +50,12 @@ public class GameLoop {
                 timer += 1000;
                 seconds++;
                 // do something here
-            
+
                 frames = 0;
                 ticks = 0;
             }
         }
 
-
-        
     }
 
-
-    
 }

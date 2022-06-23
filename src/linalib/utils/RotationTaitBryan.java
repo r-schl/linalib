@@ -2,7 +2,6 @@ package linalib.utils;
 
 import linalib.Mat3;
 import linalib.Mat3Readable;
-import linalib.Mat4Readable;
 import linalib.Vec3;
 
 public class RotationTaitBryan {
